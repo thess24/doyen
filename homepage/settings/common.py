@@ -215,6 +215,11 @@ THIRD_PARTY_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.twitter',
 
 
 )
@@ -278,27 +283,15 @@ WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
-########## COMPRESSION CONFIGURATION
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
-# COMPRESS_ENABLED = True
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_FILTERS
-# COMPRESS_CSS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_JS_FILTERS
-# COMPRESS_JS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-########## END COMPRESSION CONFIGURATION
-
-
-
 ########## ALL AUTH
 
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
+# default settings are very good
+
+
+
+
 
 ########## CRISPY FORMS 
 

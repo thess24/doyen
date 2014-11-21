@@ -9,32 +9,6 @@ from crispy_forms.layout import Layout, Field
 from crispy_forms.bootstrap import PrependedText, StrictButton
 from django.core.exceptions import ValidationError
 
-# class ProductImage(models.Model):
-# 	product = models.ForeignKey(Product)
-# 	text = models.CharField(max_length=140,blank=True, null=True)
-# 	added_date = models.DateTimeField(auto_now_add=True)
-# 	image = models.ImageField(upload_to='products')
-  
-# 	def __unicode__(self):
-# 		return self.product.name
-
-# class Purchase(models.Model):
-# 	user = models.ForeignKey(User, blank=True, null=True)
-# 	product = models.ForeignKey(Product)
-# 	sale_date = models.DateTimeField(auto_now_add=True)
-# 	downloads = models.IntegerField()
-# 	email = models.EmailField()
-# 	uuid = models.CharField(max_length=100)
-# 	price = models.DecimalField(max_digits=6, decimal_places=2)
-
-# 	def active_to_download(self):
-# 		if self.downloads <=0: return False
-# 		else: return True
-
-# 	def __unicode__(self):
-# 		return self.product.name
-
-
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -43,6 +17,7 @@ class ExpertProfile(models.Model):
 	picture = models.ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
 
+	# categories = models.   Many to Many
 	tags = TaggableManager()
 
 	def __unicode__(self):
@@ -71,7 +46,17 @@ class RequestedTalk(models.Model):
 	def __unicode__(self):
 		return self.expert.email
 		
+class Rating(models.Model):
+	user = models.ForeignKey(User, related_name='rating_user')
+	expert = models.ForeignKey(User, related_name='rating_expert')
+	rating = models.IntegerField()
+	comment = models.TextField()
 
+	def __unicode__(self):
+		return self.expert.email
+
+# class Message(models.Model):
+	
 # model for messaging btwn expert and user
 # 3 times to ask expert about -- request for talk
 # saved experts

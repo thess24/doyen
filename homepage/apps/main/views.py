@@ -27,6 +27,17 @@ def index(request):
 	context= {}
 	return render(request, 'main/index.html', context)
 
+def expert(request, expertid):
+	# expert = ExpertProfile.objects.get(id=expertid)
+
+	context = {}
+	return render(request, 'main/expert.html')	
+
+def expertfind(request):
+	return render(request, 'main/expertfind.html')	
+
+def talks(request):
+	return render(request, 'main/talks.html')	
 
 def tos(request):
 	return render(request, 'main/tos.html')	

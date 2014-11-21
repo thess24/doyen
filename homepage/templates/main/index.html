@@ -9,74 +9,12 @@
 {% endblock %}
  
 
+
+
+
+
 {% block content %} 
-        <div class="page-header">
 
-          <div class='row'>
-            <div class='jumbotron' style='min-height:250px'>
-              <div class='col-md-12'>
-                <div class='col-md-6'>
-                  <h1>DeckRuler</h1>
-                  <h4>Buy and Sell Unique, Beautiful Powerpoint Templates, Graphics, and Icons</h4>
-                  
-
-                </div>
-                <div class='col-md-6'>
-                  <h4>The way you present yourself sets you apart</h4>
-                  <h5> At DeckRuler, you have access to presentations that impress!</h5>
-                  <h4>Get Beautiful Graphics and Templates for a couple bucks!</h4>
-                  <h5 style='color:rgb(0, 175, 70);'>Start selling in 5 minutes!</h5>
-                  <h5 style='color:rgb(0, 175, 70);'>Buy in 2 minutes! No registration required.</h5>
-                </div>
-              </div>
-            </div><!--end jumbotron-->
-          </div>
-
-        </div>
-
-        <div class='row' style='text-align:center'>
-          <form method="GET"><input type='hidden' value='recent' name='type'>
-            <button type='submit' class='filterbtn'>Recent</button> /
-          </form>
-          <form method="GET"><input type='hidden' value='featured' name='type'>
-            <button type='submit' class='filterbtn'>Featured</button> /
-          </form>
-          <form method="GET"><input type='hidden' value='popular' name='type'>
-            <button type='submit' class='filterbtn'>Popular</button>
-          </form>   
-        </div>
-
- 
-        <h4>Featured</h4>
-
-        <div class='row'>
-            {% for p in products %}
-            <div class='col-md-3'>
-              <div class='well productwindow'>
-                    <div class='imgbox'>
-                      <img src="{{MEDIA_URL}}{{p.image}}" width="100%">
-                      {% if p.featured%}<span class='banner' style='background-color: rgb(200, 0, 0)'>Featured!</span>{% endif %}
-                      {% if p.popular%}<span class='banner' style='background-color: rgb(0, 120, 200)'>Popular!</span>{% endif %}
-                      {% if p.new%}<span class='banner' style='background-color: rgb(0, 200, 40)'>New!</span>{% endif %}
-                      <button class= 'viewbtn' style='display:none'>
-                        <a href="{% url 'productpage' p.id %}"><span class='glyphicon glyphicon-share'></span> View</a>
-                      </button>
-                    </div>
-                    <div class='imgboxlower'>
-                      <h4>
-                      <a href="{% url 'productpage' p.id %}">{{p.name|capfirst}}</a>
-                      </h4>
-                      <span class='windowprice'>${{p.price}}</span>
-                      <span style='margin-left:10px'><a href="{% url 'category' p.category %}">{{p.category}}</a></span>
-                    </div>
-              </div>
-            </div>
-            {% endfor %}
-
-          </div>
-
-
-        </div>
 {% endblock %}
 
 
@@ -84,29 +22,6 @@
 
 
 {% block scripts %}
-
-<script type="text/javascript">
-
-$(function () {
-    $(document).on(
-        'mouseenter','.imgbox', function() {
-        $(this).find('button').fadeIn(200);
-        $(this).css('opacity',0.95);
-      });
-
-    $(document).on(
-        'mouseleave','.imgbox', function() {
-        $(this).find('button').fadeOut(200);
-        $(this).css('opacity',1);
-
-      });
-});
-
-
-
-
-
-</script>
 
 {% endblock %}
 

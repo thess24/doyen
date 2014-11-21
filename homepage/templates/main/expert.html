@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+	.propic{
+		width: 200px;
+	}
+
+	.proprice{
+		font-size: 6em;
+		color: green;
+		letter-spacing: -3px;
+		font-weight: 300;
+	}
+
+	.propricecents{
+		position: relative;
+		top: -30px;
+		font-size: 2.5em;
+		color: green;
+		letter-spacing: -2px;
+
+	}
+
+	.propricedollarsign{
+		position: relative;
+		top: -40px;
+		font-size: 1.75em;
+	}
+
+	.commentarea{
+
+	}
+
+	.commentheader{
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+
+	.commentreviewer{
+		padding: 3px;
+		font-size: .9em;
+	}
+
+	span.stars, span.stars span {
+    display: block;
+    background: url({{STATIC_URL}}img/stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+	}
+
+	span.stars span {
+	    background-position: 0 0;
+	}
+
+	.labelarea{
+		padding: 5px;
+		font-size: 1.2em;
+	}
+
+
+
+
+
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+<div class="page-header">
+
+  <div class='row'>
+    <div class='col-md-12'>
+          <h1 id='mainheader'>Jon Swanson</h1>
+    </div>
+  </div>
+</div>
+
+
+<div class='row'>
+
+	<div class='col-md-9'>
+		<div class='row'>
+			<div class="media">
+			  <div class="media-left" href="#">
+			    <img src="{{STATIC_URL}}img/profile.jpg" alt="..." class='propic'>
+
+			    <div class='labelarea'>
+				    <span class="label label-default">Oil and Gas</span>
+				  	<span class="label label-default">Energy</span>
+				  	<span class="label label-default">Natural Gas</span>
+			  	</div>
+
+			  </div>
+			  <div class="media-body">
+			  	
+
+			    <h4 class="media-heading">Background</h4>
+			    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+			    <br>
+			    <h4 class="media-heading">Areas of Expertise</h4>
+
+			    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+			  </div>
+			</div>
+		</div>
+		<div class='row'>
+			<h3>Reviews</h3>
+
+			<div class="panel panel-default">
+			  <div class="panel-body">
+
+			    <div>
+			    	<span class="stars">4.8618164</span>
+			    	<span class='commentheader'>This guy is great</span>
+			    	<div class='commentreviewer'>by Reviewer</div>
+			    </div>
+
+			    <p class='commentarea'>mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum qutur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi cons</p>
+
+			  </div>
+			</div>
+
+			<div class="panel panel-default">
+			  <div class="panel-body">
+
+			    <div>
+			    	<span class="stars">2</span>
+			    	<span class='commentheader'>This guy sucks</span>
+			    	<div class='commentreviewer'>by Reviewer</div>
+			    </div>
+
+			    <p class='commentarea'>mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum qutur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi cons</p>
+
+			  </div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class='col-md-3'>
+		<button class='btn btn-lg btn-success' style='width:100%'>
+		<i class="fa fa-phone"></i>
+			Schedule a Call
+		</button>
+
+		<div style='padding:0px 30px'>
+			<span class='propricedollarsign'>$</span>
+			<!-- <span class='proprice'>2.00</span> -->
+			<span class='proprice'>2</span>
+			<span class='propricecents'>00</span>
+			<span style='font-weight:bold'> / minute</span>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+
+<script type="text/javascript">
+
+
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
+
+
+$(function() {
+    $('span.stars').stars();
+});
+
+
+</script>
+{% endblock %}
+
+
+

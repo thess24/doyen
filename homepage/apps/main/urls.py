@@ -8,8 +8,11 @@ urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
 
 
+	url(r'^expert/(?P<expertid>.+)/$', views.expert, name='expert'),
 
 
+	url(r'^talks/$', views.talks, name='talks'),
+	url(r'^expertfind/$', views.expertfind, name='expertfind'),
 	url(r'^tos/$', views.tos, name='tos'),
 	url(r'^privacypolicy/$', views.privacypolicy, name='privacypolicy'),
 	url(r'^faq/$', views.faq, name='faq'),
