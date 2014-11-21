@@ -120,26 +120,6 @@ MEDIA_URL = S3_URL + '/media/'
 COMPRESS_URL = STATIC_URL 
 ########## END STORAGE CONFIGURATION
 
- 
-########## COMPRESSION CONFIGURATION
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_OFFLINE = True
-COMPRESS_ENABLED = False
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_STORAGE
-# COMPRESS_STORAGE = DEFAULT_FILE_STORAGE
-COMPRESS_STORAGE = STATICFILES_STORAGE
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_FILTERS
-COMPRESS_CSS_FILTERS += [
-    'compressor.filters.cssmin.CSSMinFilter',
-]
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_JS_FILTERS
-COMPRESS_JS_FILTERS += [
-    'compressor.filters.jsmin.JSMinFilter',
-]
-########## END COMPRESSION CONFIGURATION
 
 
 ########## SECRET CONFIGURATION
