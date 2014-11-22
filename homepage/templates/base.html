@@ -47,7 +47,8 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="{% url 'expertfind' %}">Find an Expert</a></li>
             <li><a href="{% url 'talks' %}">Talks</a></li>
-            <li class="dropdown">
+            <li><a href="{% url 'talkrequests' %}">Requests</a></li>
+  <!--           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Action</a></li>
@@ -58,7 +59,7 @@
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
@@ -68,6 +69,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu"> 
                 <li><a href="/accounts/password/change">Change Password</a></li>
+                <li><a href="{% url 'expertprofile' %}">Update Profile</a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
               </ul>
             </li>

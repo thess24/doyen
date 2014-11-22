@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+
+
+<div class="row">
+
+	<div class='col-md-12'>
+		<div class="page-header">
+
+		  <div class='row'>
+		    <div class='col-md-12'>
+		          <h1 id='mainheader'>Extended Profile</h1>
+		    </div>
+		  </div>
+		</div>
+
+
+		{% load crispy_forms_tags %}
+             {% crispy form %}
+
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

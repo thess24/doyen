@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk, RequestedTalk
+from apps.main.models import ExpertProfile, Talk, RequestedTalk, Rating
+from apps.main.models import RequestedTalkForm, ExpertProfileForm, RatingForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from settings.common import MEDIA_ROOT
@@ -33,11 +34,39 @@ def expert(request, expertid):
 	context = {}
 	return render(request, 'main/expert.html')	
 
+def expertprofile(request):
+	try: expert = ExpertProfile.objects.get(user=request.user)
+	except: expert = None
+
+	form = ExpertProfileForm(instance=expert)
+
+	if request.method=='POST':
+		if 'updateprofile' in request.POST:
+			form = ExpertProfileForm(request.POST, instance=expert)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.user=request.user
+				instance.save()
+
+				return HttpResponseRedirect(reverse('apps.main.views.expertprofile', args=()))
+
+	context= {'expert':expert, 'form':form}
+	return render(request, 'main/expertprofile.html', context)	
+
 def expertfind(request):
-	return render(request, 'main/expertfind.html')	
+	expert = ExpertProfile.objects.all()
+
+	context ={expert:'expert'}
+	return render(request, 'main/expertfind.html', context)	
 
 def talks(request):
 	return render(request, 'main/talks.html')	
+
+def talkrequests(request):
+	# reqtalks = RequestedTalk.objects.filter(expert = request.user)
+
+	# context = {reqtalks:'reqtalks'}
+	return render(request, 'main/requestedtalks.html')	
 
 def tos(request):
 	return render(request, 'main/tos.html')	

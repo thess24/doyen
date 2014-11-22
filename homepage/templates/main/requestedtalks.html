@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+	.datesubmitted{
+		font-size: .9em;
+		padding: 0px 20px;
+	}
+
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+<div class="page-header">
+
+  <div class='row'>
+    <div class='col-md-12'>
+          <h1 id='mainheader'>Requested Talks</h1>
+    </div>
+  </div>
+</div>
+
+
+	<div class="media">
+	  <a class="media-left" href="#">
+		<i class="fa fa-phone fa-4x"></i>
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading">Jon Swanson</h4>
+	    <h5>Request for Monday, January 1st, 2014</h5>
+	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
+	    <div class='datesubmitted'>December 21st at 2pm</div>
+	    <div style='padding:15px 0px'>
+	    	<span>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-recipient="first" data-time="Jan 1" data-name="Jon">Respond</button>
+	    	</span>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="media">
+	  <a class="media-left" href="#">
+		<i class="fa fa-phone fa-4x"></i>
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading">Jon Swanson</h4>
+	    <h5>Request for Monday, January 1st, 2014</h5>
+	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
+	    <div class='datesubmitted'>December 21st at 2pm</div>
+	    <div style='padding:15px 0px'>
+	    	<span>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-recipient="sec" data-time="Jan 2" data-name="Jon">Respond</button>
+	    	</span>
+	    </div>
+	  </div>
+	</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+         <div class="form-group">
+            <p><span id='responsename'></span> at <span id='responsetime'></span></p>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Accept</button>
+        <button type="button" class="btn btn-danger">Reject</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script type="text/javascript">
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('recipient') // Extract info from data-* attributes
+  var responsetime = button.data('time') // Extract info from data-* attributes
+  var responsename = button.data('name') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('#responsetime').text(responsetime)
+  modal.find('#responsename').text(responsename)
+  // modal.find('.modal-body input').val(recipient)
+})
+
+</script>
+{% endblock %}
+
+
+
