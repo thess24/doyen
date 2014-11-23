@@ -1,10 +1,9 @@
 from django.contrib import admin
-from apps.main.models import ExpertProfile, Talk, RequestedTalk, Rating, Message
+from apps.main.models import ExpertProfile, Talk, Rating, Message
 
 
 admin.site.register(ExpertProfile)
 admin.site.register(Talk)
-admin.site.register(RequestedTalk)
 admin.site.register(Rating)
 admin.site.register(Message)
 
@@ -26,11 +25,9 @@ admin.site.register(Message)
 
 
 
-# login emails
 # social auth creds
 # make twilio call work--first as standalone, then map out
 # accept payments--map this out
-# tos
 # model for stripe keys
 
 
@@ -49,11 +46,3 @@ admin.site.register(Message)
 # message count
 # alerts for form submits - jelly popup
 
-
-### Needed
-# github private
-# aws account
-# social auth signups--fb,twit,g+,lin
-# twilio account
-# stripe account
-# mailgun/ mandrill account

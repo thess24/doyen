@@ -64,6 +64,9 @@
 
 
 </style>
+
+<link href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 {% endblock %}
  
 
@@ -220,10 +223,10 @@
 
 {% block scripts %}
 
+<script src="{{STATIC_URL}}js/bootstrap-datetimepicker.min.js"></script>
+
 
 <script type="text/javascript">
-
-
 $.fn.stars = function() {
     return $(this).each(function() {
         // Get the value
@@ -239,9 +242,16 @@ $.fn.stars = function() {
 
 
 $(function() {
-    $('span.stars').stars();
-});
 
+    $('span.stars').stars();
+
+
+    $('#id_time').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii',
+    pickerPosition: 'top-right',
+	});
+
+});
 
 </script>
 {% endblock %}

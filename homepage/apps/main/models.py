@@ -32,23 +32,18 @@ class Talk(models.Model):
 	expert = models.ForeignKey(User, related_name='talk_expert')
 	time = models.DateTimeField()
 	created = models.DateTimeField(auto_now_add=True)
-	price = models.DecimalField(max_digits=6, decimal_places=2)
-	# pin = models.CharField(max_length=10)  # pin for call
+	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
+	pin = models.CharField(max_length=10,blank=True,null=True)  # pin for call
+	message = models.TextField(max_length=500, blank=True, null=True)
+	reply_message = models.TextField(max_length=500, blank=True, null=True)
+	accepted = models.BooleanField(default=False)
+	accepted_at = models.DateTimeField(blank=True,null=True)
+	cancelled = models.BooleanField(default=False)
+	cancelled_at = models.DateTimeField(blank=True,null=True)
+	requested = models.BooleanField(default=True)
 
 	def __unicode__(self):
 		return self.user.email
-
-
-class RequestedTalk(models.Model):
-	user = models.ForeignKey(User, related_name='reqtalk_user')
-	expert = models.ForeignKey(User, related_name='reqtalk_expert')
-	time = models.DateTimeField()
-	message = models.TextField(max_length=1000)
-	created = models.DateTimeField(auto_now_add=True)
-	new = models.BooleanField(default=True)
-
-	def __unicode__(self):
-		return self.expert.email
 		
 
 class Rating(models.Model):
@@ -104,13 +99,13 @@ class ExpertProfileForm(ModelForm):
 		)
 
 
-class RequestedTalkForm(ModelForm):
+class TalkForm(ModelForm):
 	class Meta:
-		model = RequestedTalk
-		exclude = ['user', 'expert', 'created', 'new']
+		model = Talk
+		fields = ['time', 'message']
 
 	def __init__(self, *args, **kwargs):
-		super(RequestedTalkForm, self).__init__(*args, **kwargs)
+		super(TalkForm, self).__init__(*args, **kwargs)
 		self.helper= FormHelper()
 		self.helper.form_class = 'form-horizontal'
 		self.helper.form_id = 'upload-form'
