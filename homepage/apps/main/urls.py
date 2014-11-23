@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
 
 	url(r'^talks/$', views.talks, name='talks'),
+	url(r'^messages/$', views.messages, name='messages'),
 	url(r'^requests/$', views.talkrequests, name='talkrequests'),
 	url(r'^expertfind/$', views.expertfind, name='expertfind'),
 	url(r'^tos/$', views.tos, name='tos'),

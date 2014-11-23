@@ -8,11 +8,14 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field
 from crispy_forms.bootstrap import PrependedText, StrictButton
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
 	credentials = models.TextField()  #split btwn background/areas of expertise
+	# background = models.TextField()  #split btwn background/areas of expertise
+	# expertise = models.TextField()  #split btwn background/areas of expertise
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picture = models.ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
@@ -30,16 +33,17 @@ class Talk(models.Model):
 	time = models.DateTimeField()
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2)
+	# pin = models.CharField(max_length=10)  # pin for call
 
 	def __unicode__(self):
-		return self.created
+		return self.user.email
 
 
 class RequestedTalk(models.Model):
 	user = models.ForeignKey(User, related_name='reqtalk_user')
 	expert = models.ForeignKey(User, related_name='reqtalk_expert')
 	time = models.DateTimeField()
-	message = models.CharField(max_length=1000)
+	message = models.TextField(max_length=1000)
 	created = models.DateTimeField(auto_now_add=True)
 	new = models.BooleanField(default=True)
 
@@ -52,27 +56,28 @@ class Rating(models.Model):
 	expert = models.ForeignKey(User, related_name='rating_expert')
 	rating = models.IntegerField()
 	comment = models.TextField()
+	title = models.CharField(max_length=100)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
 		return self.expert.email
 
-# class Message(models.Model):
-# 	sender = models.ForeignKey(User, related_name='message_sender')
-# 	reciever = models.ForeignKey(User, related_name='messege_reciever')
-# 	message = models.TextField()
-# 	title = models.CharField(max_length=100)
-# 	sent_at = models.DateTimeField(auto_now_add=True)
-# 	read_at = models.DateTimeField(null=True,blank=True)
+class Message(models.Model):
+	sender = models.ForeignKey(User, related_name='message_sender')
+	reciever = models.ForeignKey(User, related_name='messege_reciever')
+	message = models.TextField()
+	title = models.CharField(max_length=100)
+	sent_at = models.DateTimeField(auto_now_add=True)
+	read_at = models.DateTimeField(null=True,blank=True)
 
-# 	def new(self):
-# 		"""returns whether the recipient has read the message or not"""
-# 		if self.read_at is not None:
-# 			return False
-# 		return True
+	def new(self):
+		"""returns whether the recipient has read the message or not"""
+		if self.read_at is not None:
+			return False
+		return True
 
-# 	def __unicode__(self):
-# 		return self.title    
+	def __unicode__(self):
+		return self.title    
 
 
 
@@ -92,7 +97,7 @@ class ExpertProfileForm(ModelForm):
 		self.helper.field_class = 'col-lg-9'
 		self.helper.layout = Layout(
 				'credentials' ,
-				'price	' ,
+				'price' ,
 				'tags',
 				'picture' ,
 				StrictButton('Submit', name='updateprofile', type='submit',css_class='btn-primary btn-lg'),
@@ -104,17 +109,43 @@ class RequestedTalkForm(ModelForm):
 		model = RequestedTalk
 		exclude = ['user', 'expert', 'created', 'new']
 
+	def __init__(self, *args, **kwargs):
+		super(RequestedTalkForm, self).__init__(*args, **kwargs)
+		self.helper= FormHelper()
+		self.helper.form_class = 'form-horizontal'
+		self.helper.form_id = 'upload-form'
+		self.helper.label_class = 'col-lg-3'
+		self.helper.field_class = 'col-lg-9'
+		self.helper.layout = Layout(
+				'time',
+				'message' ,
+				StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
+		)
+
 
 class RatingForm(ModelForm):
 	class Meta:
 		model = Rating
 		exclude = ['user', 'expert', 'date']
 
-# class MessageForm(ModelForm):
-# 	class Meta:
-# 		model = Message
-# 		exclude = ['sender', 'reciever', 'sent_at', 'read_at']
 
+class MessageForm(ModelForm):
+	class Meta:
+		model = Message
+		exclude = ['sender', 'reciever', 'sent_at', 'read_at']
+
+	def __init__(self, *args, **kwargs):
+		super(MessageForm, self).__init__(*args, **kwargs)
+		self.helper= FormHelper()
+		self.helper.form_class = 'form-horizontal'
+		self.helper.form_id = 'upload-form'
+		self.helper.label_class = 'col-lg-3'
+		self.helper.field_class = 'col-lg-9'
+		self.helper.layout = Layout(
+				'title' ,
+				'message' ,
+				StrictButton('Send', name='sendmessage', type='submit',css_class='btn-primary btn-lg'),
+		)
 
 
 

@@ -13,6 +13,10 @@
     padding: 3px;
   }
 
+  .messagehead{
+    background-color: #F3F2FF!important;
+  }
+
 </style>
 {% endblock %}
  
@@ -27,48 +31,76 @@
 
   <div class='row'>
     <div class='col-md-12'>
-          <h1 id='mainheader'>Requested Talks</h1>
+          <h3 id='mainheader'>Inbox <span class='badge'>{{newmessages}}</span></h3>
     </div>
   </div>
 </div>
 
 
-{% for r in reqtalks%}
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-phone fa-4x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.first_name}}</h4>
-	    <h5>Request for <span class='timehigh'>{{r.time}}</span></h5>
-	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
-	    <div class='datesubmitted'>December 21st at 2pm</div>
-	    <div style='padding:15px 0px'>
-	    	<span>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}">Respond</button>
-	    	</span>
-	    </div>
-	  </div>
-	</div>
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+{% for i in inbox%}
+
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix messagehead" role="tab" id="heading{{i.id}}">
+      <div class='btn-group pull-right'>
+        <button class='btn btn-primary btn-xs'>Reply</button>
+      </div>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapse{{i.id}}">
+          {{i.sender}} - {{i.title}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{i.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{i.id}}">
+      <div class="panel-body">
+        {{i.message}}
+      </div>
+    </div>
+  </div>
+{% empty %}
+<div>No Messages</div>
 {% endfor %}
 
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-phone fa-4x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">Jon Swanson</h4>
-	    <h5>Request for Monday, January 1st, 2014</h5>
-	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
-	    <div class='datesubmitted'>December 21st at 2pm</div>
-	    <div style='padding:15px 0px'>
-	    	<span>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-time="Jan 2" data-name="Jon">Respond</button>
-	    	</span>
-	    </div>
-	  </div>
-	</div>
+</div>
 
+<div class="page-header">
+
+  <div class='row'>
+    <div class='col-md-12'>
+          <h3 id='mainheader'>Outbox</h3>
+    </div>
+  </div>
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+{% for i in outbox%}
+
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix messagehead" role="tab" id="heading{{i.id}}">
+      <div class='btn-group pull-right'>
+        <button class='btn btn-primary btn-xs'>Reply</button>
+      </div>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapse{{i.id}}">
+          {{i.sender}} - {{i.title}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{i.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{i.id}}">
+      <div class="panel-body">
+        {{i.message}}
+      </div>
+    </div>
+  </div>
+{% empty %}
+<div>No Messages</div>
+{% endfor %}
+
+</div>
+
+             
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

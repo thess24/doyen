@@ -4,7 +4,16 @@
 {% block head %}
 <style type="text/css">
 
+	.createdtime-media{
+		font-size: .8em;
+		position: absolute;
+		right: 0px;
+	}
 
+	.schedtime-media{
+		background-color: rgb(253, 253, 225);
+		padding: 3px;
+	}
 </style>
 {% endblock %}
  
@@ -19,38 +28,58 @@
 
   <div class='row'>
     <div class='col-md-12'>
-          <h1 id='mainheader'>Scheduled Talks</h1>
+          <h3 id='mainheader'>Scheduled Talks</h3>
     </div>
   </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-phone fa-5x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">Jon Swanson</h4>
-	    <h5>Talk scheduled for Monday, January 1st, 2014</h5>
-	  </div>
+
+{% for t in talks%}
+	<div class="panel panel-default">
+	  <div class="panel-body">
+		<div class="media">
+		  <a class="media-left" href="#">
+			<i class="fa fa-phone fa-5x"></i>
+		  </a>
+		  <div class="media-body" style='width:100%;position:relative'>
+		    <h3 class="media-heading">{{t.expert.first_name}} {{t.expert.last_name}}</h3>
+		    <div>Talk scheduled for <span class='schedtime-media'>{{t.time}}</span></div>
+		    <div>${{t.price}} per minute</div>
+		  	<span class='createdtime-media'>Made on {{t.created}}</span>
+		  </div>
+		</div>
+	   </div>
 	</div>
-   </div>
+{% empty %}
+	<div>None</div>
+{% endfor %}
+
+
+<div class="page-header">
+  <div class='row'>
+    <div class='col-md-12'>
+          <h3 id='mainheader'>Open Messages</h3>
+    </div>
+  </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-clock-o fa-5x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">Taylor Hess</h4>
-	    <h5>Talk Requested - Waiting for Response</h5>
-	  </div>
+{% for r in reqtalks%}
+	<div class="panel panel-default">
+	  <div class="panel-body">
+		<div class="media">
+		  <a class="media-left" href="#">
+			<i class="fa fa-clock-o fa-5x"></i>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">{{r.expert.first_name}} {{r.expert.last_name}}</h4>
+		    <h5>Talk Requested for {{r.time}}- Waiting for Response</h5>
+		  </div>
+		</div>
+	   </div>
 	</div>
-   </div>
-</div>
+{% empty %}
+	<div>None</div>
+{% endfor %}
 
 {% endblock %}
 

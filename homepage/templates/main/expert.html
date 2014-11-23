@@ -77,7 +77,7 @@
 
   <div class='row'>
     <div class='col-md-12'>
-          <h1 id='mainheader'>Jon Swanson</h1>
+          <h1 id='mainheader'>{{expert.user.first_name}} {{expert.user.last_name}}</h1>
     </div>
   </div>
 </div>
@@ -89,12 +89,12 @@
 		<div class='row'>
 			<div class="media">
 			  <div class="media-left" href="#">
-			    <img src="{{STATIC_URL}}img/profile.jpg" alt="..." class='propic'>
+			    <img src="{{MEDIA_URL}}{{expert.picture}}" alt="..." class='propic'>
 
 			    <div class='labelarea'>
-				    <span class="label label-default">Oil and Gas</span>
-				  	<span class="label label-default">Energy</span>
-				  	<span class="label label-default">Natural Gas</span>
+				    {% for t in expert.tags.all%} 
+				    <span class="label label-default">{{t.name}}</span>
+				    {% endfor %}
 			  	</div>
 
 			  </div>
@@ -102,7 +102,7 @@
 			  	
 
 			    <h4 class="media-heading">Background</h4>
-			    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+			    <p>{{expert.credentials}}</p>
 
 			    <br>
 			    <h4 class="media-heading">Areas of Expertise</h4>
@@ -112,8 +112,42 @@
 			  </div>
 			</div>
 		</div>
+
+
+		<div>
+		{% load crispy_forms_tags %}
+             {% crispy requestform %}
+
+		</div>
+
+
 		<div class='row'>
-			<h3>Reviews<button class='btn btn-sm pull-right'>Add Review</button></h3>
+			<h3>
+				<span>Reviews</span>
+
+				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">Add Review</button>
+
+			</h3>
+
+			{% for r in reviews %}
+			<div class="panel panel-default">
+			  <div class="panel-body">
+
+			    <div>
+			    	<span class="stars">{{r.rating}}</span>
+			    	<span class='commentheader'>{{r.title}}</span>
+			    	<div class='commentreviewer'>{{r.date}}</div>
+			    	<div class='commentreviewer'>by {{r.user}}</div>
+			    </div>
+
+			    <p class='commentarea'>{{r.comment}}</p>
+
+			  </div>
+			</div>
+
+			{% empty %}
+			<div>No Reviews</div>
+			{% endfor %}
 
 			<div class="panel panel-default">
 			  <div class="panel-body">
@@ -121,20 +155,6 @@
 			    <div>
 			    	<span class="stars">4.8618164</span>
 			    	<span class='commentheader'>This guy is great</span>
-			    	<div class='commentreviewer'>by Reviewer</div>
-			    </div>
-
-			    <p class='commentarea'>mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum qutur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi cons</p>
-
-			  </div>
-			</div>
-
-			<div class="panel panel-default">
-			  <div class="panel-body">
-
-			    <div>
-			    	<span class="stars">2</span>
-			    	<span class='commentheader'>This guy sucks</span>
 			    	<div class='commentreviewer'>by Reviewer</div>
 			    </div>
 
@@ -162,6 +182,35 @@
 	</div>
 
 </div>
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Review</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="rating-text" class="control-label">Rating:</label>
+            <textarea class="form-control" id="rating-text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
 
