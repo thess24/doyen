@@ -40,7 +40,7 @@ EMAIL_USE_TLS = True
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = EMAIL_HOST_USER
 
-DEFAULT_FROM_EMAIL = environ.get('EMAIL_HOST_USER', '')  #for use with windows live 
+# DEFAULT_FROM_EMAIL = environ.get('EMAIL_HOST_USER', '')  #for use with windows live 
 ########## END EMAIL CONFIGURATION
 
 
