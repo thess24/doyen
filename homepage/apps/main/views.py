@@ -7,7 +7,7 @@ from settings.common import MEDIA_ROOT
 from django.db.models import Sum
 import stripe
 import requests
-
+from django.http import HttpResponse, HttpResponseRedirect, Http404
  
 
 def index(request):
