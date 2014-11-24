@@ -39,39 +39,25 @@
 		<i class="fa fa-phone fa-4x"></i>
 	  </a>
 	  <div class="media-body">
-	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.first_name}}</h4>
+	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.last_name}}</h4>
 	    <h5>Request for <span class='timehigh'>{{r.time}}</span></h5>
-	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
+	    <p>{{r.message}}</p>
 	    <div class='datesubmitted'>December 21st at 2pm</div>
 	    <div style='padding:15px 0px'>
 	    	<span>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}">Respond</button>
+	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}">Respond</button>
 	    	</span>
 	    </div>
 	  </div>
 	</div>
 {% endfor %}
 
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-phone fa-4x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">Jon Swanson</h4>
-	    <h5>Request for Monday, January 1st, 2014</h5>
-	    <p>eriam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua</p>
-	    <div class='datesubmitted'>December 21st at 2pm</div>
-	    <div style='padding:15px 0px'>
-	    	<span>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-time="Jan 2" data-name="Jon">Respond</button>
-	    	</span>
-	    </div>
-	  </div>
-	</div>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+
+          <form method="POST" action="{% url 'talkrequests' %}">
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -83,17 +69,26 @@
             <p><span id='responsename'></span> at <span id='responsetime'></span></p>
           </div>
           <div class="form-group">
-            <label for="message-text" class="control-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+          
+              {% csrf_token %}
+            <label for="id_message" class="control-label">Message:</label>
+            <textarea cols="40" id="id_reply_message" maxlength="500" name="reply_message" rows="7" class='form-control'></textarea>
+            <input type='hidden' value='' id='requestid' name='requestid'>
+            <!-- {{talkreplyform}} -->
+
+
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success">Accept</button>
-        <button type="button" class="btn btn-danger">Reject</button>
+        <button type="submit" class="btn btn-success" name='acceptform'>Accept</button>
+        <button type="submit" class="btn btn-danger" name='rejectform'>Reject</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
+
+          </form>
+
   </div>
 </div>
 
@@ -113,13 +108,14 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var responsetime = button.data('time') // Extract info from data-* attributes
   var responsename = button.data('name') // Extract info from data-* attributes
+  var requestid = button.data('reqid') // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-title').text('Response to ' + responsename)
   modal.find('#responsetime').text(responsetime)
   modal.find('#responsename').text(responsename)
-  // modal.find('.modal-body input').val(recipient)
+  modal.find('#requestid').val(requestid)
 })
 
 </script>

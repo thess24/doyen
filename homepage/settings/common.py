@@ -4,7 +4,6 @@
 from datetime import timedelta
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
-
 from djcelery import setup_loader
 
 
@@ -290,6 +289,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 # default settings are very good
 
 
+# this is used to extend signup form
+ACCOUNT_SIGNUP_FORM_CLASS = 'apps.main.models.SignupForm'
 
 
 

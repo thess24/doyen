@@ -13,9 +13,9 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
-	credentials = models.TextField()  #split btwn background/areas of expertise
-	# background = models.TextField()  #split btwn background/areas of expertise
-	# expertise = models.TextField()  #split btwn background/areas of expertise
+	# credentials = models.TextField()  #split btwn background/areas of expertise
+	background = models.TextField()  #split btwn background/areas of expertise
+	expertise = models.TextField()  #split btwn background/areas of expertise
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picture = models.ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
@@ -117,12 +117,41 @@ class TalkForm(ModelForm):
 				StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
 		)
 
+class TalkReplyForm(ModelForm):
+	class Meta:
+		model = Talk
+		fields = ['reply_message']
+
+	def __init__(self, *args, **kwargs):
+		super(TalkReplyForm, self).__init__(*args, **kwargs)
+		self.helper= FormHelper()
+		self.helper.form_class = 'form-horizontal'
+		self.helper.form_id = 'upload-form'
+		self.helper.label_class = 'col-lg-3'
+		self.helper.field_class = 'col-lg-9'
+		self.helper.layout = Layout(
+				'reply_message' ,
+				StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
+		)
 
 class RatingForm(ModelForm):
 	class Meta:
 		model = Rating
 		exclude = ['user', 'expert', 'date']
 
+	def __init__(self, *args, **kwargs):
+		super(RatingForm, self).__init__(*args, **kwargs)
+		self.helper= FormHelper()
+		self.helper.form_class = 'form-horizontal'
+		self.helper.form_id = 'upload-form'
+		self.helper.label_class = 'col-lg-3'
+		self.helper.field_class = 'col-lg-9'
+		self.helper.layout = Layout(
+				'title' ,
+				'rating' ,
+				'comment' ,
+				# StrictButton('Submit', name='ratingform', type='submit',css_class='btn-primary btn-lg'),
+		)
 
 class MessageForm(ModelForm):
 	class Meta:
@@ -139,8 +168,19 @@ class MessageForm(ModelForm):
 		self.helper.layout = Layout(
 				'title' ,
 				'message' ,
-				StrictButton('Send', name='sendmessage', type='submit',css_class='btn-primary btn-lg'),
+				# StrictButton('Send', name='sendmessage', type='submit',css_class='btn-primary btn-lg'),
 		)
+
+
+# extended form for allauth
+class SignupForm(forms.Form):
+    first_name = forms.CharField(max_length=30, label='First Name')
+    last_name = forms.CharField(max_length=30, label='Last Name')
+
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
 
 
 

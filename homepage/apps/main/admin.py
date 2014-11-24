@@ -2,8 +2,17 @@ from django.contrib import admin
 from apps.main.models import ExpertProfile, Talk, Rating, Message
 
 
+
+
+
+class TalkAdmin(admin.ModelAdmin):
+    list_display = ('user', 'expert', 'time', 'accepted','cancelled','requested')
+
+
+
+
 admin.site.register(ExpertProfile)
-admin.site.register(Talk)
+admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(Message)
 

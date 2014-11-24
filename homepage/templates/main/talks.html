@@ -14,6 +14,14 @@
 		background-color: rgb(253, 253, 225);
 		padding: 3px;
 	}
+
+	.accepted{
+		color: rgb(0, 179, 0);
+	}
+
+	.cancelled{
+		color: rgb(220, 0, 0);
+	}
 </style>
 {% endblock %}
  
@@ -45,6 +53,8 @@
 		    <h3 class="media-heading">{{t.expert.first_name}} {{t.expert.last_name}}</h3>
 		    <div>Talk scheduled for <span class='schedtime-media'>{{t.time}}</span></div>
 		    <div>${{t.price}} per minute</div>
+		    <div>{{t.message}}</div>
+		    <div>{{t.reply_message}}</div>
 		  	<span class='createdtime-media'>Made on {{t.created}}</span>
 		  </div>
 		</div>
@@ -68,11 +78,19 @@
 	  <div class="panel-body">
 		<div class="media">
 		  <a class="media-left" href="#">
-			<i class="fa fa-clock-o fa-5x"></i>
+		  	{% if r.requested %}
+			<i class="fa fa-clock-o fa-3x"></i>
+		  	{% elif r.cancelled %}
+			<i class="fa fa-times fa-3x cancelled"></i>
+		  	{% elif r.accepted %}
+			<i class="fa fa-check-square-o fa-3x accepted"></i>
+		  	{% endif %}
+
 		  </a>
-		  <div class="media-body">
+		  <div class="media-body" style='position:relative;width:100%'>
 		    <h4 class="media-heading">{{r.expert.first_name}} {{r.expert.last_name}}</h4>
-		    <h5>Talk Requested for {{r.time}}- Waiting for Response</h5>
+		    <h5>Talk Requested for {{r.time}}</h5>
+		  	<span class='createdtime-media'>Requested on {{r.created}}</span>
 		  </div>
 		</div>
 	   </div>

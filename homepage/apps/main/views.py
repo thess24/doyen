@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from apps.main.models import ExpertProfile, Talk, Rating, Message
-from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm
+from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from settings.common import MEDIA_ROOT
@@ -18,7 +18,12 @@ def expert(request, expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
 
+
+	messageform = MessageForm()
 	requestform = TalkForm()
+	ratingform = RatingForm()
+
+
 	if request.method=='POST':
 	# make ajax form here, also make sure user signed up
 		if 'requestform' in request.POST:
@@ -27,26 +32,32 @@ def expert(request, expertid):
 				instance = form.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
-				print instance.expert
+				instance.save()
+
+				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
+
+		if 'sendmessage' in request.POST:
+			form = MessageForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.reciever = expert.user
+				instance.sender = request.user
+				instance.save()
+
+				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
+
+		if 'ratingform' in request.POST:
+			form = RatingForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.expert = expert.user
+				instance.user=request.user
 				instance.save()
 
 				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
 
 
-	# ratingform = RatingForm()
-	# if request.method=='POST':
-	## make ajax form here
-	# 	if 'ratingform' in request.POST:
-	# 		form = RatingForm(request.POST)
-	# 		if form.is_valid():
-	# 			instance = form.save(commit=False)
-	# 			instance.user=request.user
-	# 			instance.save()
-
-	# 			return HttpResponseRedirect(reverse('apps.main.views.expertprofile', args=()))
-
-
-	context = {'expert':expert, 'reviews':reviews, 'requestform':requestform}
+	context = {'expert':expert, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform}
 	return render(request, 'main/expert.html',context)
 
 def expertprofile(request):
@@ -101,43 +112,59 @@ def expertfind(request):
 
 @login_required
 def talks(request):
+
+	# only times for future
+	# revise for fewer queries
 	talks = Talk.objects.filter(user=request.user, accepted=True)
 	reqtalks = Talk.objects.filter(user=request.user)
+
 
 	context = {'talks':talks, 'reqtalks':reqtalks}
 	return render(request, 'main/talks.html', context)	
 
 @login_required
 def talkrequests(request):
+	expert = get_object_or_404(ExpertProfile, user=request.user)
+
 	reqtalks = Talk.objects.filter(expert = request.user,requested=True)
 
 
-	# form = TalkReplyForm()
+	talkreplyform = TalkReplyForm()
 
-# add talkreplyform everywhere, make form submit rej or accept
+	if request.method=='POST':
+		reqid = request.POST.get('requestid','')
+		reqinstance = reqtalks.get(id=reqid)
 
-	# if request.method=='POST':
-	# 	if 'talkresponse' in request.POST:
-	# 		form = TalkReplyForm(request.POST)
-	# 		if form.is_valid():
-	# 			instance = form.save(commit=False)
+		if 'acceptform' in request.POST:
+			form = TalkReplyForm(request.POST,instance=reqinstance)
+			if form.is_valid():
+				instance = form.save(commit=False)
 
-	# 			if rejected:
-	# 				instance.accepted = False
-	# 				instance.rejected = True
-	# 				instance.requested = False
-	# 			if accepted:
-	# 				instance.rejected = False
-	# 				instance.accepted = True
-	# 				instance.requested = False
+				instance.cancelled = False
+				instance.accepted = True
+				instance.requested = False
+				instance.price = expert.price
 
-	# 			instance.user=request.user
-	# 			instance.save()
+				instance.user=request.user
+				instance.save()
 
-	# 			return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
+		if 'rejectform' in request.POST:
+			form = TalkReplyForm(request.POST,instance=reqinstance)
+			if form.is_valid():
+				instance = form.save(commit=False)
+
+				instance.cancelled = True
+				instance.accepted = False
+				instance.requested = False
+				instance.price = expert.price
+
+				instance.user=request.user
+				instance.save()
+
+				return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
 
 
-	context = {'reqtalks':reqtalks}
+	context = {'reqtalks':reqtalks , 'talkreplyform': talkreplyform}
 	return render(request, 'main/requestedtalks.html', context)	
 
 
