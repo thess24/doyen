@@ -143,3 +143,11 @@ ACCOUNT_EMAIL_VERIFICATION='mandatory'
 
 SECURE_SSL_REDIRECT=True
 
+
+
+
+
+############ TWILIO
+
+TWILIO_ACCOUNT_SID = environ.get('TWILIO_ACCOUNT_SID', "")
+TWILIO_AUTH_TOKEN = environ.get('TWILIO_AUTH_TOKEN', "")

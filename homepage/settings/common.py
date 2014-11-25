@@ -219,6 +219,7 @@ THIRD_PARTY_APPS = (
     # 'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.linkedin_oauth2',
     # 'allauth.socialaccount.providers.twitter',
+    'django_twilio',
 
 
 )

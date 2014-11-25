@@ -8,7 +8,10 @@ from django.db.models import Sum
 import stripe
 import requests
 from django.http import HttpResponse, HttpResponseRedirect, Http404
- 
+from twilio import twiml
+from django_twilio.decorators import twilio_view
+
+
 
 def index(request):
 	context= {}
@@ -168,6 +171,28 @@ def talkrequests(request):
 	return render(request, 'main/requestedtalks.html', context)	
 
 
+@twilio_view
+def process_pin(request):
+
+    digits_pressed = request.values.get('Digits', None)
+    print digits_pressed
+	# conference = Conference.objects.get(pin=digits_pressed)
+	# check conference pin and time
+
+	# startwindow = 3 hour before call
+	# endwindow = 3 hour after call
+
+	# if conference.talk.time >= startwindow and conference.talk.time <= endwindow:
+	# 	were good
+	# else:
+	# 	dont do call
+
+    # r = twiml.Response()
+    # r.dial().conference(name=str(digits_pressed))
+    # return r
+
+	print request.POST  # Output GET data to terminal (for debug).
+	return HttpResponse()
 
 
 

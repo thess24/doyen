@@ -75,6 +75,14 @@ class Message(models.Model):
 		return self.title    
 
 
+class ConferenceLine(models.Model):
+	pin = models.CharField(max_length=5)
+	talk = models.ForeignKey(Talk, blank=True, null=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.pin    
+
 
 ##########    FORMS   ############
 

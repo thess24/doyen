@@ -42,5 +42,5 @@ admin.site.register(Message)
 # ability to send ajax messages from expert page if logged in
 # check image size on upload
 # message count
-# alerts for form submits - jelly popup
+# alerts for form submits - bootstrap growl
 
