@@ -13,12 +13,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('allauth.urls')),
     url(r'', include('apps.main.urls')),
-    url(r'^gather/$', 'django_twilio.views.gather', {
-        'action': '/process_input/',
-        'method': 'GET',
-        'timeout': 5,
-        'finish_on_key': '#',
-        'num_digits': 6,
-    }),
 )
  
