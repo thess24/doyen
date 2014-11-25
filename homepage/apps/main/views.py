@@ -174,8 +174,8 @@ def talkrequests(request):
 @twilio_view
 def process_pin(request):
 
-	# digits_pressed = request.values.get('Digits', None)
-	# print digits_pressed
+	digits_pressed =  request.POST.get('Digits','')
+
 	# conference = Conference.objects.get(pin=digits_pressed)
 	# check conference pin and time
 
@@ -187,15 +187,22 @@ def process_pin(request):
 	# else:
 	# 	dont do call
 
-	# r = twiml.Response()
-	# r.dial().conference(name=str(digits_pressed))
-	# return r
-
-	print request.POST.get('Digits','') # Output GET data to terminal (for debug).
 	r = twiml.Response()
-	r.dial().conference(name='hey')
+	r.dial().conference(name=digits_pressed)
 	return r
-	# return HttpResponse()
+
+
+@twilio_view
+def gather_pin(request, action='/process_pin/', method='POST', num_digits=6, timeout=None,
+           finish_on_key=None):
+
+	r = twiml.Response()
+	r.say('Please enter the six digit pin')
+	r.gather(action=action, method=method, numDigits=num_digits,
+			timeout=timeout, finishOnKey=finish_on_key)
+	
+	return r
+
 
 
 
