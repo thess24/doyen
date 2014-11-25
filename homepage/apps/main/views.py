@@ -10,7 +10,7 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from twilio import twiml
 from django_twilio.decorators import twilio_view
-
+import datetime  # arrow? 
 
 
 def index(request):
@@ -173,22 +173,22 @@ def talkrequests(request):
 
 @twilio_view
 def process_pin(request):
-
 	digits_pressed =  request.POST.get('Digits','')
 
 	# conference = Conference.objects.get(pin=digits_pressed)
 	# check conference pin and time
 
+	# conftime = conference.talk.time
 	# startwindow = 3 hour before call
 	# endwindow = 3 hour after call
 
-	# if conference.talk.time >= startwindow and conference.talk.time <= endwindow:
+	# if conftime >= startwindow and conftime <= endwindow:
 	# 	were good
 	# else:
 	# 	dont do call
 
 	r = twiml.Response()
-	r.dial().conference(name=digits_pressed)
+	r.dial(record='record-from-start',action='/call_info/').conference(name=digits_pressed)
 	return r
 
 
@@ -197,11 +197,17 @@ def gather_pin(request, action='/process_pin/', method='POST', num_digits=6, tim
            finish_on_key=None):
 
 	r = twiml.Response()
-	r.say('Please enter the six digit pin')
+	r.say('Welcome to Investor Doyen! Please enter the pin code')
 	r.gather(action=action, method=method, numDigits=num_digits,
 			timeout=timeout, finishOnKey=finish_on_key)
-	
+
 	return r
+
+@twilio_view
+def call_hook(request):
+
+	# digits_pressed =  request.POST.get('Digits','')
+	print request.POST
 
 
 

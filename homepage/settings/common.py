@@ -304,3 +304,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+######## TWILIO 
+
+TWILIO_ACCOUNT_SID = 'id'
+TWILIO_AUTH_TOKEN = 'token'

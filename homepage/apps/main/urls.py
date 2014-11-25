@@ -19,8 +19,7 @@ urlpatterns = patterns('',
 
 	url(r'^process_pin/$', views.process_pin, name='process_pin'),
 	url(r'^gather_pin/$', views.gather_pin, name='gather_pin'),
-	# url(r'^gather_pin/$', 'django_twilio.views.gather', 
-	# 	{'action': '/process_pin/','timeout': 5,'finish_on_key': '#','num_digits': 6,}),
+	url(r'^call_hook/$', views.call_hook, name='call_hook'),
 
 	url(r'^tos/$', views.tos, name='tos'),
 	url(r'^privacypolicy/$', views.privacypolicy, name='privacypolicy'),
