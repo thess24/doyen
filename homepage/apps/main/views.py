@@ -174,8 +174,8 @@ def talkrequests(request):
 @twilio_view
 def process_pin(request):
 
-	digits_pressed = request.values.get('Digits', None)
-	print digits_pressed
+	# digits_pressed = request.values.get('Digits', None)
+	# print digits_pressed
 	# conference = Conference.objects.get(pin=digits_pressed)
 	# check conference pin and time
 
