@@ -191,8 +191,11 @@ def process_pin(request):
 	# r.dial().conference(name=str(digits_pressed))
 	# return r
 
-	print request.POST  # Output GET data to terminal (for debug).
-	return HttpResponse()
+	print request.POST.get('Digits','') # Output GET data to terminal (for debug).
+	r = twiml.Response()
+	r.dial().conference(name=str(digits_pressed))
+	return r
+	# return HttpResponse()
 
 
 
