@@ -188,7 +188,7 @@ def process_pin(request):
 	# 	dont do call
 
 	r = twiml.Response()
-	r.dial(record='record-from-start',action='/call_info/').conference(name=digits_pressed)
+	r.dial(record='record-from-answer',action='/call_hook/').conference(name=digits_pressed)
 	return r
 
 
