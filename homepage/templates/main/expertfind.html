@@ -33,7 +33,7 @@
 		{% for e in experts %}
 		  <div class="col-sm-6 col-md-3">
 		    <div class="thumbnail">
-		      <img src="{{STATIC_URL}}img/profile.jpg" alt="...">
+		      <img src="{{MEDIA_URL}}{{e.picture}}" alt="...">
 		      <div class="caption">
 		        <h3>{{e.user.first_name}} {{e.user.last_name}}</h3>
 		        <p>

@@ -6,4 +6,5 @@ django-taggit==0.12.2
 django-crispy-forms==1.4.0
 stripe==1.19.1
 Pillow==2.6.1
-django_twilio
+django_twilio==0.8.0
+django-timezone-field==1.1

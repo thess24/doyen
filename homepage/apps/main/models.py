@@ -9,18 +9,24 @@ from crispy_forms.layout import Layout, Field
 from crispy_forms.bootstrap import PrependedText, StrictButton
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+import pytz # time zones
+from timezone_field import TimeZoneField
+
 
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
-	# credentials = models.TextField()  #split btwn background/areas of expertise
-	background = models.TextField()  #split btwn background/areas of expertise
-	expertise = models.TextField()  #split btwn background/areas of expertise
+	qualifications = models.TextField()  
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picture = models.ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
-
+	title = models.CharField(max_length=100)
+	time_zone = TimeZoneField()
+	location = models.CharField(max_length=100)
+	twitter = models.CharField(max_length=50, blank=True, null=True)
+	linkedin = models.CharField(max_length=50, blank=True, null=True)
 	# categories = models.   Many to Many
+
 	tags = TaggableManager()
 
 	def __unicode__(self):
@@ -82,6 +88,16 @@ class ConferenceLine(models.Model):
 
 	def __unicode__(self):
 		return self.pin    
+
+
+class Favorite(models.Model):
+	user = models.ForeignKey(User, related_name='favorite_user')
+	expert = models.ForeignKey(User, related_name='favorite_expert')
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.user    
+
 
 
 ##########    FORMS   ############

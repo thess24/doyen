@@ -2,6 +2,7 @@
 
 
 
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -11,6 +12,8 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-family: 'Raleway';
+
 }
 .footer {
   position: absolute;

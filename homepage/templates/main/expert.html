@@ -59,7 +59,13 @@
 		font-size: 1.2em;
 	}
 
+	.taglink{
 
+	}
+
+	.sm-sociallogo{
+		margin: 4px;
+	}
 
 
 
@@ -96,16 +102,22 @@
 
 			    <div class='labelarea'>
 				    {% for t in expert.tags.all%} 
-				    <span class="label label-default">{{t.name}}</span>
+				    <a href="" class='taglink'><span class="label label-default">{{t.name}}</span></a>
 				    {% endfor %}
 			  	</div>
 
 			  </div>
 			  <div class="media-body">
 			  	
-
+			  	<h4>{{expert.title}}</h4>
+			  	<h5><i class="fa fa-map-marker"></i> {{expert.location}}</h5>
+			  	<div>
+			  		<i class="fa fa-twitter sm-sociallogo" data-toggle="tooltip" data-placement="bottom" title="Verified"></i> 
+			  		<i class="fa fa-linkedin sm-sociallogo" data-toggle="tooltip" data-placement="bottom" title="Verified"></i>
+			  	</div>
+			  	<hr>
 			    <h4 class="media-heading">
-			    	<span>Background</span>
+			    	<span>Professional Qualifications</span>
 			    	<span class='pull-right'>
 
 					{% if user.is_authenticated %}
@@ -116,12 +128,9 @@
 
 			    	</span>
 			    </h4>
-			    <p>{{expert.background}}</p>
+			    <p>{{expert.qualifications}}</p>
 
 			    <br>
-			    <h4 class="media-heading">Areas of Expertise</h4>
-
-			    <p>{{expert.expertise}}</p>
 
 			  </div>
 			</div>
@@ -192,6 +201,17 @@
 		<button class='btn btn-lg btn-success' style='width:100%'>
 		<i class="fa fa-phone"></i>
 			Schedule a Call
+		</button>
+
+
+		<button class='btn btn-lg' style='width:100%;margin-top:10px'>
+			{% if favorites %}
+		<i class="fa fa-heart"></i>
+			{% else %}
+		<i class="fa fa-heart-o"></i>
+			{% endif %}
+
+			Favorite
 		</button>
 
 		<div style='padding:0px 30px'>
@@ -324,6 +344,13 @@ $(function() {
 	});
 
 });
+
+
+// initialize tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 
 </script>
 {% endblock %}

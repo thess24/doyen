@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk, Rating, Message
+from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite
 from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -20,6 +20,7 @@ def index(request):
 def expert(request, expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
+	favorites = Favorite.objects.filter(user=request.user)
 
 
 	messageform = MessageForm()
@@ -60,7 +61,7 @@ def expert(request, expertid):
 				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
 
 
-	context = {'expert':expert, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform}
+	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform}
 	return render(request, 'main/expert.html',context)
 
 def expertprofile(request):
@@ -109,7 +110,12 @@ def messages(request):
 
 def expertfind(request):
 	experts = ExpertProfile.objects.filter(online=True)
-	print experts
+
+	if request.user.is_authenticated:
+		favorites = Favorite.objects.filter(user=request.user)
+	else:
+		favorites = []
+
 	context = {'experts':experts}
 	return render(request, 'main/expertfind.html', context)	
 
