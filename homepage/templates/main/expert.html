@@ -102,7 +102,7 @@
 
 			    <div class='labelarea'>
 				    {% for t in expert.tags.all%} 
-				    <a href="" class='taglink'><span class="label label-default">{{t.name}}</span></a>
+				    <a href="{% url 'tagsearch' t.name %}" class='taglink'><span class="label label-default">{{t.name}}</span></a>
 				    {% endfor %}
 			  	</div>
 

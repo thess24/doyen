@@ -4,6 +4,11 @@
 {% block head %}
 <style type="text/css">
 
+.experttag a{
+	text-decoration: none;
+	color: white;
+
+}
 
 </style>
 {% endblock %}
@@ -38,7 +43,7 @@
 		        <h3>{{e.user.first_name}} {{e.user.last_name}}</h3>
 		        <p>
 		        	{% for t in e.tags.all %}
-		        	<span class="label label-default">{{t.name}}</span>
+		        	<span class="label label-default experttag"><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
 		        	{% endfor %}
 
 		        </p>

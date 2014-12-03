@@ -18,7 +18,7 @@ admin.site.register(Message)
 # privacy policy
 
 
-### TODO
+### TODO 
 
 # 1. get time of call - process payments
 # 2. accept cc info and check cards before charged
@@ -29,10 +29,9 @@ admin.site.register(Message)
 # add categories
 # make favorites work
 # submit 3 times at once
-# click on tags to go to search page
+# fix tagging
 # social auth creds
 # accept payments--map this out
-# model for stripe keys
 # restrict reviews only if youve had call
 # ability to send ajax messages from /messages
 # ability to send ajax messages from expert page if logged in

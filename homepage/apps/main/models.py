@@ -13,6 +13,14 @@ import pytz # time zones
 from timezone_field import TimeZoneField
 
 
+# class UserProfile(models.Model):
+# 	user = models.OneToOneField(User)
+# 	stripe_id = models.CharField(max_length=200)  
+# 	picture = models.ImageField(upload_to='profilepics')
+
+# 	def __unicode__(self):
+# 		return self.user.email
+		
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -39,7 +47,7 @@ class Talk(models.Model):
 	time = models.DateTimeField()
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
-	pin = models.CharField(max_length=10,blank=True,null=True)  # pin for call
+	pin = models.CharField(max_length=10,blank=True,null=True)  # room name - change this
 	message = models.TextField(max_length=500, blank=True, null=True)
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
 	accepted = models.BooleanField(default=False)
@@ -47,6 +55,9 @@ class Talk(models.Model):
 	cancelled = models.BooleanField(default=False)
 	cancelled_at = models.DateTimeField(blank=True,null=True)
 	requested = models.BooleanField(default=True)
+	# time_started = models.DateTimeField(blank=True,null=True)
+	# time_ended = models.DateTimeField(blank=True,null=True)
+	# can get rid of most bool rows here
 
 	def __unicode__(self):
 		return self.user.email
@@ -82,9 +93,11 @@ class Message(models.Model):
 
 
 class ConferenceLine(models.Model):
-	pin = models.CharField(max_length=5)
+	pin = models.CharField(max_length=5)  #change to 10
 	talk = models.ForeignKey(Talk, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
+	# expert = models.BooleanField(default=False)
+
 
 	def __unicode__(self):
 		return self.pin    
@@ -117,9 +130,13 @@ class ExpertProfileForm(ModelForm):
 		self.helper.layout = Layout(
 				'background' ,
 				'expertise' ,
+				'title',
+				'time_zone',
 				'price' ,
 				'tags',
-				'picture' ,
+				'picture',
+				'twitter',
+				'linkedin',
 				StrictButton('Submit', name='updateprofile', type='submit',css_class='btn-primary btn-lg'),
 		)
 

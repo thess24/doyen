@@ -17,10 +17,22 @@ def index(request):
 	context= {}
 	return render(request, 'main/index.html', context)
 
+def tagsearch(request,tags):
+	taglist = tags.split("+")
+	experts = ExpertProfile.objects.filter(tags__name__in=taglist).distinct()
+	print taglist
+	# for e in experts:
+	# 	print e.tags.all()
+	context = {'experts':experts}
+	return render(request, 'main/expertfind.html', context)	
+
 def expert(request, expertid):
+	# currenttime = datetime.datetime.now()
+
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
 	favorites = Favorite.objects.filter(user=request.user)
+	# finished_talks = Talk.objects.filter(user=request.user,accepted=True,time__gt=currenttime)
 
 
 	messageform = MessageForm()
@@ -156,6 +168,17 @@ def talkrequests(request):
 
 				instance.user=request.user
 				instance.save()
+
+				'''
+				make function here
+				create conference pin, user pin, expert pin
+				while checking for duplicates within the day
+				and make sure room is unique
+
+				for callback from call in--may need to track callback id (store in db)
+				to make sure we track expert vs others and can see when they call in
+
+				'''
 
 		if 'rejectform' in request.POST:
 			form = TalkReplyForm(request.POST,instance=reqinstance)

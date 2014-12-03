@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 	url(r'^messages/$', views.messages, name='messages'),
 	url(r'^requests/$', views.talkrequests, name='talkrequests'),
 	url(r'^expertfind/$', views.expertfind, name='expertfind'),
+	url(r'^tagsearch/(?P<tags>.+)/$', views.tagsearch, name='tagsearch'),
 
 	url(r'^process_pin/$', views.process_pin, name='process_pin'),
 	url(r'^gather_pin/$', views.gather_pin, name='gather_pin'),
