@@ -266,7 +266,9 @@ def process_pin(request):
 	elif user:
 		talk = Talk.objects.get(user_pin=int(digits_pressed))
 		## if error go back to enter digit prompt
+		print 'user'
 		talk.user_count+=1
+		print talk.user_count
 
 
 	else:
@@ -289,7 +291,7 @@ def process_pin(request):
 
 
 
-
+	talk.save()
 	r = twiml.Response()
 	r.dial(action='/call_hook/').conference(name=talk.room)
 	# r.dial(record='record-from-answer',action='/call_hook/').conference(name=digits_pressed)
