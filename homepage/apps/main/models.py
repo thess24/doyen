@@ -116,7 +116,7 @@ class Message(models.Model):
 
 
 class ConferenceLine(models.Model):
-	pin = models.CharField(max_length=10)  #change to 10
+	pin = models.CharField(max_length=10)
 	talk = models.ForeignKey(Talk, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	expert = models.BooleanField(default=False)
@@ -128,9 +128,9 @@ class ConferenceLine(models.Model):
 
 class CallIn(models.Model):
 	twilio_call_key = models.CharField(max_length=100)
-	talk = models.ForeignKey(Talk, blank=True, null=True)
+	talk = models.ForeignKey(Talk)
 	time_started = models.DateTimeField(auto_now_add=True)
-	time_ended = models.DateTimeField(auto_now_add=True)
+	time_ended = models.DateTimeField(blank=True,null=True)
 	expert = models.BooleanField(default=False)
 
 	def __unicode__(self):

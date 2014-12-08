@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite, UserProfile, ConferenceLine
+from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn
 from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -10,7 +10,6 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from twilio import twiml
 from django_twilio.decorators import twilio_view
-# import datetime  # arrow? 
 from datetime import datetime
 import uuid
 import random
@@ -241,10 +240,10 @@ def talkrequests(request):
 
 @twilio_view
 def process_pin(request):
-	digits_pressed =  request.POST.get('Digits','')
-	print digits_pressed
+	digits_pressed = request.POST.get('Digits','')
+	callkey = request.POST.get('CallSid','')
+
 	leaddigit = digits_pressed[0]
-	print leaddigit
 
 	if leaddigit == "1":
 		expert = True
@@ -256,17 +255,19 @@ def process_pin(request):
 
 
 	if expert:
-		talk = Talk.objects.get(expert_pin=int(digits_pressed))
+		talk = Talk.objects.get(expert_pin=digits_pressed) #filter by date
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
 
+		CallIn(talk=talk,twilio_call_key=callkey,expert=True,time_started = datetime.now())
 
 	elif user:
-		print 'user'
-		talk = Talk.objects.get(user_pin=digits_pressed)
+		talk = Talk.objects.get(user_pin=digits_pressed) #filter by date
 		## if error go back to enter digit prompt
 		talk.user_count+=1
-		print talk.user_count
+
+		CallIn(talk=talk,twilio_call_key=callkey,time_started = datetime.now())
+
 
 
 	else:
@@ -307,10 +308,28 @@ def gather_pin(request, action='/process_pin/', method='POST', num_digits=6, tim
 
 	return r
 
+
 @twilio_view
 def call_hook(request):
 
-	# digits_pressed =  request.POST.get('Digits','')
+	callkey = request.POST.get('CallSid','')
+	callin = CallIn.objects.get(twilio_call_key=callkey)
+
+	talk = callin.talk
+
+	if callin.expert == True:
+		talk.expert_count=0
+	else: 
+		talk.user_count-=1
+
+	if talk.expert_count == 0 and talk.time_started:
+		talk.time_ended = datetime.now()
+	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0:
+		talk.time_ended = datetime.now()
+
+
+	talk.save()
+
 	print request.POST
 
 
