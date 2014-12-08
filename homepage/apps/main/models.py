@@ -55,10 +55,10 @@ class Talk(models.Model):
 	cancelled_at = models.DateTimeField(blank=True,null=True)
 	requested = models.BooleanField(default=True)
 
-	expert_pin = models.CharField(max_length=10)
-	user_pin = models.CharField(max_length=10)
-	expert_count = models.IntegerField()
-	user_count = models.IntegerField()
+	expert_pin = models.CharField(max_length=10,blank=True,null=True)
+	user_pin = models.CharField(max_length=10,blank=True,null=True)
+	expert_count = models.IntegerField(default=0)
+	user_count = models.IntegerField(default=0)
 
 	disconnected = models.DateTimeField(blank=True,null=True)
 

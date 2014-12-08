@@ -258,6 +258,9 @@ def process_pin(request):
 		talk = Talk.objects.get(expert_pin=int(digits_pressed))
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
+		print 'expert'
+		print talk.room
+		print talk.expert_count
 
 
 	elif user:
