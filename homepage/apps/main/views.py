@@ -242,8 +242,9 @@ def talkrequests(request):
 @twilio_view
 def process_pin(request):
 	digits_pressed =  request.POST.get('Digits','')
-
+	print digits_pressed
 	leaddigit = digits_pressed[0]
+	print leaddigit
 
 	if leaddigit == "1":
 		expert = True
@@ -258,15 +259,12 @@ def process_pin(request):
 		talk = Talk.objects.get(expert_pin=int(digits_pressed))
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
-		print 'expert'
-		print talk.room
-		print talk.expert_count
 
 
 	elif user:
-		talk = Talk.objects.get(user_pin=int(digits_pressed))
-		## if error go back to enter digit prompt
 		print 'user'
+		talk = Talk.objects.get(user_pin=digits_pressed)
+		## if error go back to enter digit prompt
 		talk.user_count+=1
 		print talk.user_count
 
