@@ -68,7 +68,7 @@
 <div class="page-header">
   <div class='row'>
     <div class='col-md-12'>
-          <h3 id='mainheader'>History</h3>
+          <h3 id='mainheader'>History</h3> 
     </div>
   </div>
 </div>
@@ -80,9 +80,9 @@
 		  <a class="media-left" href="#">
 		  	{% if r.requested %}
 			<i class="fa fa-clock-o fa-3x"></i>
-		  	{% elif r.cancelled %}
+		  	{% elif r.cancelled_at %}
 			<i class="fa fa-times fa-3x cancelled"></i>
-		  	{% elif r.accepted %}
+		  	{% elif r.accepted_at %}
 			<i class="fa fa-check-square-o fa-3x accepted"></i>
 		  	{% endif %}
 

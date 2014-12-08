@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.main.models import ExpertProfile, Talk, Rating, Message
+from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -10,6 +10,7 @@ admin.site.register(ExpertProfile)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(Message)
+admin.site.register(CallIn)
 
 
 
@@ -39,3 +40,5 @@ admin.site.register(Message)
 # message count
 # alerts for form submits - bootstrap growl
 # check to see if conference is allowed at time, and if one is scheduled w pin
+
+# change datetime.now() to timezone.now() from django utils -lookup in docs

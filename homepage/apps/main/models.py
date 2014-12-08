@@ -13,14 +13,14 @@ import pytz # time zones
 from timezone_field import TimeZoneField
 
 
-# class UserProfile(models.Model):
-# 	user = models.OneToOneField(User)
-# 	stripe_id = models.CharField(max_length=200)  
-# 	picture = models.ImageField(upload_to='profilepics')
+class UserProfile(models.Model):
+	user = models.OneToOneField(User)
+	stripe_id = models.CharField(max_length=200)  
+	picture = models.ImageField(upload_to='profilepics')
 
-# 	def __unicode__(self):
-# 		return self.user.email
-		
+	def __unicode__(self):
+		return self.user.email
+
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -47,17 +47,40 @@ class Talk(models.Model):
 	time = models.DateTimeField()
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
-	pin = models.CharField(max_length=10,blank=True,null=True)  # room name - change this
+	room = models.CharField(max_length=100,blank=True,null=True)
 	message = models.TextField(max_length=500, blank=True, null=True)
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
-	accepted = models.BooleanField(default=False)
+
 	accepted_at = models.DateTimeField(blank=True,null=True)
-	cancelled = models.BooleanField(default=False)
 	cancelled_at = models.DateTimeField(blank=True,null=True)
 	requested = models.BooleanField(default=True)
-	# time_started = models.DateTimeField(blank=True,null=True)
-	# time_ended = models.DateTimeField(blank=True,null=True)
-	# can get rid of most bool rows here
+
+	expert_pin = models.CharField(max_length=10)
+	user_pin = models.CharField(max_length=10)
+	expert_count = models.IntegerField()
+	user_count = models.IntegerField()
+
+	disconnected = models.DateTimeField(blank=True,null=True)
+
+	time_started = models.DateTimeField(blank=True,null=True)
+	time_ended = models.DateTimeField(blank=True,null=True)
+	completed = models.BooleanField(default=False)
+
+	paid_at = models.DateTimeField(blank=True,null=True)
+
+
+	def accepted(self):
+		"""returns whether the expert has accepted or not"""
+		if self.accepted_at is None:
+			return False
+		return True
+
+	def cancelled(self):
+		"""returns whether the recipient has read the message or not"""
+		if self.cancelled_at is None:
+			return False
+		return True
+
 
 	def __unicode__(self):
 		return self.user.email
@@ -93,14 +116,25 @@ class Message(models.Model):
 
 
 class ConferenceLine(models.Model):
-	pin = models.CharField(max_length=5)  #change to 10
+	pin = models.CharField(max_length=10)  #change to 10
 	talk = models.ForeignKey(Talk, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
-	# expert = models.BooleanField(default=False)
+	expert = models.BooleanField(default=False)
 
 
 	def __unicode__(self):
 		return self.pin    
+
+
+class CallIn(models.Model):
+	twilio_call_key = models.CharField(max_length=100)
+	talk = models.ForeignKey(Talk, blank=True, null=True)
+	time_started = models.DateTimeField(auto_now_add=True)
+	time_ended = models.DateTimeField(auto_now_add=True)
+	expert = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.talk.user.email    
 
 
 class Favorite(models.Model):
@@ -224,67 +258,3 @@ class SignupForm(forms.Form):
         user.last_name = self.cleaned_data['last_name']
         user.save()
 
-
-
-# class ProductForm(ModelForm):
-# 	description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 15}))
-
-# 	class Meta:
-# 		model = Product
-# 		exclude = ['purchases', 'user_created', 'active', 'new', 'popular', 'featured']
-
-# 	def clean(self):
-# 		cleaned_data = super(ProductForm, self).clean()
-# 		image = cleaned_data.get('image',False)
-# 		product_file = cleaned_data.get('product_file',False)
-# 		product_name = cleaned_data.get('name',False)
-
-# 		pname = Product.objects.filter(name=product_name)
-# 		if pname:
-# 			raise ValidationError("That name already exists")
-
-# 		if image: 
-# 			if image._size > MAX_IMG_SIZE:
-# 				raise ValidationError("Image too large - must be less than 300kb")
-
-# 			imgtype = image.name.split(".")[-1]
-# 			if imgtype not in ALLOWED_IMG_TYPES:
-# 				raise ValidationError("Must by a jpg, jpeg, gif, or png")
-
-# 		if product_file:
-# 			filetype = product_file.name.split(".")[-1]
-# 			if filetype not in ALLOWED_FILE_TYPES:
-# 				raise ValidationError("Must by a ppt, potx, or pptx")
-
-# 			if product_file._size > MAX_FILE_SIZE:
-# 				raise ValidationError("File too large - must be less than 4mb")
-
-# 		return cleaned_data
-
-	# def __init__(self, *args, **kwargs):
-	# 	super(ProductForm, self).__init__(*args, **kwargs)
-	# 	self.helper= FormHelper()
-	# 	self.helper.form_class = 'form-horizontal'
-	# 	self.helper.form_id = 'upload-form'
-	# 	self.helper.label_class = 'col-lg-3'
-	# 	self.helper.field_class = 'col-lg-9'
-	# 	self.helper.layout = Layout(
-	# 			'name' ,
-	# 			'description' ,
-	# 			PrependedText('price', '$'),
-	# 			'product_file' ,
-	# 			'image' ,
-	# 			'category' ,
-	# 			'pages' ,
-	# 			'tags' ,
-	# 			StrictButton('Continue >', name='addproduct', type='submit',css_class='btn-primary btn-lg'),
-	# 	)
-
-
-
-
-
-
-
-# 3 times to ask expert about -- request for talk
-# user extension to store stripe creds

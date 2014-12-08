@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite
+from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite, UserProfile, ConferenceLine
 from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -10,7 +10,33 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from twilio import twiml
 from django_twilio.decorators import twilio_view
-import datetime  # arrow? 
+# import datetime  # arrow? 
+from datetime import datetime
+import uuid
+import random
+
+########### UTILS --make new file
+def generatepin(digits=6, expert=False):
+	'''expert pins start with 1, user pins start with 0'''
+
+	maxpin = int('9'*digits)
+	used_pins = ConferenceLine.objects.values_list('pin',flat=True)
+	# filter on time here--none in same 3 day span
+
+
+
+	pin = random.randrange(maxpin)
+	if expert: pin = int("1"+str(pin))
+	else: pin = int("0"+str(pin))
+
+	if pin in used_pins:
+		generatepin()
+
+	return pin
+
+
+
+
 
 
 def index(request):
@@ -27,11 +53,12 @@ def tagsearch(request,tags):
 	return render(request, 'main/expertfind.html', context)	
 
 def expert(request, expertid):
-	# currenttime = datetime.datetime.now()
+	currenttime = datetime.now()
 
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
 	favorites = Favorite.objects.filter(user=request.user)
+	finished_talks = Talk.objects.filter(user=request.user,time__gt=currenttime).exclude(accepted_at=None)
 	# finished_talks = Talk.objects.filter(user=request.user,accepted=True,time__gt=currenttime)
 
 
@@ -136,13 +163,16 @@ def talks(request):
 
 	# only times for future
 	# revise for fewer queries
-	talks = Talk.objects.filter(user=request.user, accepted=True)
+	talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
+	# talks = Talk.objects.filter(user=request.user, accepted=True)
 	reqtalks = Talk.objects.filter(user=request.user)
 
 
 	context = {'talks':talks, 'reqtalks':reqtalks}
 	return render(request, 'main/talks.html', context)	
 
+
+# should add decorator where only experts can access or else redirect to forbidden page alert
 @login_required
 def talkrequests(request):
 	expert = get_object_or_404(ExpertProfile, user=request.user)
@@ -157,27 +187,36 @@ def talkrequests(request):
 		reqinstance = reqtalks.get(id=reqid)
 
 		if 'acceptform' in request.POST:
+
 			form = TalkReplyForm(request.POST,instance=reqinstance)
 			if form.is_valid():
 				instance = form.save(commit=False)
 
-				instance.cancelled = False
-				instance.accepted = True
+				instance.cancelled_at = None
+				instance.accepted_at = datetime.now()
 				instance.requested = False
 				instance.price = expert.price
+				instance.room = uuid.uuid4()
 
 				instance.user=request.user
 				instance.save()
 
-				'''
-				make function here
-				create conference pin, user pin, expert pin
-				while checking for duplicates within the day
-				and make sure room is unique
 
+				talk = Talk.objects.get(id=reqid)
+
+
+				expertpin = generatepin(expert=True)
+				otherpin = generatepin()
+
+				print expertpin
+				print otherpin
+
+				talk.expert_pin = expertpin
+				talk.user_pin = otherpin
+
+				'''
 				for callback from call in--may need to track callback id (store in db)
 				to make sure we track expert vs others and can see when they call in
-
 				'''
 
 		if 'rejectform' in request.POST:
@@ -185,8 +224,8 @@ def talkrequests(request):
 			if form.is_valid():
 				instance = form.save(commit=False)
 
-				instance.cancelled = True
-				instance.accepted = False
+				instance.cancelled_at = datetime.now()
+				instance.accepted_at = None
 				instance.requested = False
 				instance.price = expert.price
 
@@ -204,20 +243,53 @@ def talkrequests(request):
 def process_pin(request):
 	digits_pressed =  request.POST.get('Digits','')
 
-	# conference = Conference.objects.get(pin=digits_pressed)
-	# check conference pin and time
+	leaddigit = digits_pressed[0]
 
-	# conftime = conference.talk.time
-	# startwindow = 3 hour before call
-	# endwindow = 3 hour after call
+	if leaddigit == "1":
+		expert = True
+		user = False
 
-	# if conftime >= startwindow and conftime <= endwindow:
-	# 	were good
-	# else:
-	# 	dont do call
+	elif leaddigit == "0":
+		expert = False
+		user = True
+
+
+	if expert:
+		talk = Talk.objects.get(expert_pin=int(digits_pressed))
+		## if error go back to enter digit prompt
+		talk.expert_count = 1
+
+
+	elif user:
+		talk = Talk.objects.get(user_pin=int(digits_pressed))
+		## if error go back to enter digit prompt
+		talk.user_count+=1
+
+
+	else:
+		## redirect to pin prompt
+		pass
+
+	## check times here and see if its within window
+		# conftime = conference.talk.time
+		# startwindow = 3 hour before call
+		# endwindow = 3 hour after call
+
+		# if conftime >= startwindow and conftime <= endwindow:
+		# 	were good
+		# else:
+		# 	dont do call
+
+
+	if talk.expert_count == 1 and talk.user_count >= 1 and not talk.time_started:
+		talk.time_started = datetime.now()
+
+
+
 
 	r = twiml.Response()
-	r.dial(record='record-from-answer',action='/call_hook/').conference(name=digits_pressed)
+	r.dial(action='/call_hook/').conference(name=talk.room)
+	# r.dial(record='record-from-answer',action='/call_hook/').conference(name=digits_pressed)
 	return r
 
 
@@ -226,7 +298,7 @@ def gather_pin(request, action='/process_pin/', method='POST', num_digits=6, tim
            finish_on_key=None):
 
 	r = twiml.Response()
-	r.say('Welcome to Investor Doyen! Please enter the pin code')
+	r.say('Welcome to Investor Doyen! Please enter your pin code')
 	r.gather(action=action, method=method, numDigits=num_digits,
 			timeout=timeout, finishOnKey=finish_on_key)
 
