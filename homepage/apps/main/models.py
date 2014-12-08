@@ -163,9 +163,10 @@ class ExpertProfileForm(ModelForm):
 		self.helper.field_class = 'col-lg-9'
 		self.helper.layout = Layout(
 				'background' ,
-				'expertise' ,
+				'qualifications' ,
 				'title',
 				'time_zone',
+				'location',
 				'price' ,
 				'tags',
 				'picture',

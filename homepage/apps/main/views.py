@@ -197,7 +197,6 @@ def talkrequests(request):
 				instance.price = expert.price
 				instance.room = uuid.uuid4()
 
-				instance.user=request.user
 				instance.save()
 
 
@@ -213,6 +212,7 @@ def talkrequests(request):
 				talk.expert_pin = expertpin
 				talk.user_pin = otherpin
 
+				talk.save()
 				'''
 				for callback from call in--may need to track callback id (store in db)
 				to make sure we track expert vs others and can see when they call in
@@ -259,15 +259,16 @@ def process_pin(request):
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
 
-		CallIn(talk=talk,twilio_call_key=callkey,expert=True,time_started = datetime.now())
+		call = CallIn(talk=talk,twilio_call_key=callkey,expert=True,time_started = datetime.now())
+		call.save()
 
 	elif user:
 		talk = Talk.objects.get(user_pin=digits_pressed) #filter by date
 		## if error go back to enter digit prompt
 		talk.user_count+=1
 
-		CallIn(talk=talk,twilio_call_key=callkey,time_started = datetime.now())
-
+		call = CallIn(talk=talk,twilio_call_key=callkey,time_started = datetime.now())
+		call.save()
 
 
 	else:
