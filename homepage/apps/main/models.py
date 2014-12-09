@@ -81,9 +81,17 @@ class Talk(models.Model):
 			return False
 		return True
 
+	def call_length(self):
+		start = self.time_started
+		end = self.time_ended
+
+		delta = end-start
+		minutes = delta.seconds/60
+
+		return minutes
 
 	def __unicode__(self):
-		return self.user.email
+		return '{} - {}'.format(self.id,self.user.email)
 		
 
 class Rating(models.Model):

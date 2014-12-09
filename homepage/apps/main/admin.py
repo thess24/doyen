@@ -3,14 +3,16 @@ from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn
 
 
 class TalkAdmin(admin.ModelAdmin):
-    list_display = ('user', 'expert', 'time', 'accepted','cancelled','requested')
+    list_display = ('user', 'expert', 'time', 'accepted','cancelled','requested','call_length')
 
+class CallInAdmin(admin.ModelAdmin):
+    list_display = ('talk','time_started', 'time_ended','expert')
 
 admin.site.register(ExpertProfile)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(Message)
-admin.site.register(CallIn)
+admin.site.register(CallIn, CallInAdmin)
 
 
 

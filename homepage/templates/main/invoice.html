@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+
+td.right,th.right {
+	text-align: right;
+}
+
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+
+
+<div class="row"> 
+
+	<div class='col-md-12'>
+		<div class="page-header">
+
+		  <div class='row'>
+		    <div class='col-md-12'>
+		          <h1 id='mainheader'>Invoice</h1>
+		    </div>
+		  </div>
+		</div>
+
+
+
+<div class="alert alert-success" role="alert">You have successfully scheduled your talk! The card of file will be charged once the talk is complete. Congrats! </div>
+
+<div class='row'>
+	<div class='col-md-6'>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Payment Information</h3>
+		  </div>
+
+		  <div class="panel-body">
+		  </div>
+
+		</div>
+	</div>
+
+	<div class='col-md-6'>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Billing Details</h3>
+		  </div>
+
+		  <div class="panel-body">
+		  </div>
+
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Invoice - order number xxxxx</h3>
+  </div>
+  <div class="panel-body">
+	<table class="table">
+	      <caption>Optional table caption.</caption>
+	      <thead>
+	        <tr>
+	          <th>#</th>
+	          <th>Item</th>
+	          <th>Description</th>
+	          <th class='right'>Cost</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr>
+	          <td>1</td>
+	          <td>Mark</td>
+	          <td>Otto</td>
+	          <td class='right'>@mdo</td>
+	        </tr>
+	        <tr>
+	          <td>2</td>
+	          <td>Jacob</td>
+	          <td>Thornton</td>
+	          <td class='right'>@fat</td>
+	        </tr>
+	        <tr>
+	          <td>3</td>
+	          <td>Larry</td>
+	          <td>the Bird</td>
+	          <td class='right'>@twitter</td>
+	        </tr>
+	      </tbody>
+	    </table>
+
+
+<div class="row">
+
+					<div class="col-lg-4 col-sm-5 notice">
+						<div class="well">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+						</div>	
+					</div><!--/col-->
+
+					<div class="col-lg-4 col-lg-offset-4 col-sm-5 col-sm-offset-2 recap">
+						<table class="table table-clear">
+							<tbody>
+								<tr>
+									<td class="left"><strong>Subtotal</strong></td>
+									<td class="right">$8.497,00</td>                                        
+								</tr>
+								<tr>
+									<td class="left"><strong>Discount (20%)</strong></td>
+									<td class="right">$1,699,40</td>                                        
+								</tr>
+								<tr>
+									<td class="left"><strong>Total</strong></td>
+									<td class="right"><strong>$7.477,36</strong></td>                                        
+								</tr>                                  
+							</tbody>
+						</table>
+
+					<button class="btn btn-info" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
+
+
+					</div><!--/col-->
+
+				</div>
+
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

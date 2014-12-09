@@ -238,6 +238,8 @@ def talkrequests(request):
 	return render(request, 'main/requestedtalks.html', context)	
 
 
+##### Call routing #####
+
 @twilio_view
 def process_pin(request):
 	digits_pressed = request.POST.get('Digits','')
@@ -259,7 +261,7 @@ def process_pin(request):
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
 
-		call = CallIn(talk=talk,twilio_call_key=callkey,expert=True,time_started = datetime.now())
+		call = CallIn(talk=talk,twilio_call_key=callkey,expert=True)
 		call.save()
 
 	elif user:
@@ -267,7 +269,7 @@ def process_pin(request):
 		## if error go back to enter digit prompt
 		talk.user_count+=1
 
-		call = CallIn(talk=talk,twilio_call_key=callkey,time_started = datetime.now())
+		call = CallIn(talk=talk,twilio_call_key=callkey)
 		call.save()
 
 
@@ -315,6 +317,8 @@ def call_hook(request):
 
 	callkey = request.POST.get('CallSid','')
 	callin = CallIn.objects.get(twilio_call_key=callkey)
+	callin.time_ended = datetime.now()
+	callin.save()
 
 	talk = callin.talk
 
@@ -323,9 +327,9 @@ def call_hook(request):
 	else: 
 		talk.user_count-=1
 
-	if talk.expert_count == 0 and talk.time_started:
+	if talk.expert_count == 0 and talk.time_started and not talk.time_ended:
 		talk.time_ended = datetime.now()
-	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0:
+	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0 and not talk.time_ended:
 		talk.time_ended = datetime.now()
 
 
@@ -334,6 +338,86 @@ def call_hook(request):
 	print request.POST
 
 
+##### checkout flow #####
+
+def payment(request):
+	context = {}
+	return render(request, 'main/payment.html', context)	
+
+
+def review(request):
+
+	context = {}
+	return render(request, 'main/review.html', context)	
+
+
+def invoice(request):
+
+	context = {}
+	return render(request, 'main/invoice.html', context)	
+
+
+def charge(request):
+	return render(request, 'main/invoice.html', context)	
+	# # Set your secret key: remember to change this to your live secret key in production
+	# # See your keys here https://manage.stripe.com/account
+	# # stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"  #only for universal, this is a marketplace so every vendor has their own
+
+	# token = request.POST.get('stripeToken')
+	# email = request.POST.get('stripeEmail')
+	# try:productid = request.POST['productid']
+	# except: raise Http404  #put better error here
+
+	# product = Product.objects.get(id=productid)
+	# product_price = product.price
+	# product_amt = product_price*100
+	# mycut = product_amt*3/10
+
+	# a,b = UserProfile.objects.get_or_create(user=request.user)
+	# publishkey = product.user_created.userprofile.stripe_publishable_key
+	# accesstoken = product.user_created.userprofile.access_token
+
+
+	# try:
+	# 	charge = stripe.Charge.create(
+	# 		amount=product_amt, 
+	# 		currency="usd",
+	# 		card=token,
+	# 		description=email,
+	# 		application_fee= mycut,
+	# 		api_key = accesstoken,
+	# 	)
+	# except stripe.CardError, e:
+	#   # The card has been declined
+	#   # render error template
+	# 	pass
+
+
+	# # create purchase record
+	# if request.user.is_authenticated():
+	# 	purchase = Purchase(user=request.user, price=product_price, product=product, email=email, downloads=5, uuid=str(uuid.uuid4()))
+	# else:
+	# 	purchase = Purchase(product=product, price=product_price ,email=email, downloads=5, uuid=str(uuid.uuid4()))
+	# purchase.save()
+
+
+	# product.purchases+=1
+	# product.save()
+
+	# # send email
+	# plaintext = get_template('downloademail.txt')
+	# htmly = get_template('downloademail.html')
+	# d = Context({ 'purchase': purchase })
+	# subject, from_email, to = 'Download Link', 'from@example.com', 'thess624@gmail.com'
+	# text_content = plaintext.render(d)
+	# html_content = htmly.render(d)
+	# msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+	# msg.attach_alternative(html_content, "text/html")
+	# msg.send()
+
+
+	# context= {'purchase':purchase}
+	# return render(request, 'main/success.html', context)
 
 
 def tos(request):

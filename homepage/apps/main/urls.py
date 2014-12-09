@@ -18,10 +18,10 @@ urlpatterns = patterns('',
 	url(r'^expertfind/$', views.expertfind, name='expertfind'),
 	url(r'^tagsearch/(?P<tags>.+)/$', views.tagsearch, name='tagsearch'),
 
-	# url(r'^payment/$', views.payment, name='payment'),
-	# url(r'^charge/$', views.charge, name='charge'),
-	# url(r'^review/$', views.review, name='review'),
-	# url(r'^invoice/$', views.invoice, name='invoice'),
+	url(r'^payment/$', views.payment, name='payment'),
+	url(r'^charge/$', views.charge, name='charge'),
+	url(r'^review/$', views.review, name='review'),
+	url(r'^invoice/$', views.invoice, name='invoice'),
 
 	# url(r'^chargedashboard/$', views.chargedashboard, name='chargedashboard'),
 
