@@ -17,13 +17,15 @@ TEMPLATE_DEBUG = DEBUG
 
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-use-tls
 EMAIL_USE_TLS = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.mandrillapp.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-password
 EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
@@ -86,6 +88,7 @@ CELERY_RESULT_BACKEND = 'amqp'
 # See: http://django-storages.readthedocs.org/en/latest/index.html
 INSTALLED_APPS += (
     'storages',
+    'djrill'
 )
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
@@ -151,3 +154,10 @@ SECURE_SSL_REDIRECT=True
 
 TWILIO_ACCOUNT_SID = environ.get('TWILIO_ACCOUNT_SID', "")
 TWILIO_AUTH_TOKEN = environ.get('TWILIO_AUTH_TOKEN', "")
+
+
+
+
+####### DJRILL - MANDRILL EMAIL
+
+MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
