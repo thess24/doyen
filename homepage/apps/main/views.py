@@ -56,7 +56,7 @@ def expert(request, expertid):
 
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
-	favorites = Favorite.objects.filter(user=request.user)
+	favorites = Favorite.objects.filter(user=request.user).values_list('expert_id',flat=True)
 	finished_talks = Talk.objects.filter(user=request.user,time__gt=currenttime).exclude(accepted_at=None)
 	# finished_talks = Talk.objects.filter(user=request.user,accepted=True,time__gt=currenttime)
 
@@ -76,7 +76,7 @@ def expert(request, expertid):
 				instance.user = request.user
 				instance.save()
 
-				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
+				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
 		if 'sendmessage' in request.POST:
 			form = MessageForm(request.POST)
@@ -86,7 +86,7 @@ def expert(request, expertid):
 				instance.sender = request.user
 				instance.save()
 
-				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
+				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
 		if 'ratingform' in request.POST:
 			form = RatingForm(request.POST)
@@ -96,8 +96,17 @@ def expert(request, expertid):
 				instance.user=request.user
 				instance.save()
 
-				return HttpResponseRedirect(reverse('apps.main.views.talks', args=()))
+				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
+		if 'favorite' in request.POST:
+
+			if expert.id in favorites:
+				Favorite.objects.filter(expert=expert.user,user=request.user).delete()
+			else:
+				favorite = Favorite(expert=expert.user,user=request.user)
+				favorite.save()
+
+			return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
 	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform}
 	return render(request, 'main/expert.html',context)
@@ -128,7 +137,6 @@ def messages(request):
 	inbox = Message.objects.filter(reciever = request.user)
 	outbox = Message.objects.filter(sender = request.user)
 
-	newmessages = inbox.filter(read_at=None).count()
 
 	form = MessageForm()
 
@@ -143,7 +151,7 @@ def messages(request):
 	# 			return HttpResponseRedirect(reverse('apps.main.views.messages', args=()))	
 
 
-	context = {'inbox':inbox,'outbox':outbox, 'form':form, 'newmessages':newmessages}
+	context = {'inbox':inbox,'outbox':outbox, 'form':form}
 	return render(request, 'main/messages.html', context)	
 
 def expertfind(request):
@@ -341,7 +349,42 @@ def call_hook(request):
 ##### checkout flow #####
 
 def payment(request):
-	context = {}
+	''' if customer has submitted card before, displays card on file
+		if they havent, it gets info from them '''
+
+
+	# need to:
+	# add card model to store cards for user
+	# add card fk for talk to know what card to charge
+	# handle errors
+	# add button to move to review page, also add selected/inputted card to talk model instance
+	# BEFORE PROD - change api key to real one and make env variable
+	
+
+	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
+	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+
+	if newcustomer.stripe_id:
+		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+		card = customer.cards.retrieve(customer.default_card)
+
+	if request.method == "POST":
+		token = request.POST.get('stripeToken')
+
+		customer = stripe.Customer.create(
+			card=token,
+			description=request.user.email
+		)
+
+		card = customer.cards.retrieve(customer.default_card)
+
+
+		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+		newcustomer.stripe_id = customer.id
+		newcustomer.save()
+
+
+	context = {'card':card}
 	return render(request, 'main/payment.html', context)	
 
 
@@ -418,6 +461,36 @@ def charge(request):
 
 	# context= {'purchase':purchase}
 	# return render(request, 'main/success.html', context)
+
+
+
+
+	# # Save the customer ID in your database so you can use it later
+	# save_stripe_customer_id(user, customer.id)
+
+	# # Later...
+	# customer_id = get_stripe_customer_id(user)
+
+	# stripe.Charge.create(
+	#     amount=1500, # $15.00 this time
+	#     currency="usd",
+	#     customer=customer_id
+	# )
+
+
+	# Create the charge on Stripe's servers - this will charge the user's card
+	# try:
+	# 	charge = stripe.Charge.create(
+	# 		amount=ticektscents, # amount in cents, again
+	# 		currency="usd",
+	# 		customer=customer_id,
+	# 		# card=token,
+	# 		description="payinguser@example.com"
+	# 	)
+	# except stripe.CardError, e:
+	# 	# The card has been declined
+	# 	raise Http404
+
 
 
 def tos(request):

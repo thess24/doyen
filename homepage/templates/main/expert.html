@@ -203,16 +203,17 @@
 			Schedule a Call
 		</button>
 
+		<form method="post" >{% csrf_token %}
+			<button class='btn btn-lg' style='width:100%;margin-top:10px' type='submit' name='favorite'>
+				{% if expert.user.id in favorites %}
+			<i class="fa fa-heart"></i>
+				{% else %}
+			<i class="fa fa-heart-o"></i>
+				{% endif %}
 
-		<button class='btn btn-lg' style='width:100%;margin-top:10px'>
-			{% if favorites %}
-		<i class="fa fa-heart"></i>
-			{% else %}
-		<i class="fa fa-heart-o"></i>
-			{% endif %}
-
-			Favorite
-		</button>
+				Favorite
+			</button>
+		</form>
 
 		<div style='padding:0px 30px'>
 			<span class='propricedollarsign'>$</span>

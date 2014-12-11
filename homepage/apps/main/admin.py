@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn
+from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn, Favorite
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -12,6 +12,7 @@ admin.site.register(ExpertProfile)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(Message)
+admin.site.register(Favorite)
 admin.site.register(CallIn, CallInAdmin)
 
 
