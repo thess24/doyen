@@ -137,20 +137,6 @@
 		</div>
 
 
-{% if user.is_authenticated %}
-
-		<div>
-		{% load crispy_forms_tags %}
-             {% crispy requestform %}
-
-		</div>
-
-{% else %}
-
-<div>To submit request, please <a href="/accounts/signup">Sign Up</a></div>
-
-{% endif %}
-
 <hr>
 		<div class='row'>
 			<h3>
@@ -198,10 +184,10 @@
 	</div>
 
 	<div class='col-md-3'>
-		<button class='btn btn-lg btn-success' style='width:100%'>
+		<a class='btn btn-lg btn-success' style='width:100%' href="{% url 'requesttalk' expert.id %}">
 		<i class="fa fa-phone"></i>
 			Schedule a Call
-		</button>
+		</a>
 
 		<form method="post" >{% csrf_token %}
 			<button class='btn btn-lg' style='width:100%;margin-top:10px' type='submit' name='favorite'>

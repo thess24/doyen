@@ -29,18 +29,15 @@ admin.site.register(CallIn, CallInAdmin)
 
 
 
-
+# dont allow changing request once submitted by accessing url
 # add categories
-# make favorites work
 # submit 3 times at once
 # fix tagging
 # social auth creds
-# accept payments--map this out
 # restrict reviews only if youve had call
 # ability to send ajax messages from /messages
 # ability to send ajax messages from expert page if logged in
 # check image size on upload
-# message count
 # alerts for form submits - bootstrap growl
 # check to see if conference is allowed at time, and if one is scheduled w pin
 

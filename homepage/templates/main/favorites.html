@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+.heart{
+  color: red;
+  border: 0px;
+  background: transparent;
+
+}
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+<div class="page-header">
+
+  <div class='row'>
+    <div class='col-md-12'>
+          <h1 id='mainheader'>Favorites</h1>
+    </div>
+  </div>
+</div>
+
+
+{% for f in favorites%}
+	<div class="media">
+	  <a class="media-left" href="#">
+          <img src="{{MEDIA_URL}}{{f.expert.expertprofile.picture}}" style='width:100px'>
+	  </a>
+	  <div class="media-body">
+      <button type='' class='pull-right heart'> Favorite <i class="fa fa-heart"></i></button>
+	    <h4 class="media-heading">{{f.expert.first_name}} {{f.expert.last_name}}</h4>
+      <h5>{{f.expert.expertprofile.title}}</h5>
+	    <h5>{{f.expert.expertprofile.location}}</h5>
+      {% for t in f.expert.expertprofile.tags.all%} 
+            <a href="{% url 'tagsearch' t.name %}" class='taglink'><span class="label label-default">{{t.name}}</span></a>
+            {% endfor %}
+      <div>{{f.expert.expertprofile.qualifications}}</div>
+	  </div>
+	</div>
+{% empty %}
+No Favorties
+{% endfor %}
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

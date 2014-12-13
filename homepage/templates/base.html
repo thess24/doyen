@@ -52,8 +52,9 @@
             <li><a href="{% url 'talkrequests' %}">Requests</a></li>
             <li><a href="{% url 'messages' %}">{{ message_count }} Messages</a></li>
             <li><a href="{% url 'payment' %}">Payment</a></li>
-            <li><a href="{% url 'review' %}">Review</a></li>
+            <li><a href="{% url 'review' 1 %}">Review</a></li>
             <li><a href="{% url 'invoice' %}">Invoice</a></li>
+            <li><a href="{% url 'favorites' %}">Favorites</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 

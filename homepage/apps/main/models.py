@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 import pytz # time zones
 from timezone_field import TimeZoneField
 
-
+ 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	stripe_id = models.CharField(max_length=200)  
@@ -85,10 +85,16 @@ class Talk(models.Model):
 		start = self.time_started
 		end = self.time_ended
 
-		delta = end-start
-		minutes = delta.seconds/60
+		if start==None or end==None:
+			return 0
+		else:
+			delta = end-start
+			minutes = delta.seconds/60
 
-		return minutes
+			return minutes
+
+	def cost(self):
+		return self.call_length * price
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)

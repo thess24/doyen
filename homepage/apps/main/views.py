@@ -51,6 +51,28 @@ def tagsearch(request,tags):
 	context = {'experts':experts}
 	return render(request, 'main/expertfind.html', context)	
 
+def requesttalk(request,expertid):
+	expert = get_object_or_404(ExpertProfile, id=expertid)
+	requestform = TalkForm()
+
+	if request.method=='POST':
+	# make ajax form here, also make sure user signed up
+		if 'requestform' in request.POST:
+			form = TalkForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.expert = expert.user
+				instance.user = request.user
+				instance.save()
+
+				talkid = str(instance.id)
+
+				return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid)))
+	
+	context = {'expert':expert,'requestform':requestform}
+	return render(request, 'main/requesttalk.html',context)
+
+
 def expert(request, expertid):
 	currenttime = datetime.now()
 
@@ -166,11 +188,21 @@ def expertfind(request):
 	return render(request, 'main/expertfind.html', context)	
 
 @login_required
+def favorites(request):
+	favorites = Favorite.objects.filter(user=request.user)
+
+	# import pdb; pdb.set_trace()
+
+	context = {'favorites':favorites}
+	return render(request, 'main/favorites.html', context)
+
+@login_required
 def talks(request):
 
 	# only times for future
 	# revise for fewer queries
-	talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
+	# talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
+	talks = Talk.objects.filter(user=request.user).exclude(accepted_at=None)
 	# talks = Talk.objects.filter(user=request.user, accepted=True)
 	reqtalks = Talk.objects.filter(user=request.user)
 
@@ -213,9 +245,6 @@ def talkrequests(request):
 
 				expertpin = generatepin(expert=True)
 				otherpin = generatepin()
-
-				print expertpin
-				print otherpin
 
 				talk.expert_pin = expertpin
 				talk.user_pin = otherpin
@@ -347,6 +376,38 @@ def call_hook(request):
 
 
 ##### checkout flow #####
+def talkpayment(request, talkid):
+	talk = Talk.objects.get(id=talkid)
+
+	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
+	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+
+	if newcustomer.stripe_id:
+		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+		card = customer.cards.retrieve(customer.default_card)
+
+	if request.method == "POST":
+		token = request.POST.get('stripeToken')
+
+		customer = stripe.Customer.create(
+			card=token,
+			description=request.user.email
+		)
+
+		card = customer.cards.retrieve(customer.default_card)
+
+
+		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+		newcustomer.stripe_id = customer.id
+		newcustomer.save()
+		context = {'card':card, 'talk':talk}
+
+
+
+	context = {'talk':talk}
+	return render(request, 'main/talkpayment.html', context)
+
+
 
 def payment(request):
 	''' if customer has submitted card before, displays card on file
@@ -359,7 +420,7 @@ def payment(request):
 	# handle errors
 	# add button to move to review page, also add selected/inputted card to talk model instance
 	# BEFORE PROD - change api key to real one and make env variable
-	
+
 
 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
@@ -388,9 +449,19 @@ def payment(request):
 	return render(request, 'main/payment.html', context)	
 
 
-def review(request):
+def review(request, talkid):
+	talk = Talk.objects.get(id=talkid)
 
-	context = {}
+	if request.method == 'POST':
+		if 'order' in request.POST:
+			talk.requested = True
+			talk.save()
+
+			context = {'talk':talk}
+			return render(request, 'main/orderconfirm.html', context)	
+
+
+	context = {'talk':talk}
 	return render(request, 'main/review.html', context)	
 
 
@@ -401,7 +472,34 @@ def invoice(request):
 
 
 def charge(request):
-	return render(request, 'main/invoice.html', context)	
+	# # stripe.api_key = "sk_test_9ucD3dSakYLAivmgxMqOJd0r"  #only for universal, this is a marketplace so every vendor has their own
+
+	# talk = Talk.objects.get(id=)
+	# price = talk.cost * 100
+
+	# customer_id = talk.user.userprofile.stripe_id
+	# card_id = talk.user.card
+
+	## https://stripe.com/docs/api#create_charge
+	## should pass customer and card
+
+	# try:
+	# 	charge = stripe.Charge.create(
+	# 		amount= price, # amount in cents, again
+	# 		currency="usd",
+	# 		customer=customer_id,
+	#		card=card_id,
+	# 		description= talk.expert.get_full_name()
+	# 	)
+	# except stripe.CardError, e:
+	# 	# The card has been declined
+	# 	raise Http404
+
+	return render(request, 'main/invoice.html', context)
+
+
+
+
 	# # Set your secret key: remember to change this to your live secret key in production
 	# # See your keys here https://manage.stripe.com/account
 	# # stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"  #only for universal, this is a marketplace so every vendor has their own

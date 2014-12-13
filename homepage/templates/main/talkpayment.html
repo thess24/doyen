@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+
+
+<div class="row">
+
+	<div class='col-md-12'>
+		<div class="page-header">
+
+		  <div class='row'>
+		    <div class='col-md-12'>
+		          <h1 id='mainheader'>Payment Information</h1>
+		    </div>
+		  </div>
+		</div>
+
+
+<div class='row'>
+
+  <div class='col-md-8'>
+    <div class='well'>
+      <h4>Talk Request</h4>
+      <div>{{talk.expert}}</div>
+      <div>{{talk.time}}</div>
+      <div>{{talk.price}}</div>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class='well'>
+      <h4>Card on File</h4>
+      <div>{{card.brand}}</div>
+      <div>Card: **** **** **** {{card.last4}}</div>
+      <div>Expires: {{card.exp_month}} / {{card.exp_year}}</div>
+    </div>
+  </div>
+</div>
+
+<a href="{% url 'review' talk.id %}">Proceed to Checkout</a>
+
+
+<h3>Add new card</h3>
+  <form class="form-horizontal" role="form" id='payment-form' method='post'> {% csrf_token %}
+    <span class="payment-errors"></span>
+    <fieldset>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number"  size="20" data-stripe="number">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-xs-3">
+              <input type='text' size='2' class="form-control col-sm-2" name="expiry-month" id="expiry-month"  data-stripe="exp-month" />
+            </div>
+            <div class="col-xs-3">
+              <input  type='text' size='4' class="form-control" name="expiry-year" data-stripe="exp-year" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="cvc">Card CVC</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="cvc" id="cvc" placeholder="Security Code"  size="4" data-stripe="cvc">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-success">Proceed to Checkout</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block scripts %}
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<!-- stripe reccomends this in head -->
+  <script type="text/javascript">
+    // This identifies your website in the createToken call below
+    Stripe.setPublishableKey('pk_test_LuACnwzu1gOIBxwqsbndp2nY');
+
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // token contains id, last4, and card type
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // and re-submit
+        $form.get(0).submit();
+      }
+    };
+
+    jQuery(function($) {
+      $('#payment-form').submit(function(e) {
+        var $form = $(this);
+
+        // Disable the submit button to prevent repeated clicks
+        $form.find('button').prop('disabled', true);
+
+        Stripe.card.createToken($form, stripeResponseHandler);
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+  </script>
+{% endblock %}
+
+
+
