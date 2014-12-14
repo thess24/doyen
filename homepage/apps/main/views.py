@@ -15,7 +15,7 @@ import uuid
 import random
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context
-
+from django.template.loader import render_to_string
 
 ########### UTILS --make new file
 def generatepin(digits=6, expert=False):
