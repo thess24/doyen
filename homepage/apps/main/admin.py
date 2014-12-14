@@ -24,7 +24,6 @@ admin.site.register(CallIn, CallInAdmin)
 
 ### TODO 
 
-# add image to emails
 # fix reminders email to send at later date
 # do invoice email template
 # do payment email template

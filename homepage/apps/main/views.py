@@ -17,6 +17,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
 
+
 ########### UTILS --make new file
 def generatepin(digits=6, expert=False):
 	'''expert pins start with 1, user pins start with 0'''
@@ -48,14 +49,16 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 		# headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
 	)
 
-	if send_at:
-		msg.send_at = send_at
-
 	c = Context(context)
 	htmly = render_to_string(html_path,c)
 	msg.attach_alternative(htmly, "text/html")
 	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
 	# msg.metadata = {'user_id': "8675309"}
+
+	if send_at:
+		print send_at
+		msg.send_at = send_at
+		
 	msg.send()
 
 
