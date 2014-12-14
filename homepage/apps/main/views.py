@@ -305,7 +305,7 @@ def talkrequests(request):
 						html_path="doyen_email/user_reminder.html",
 						send_at = future_time
 				)
-				
+
 				'''
 				for callback from call in--may need to track callback id (store in db)
 				to make sure we track expert vs others and can see when they call in
@@ -530,6 +530,8 @@ def payment(request):
 
 
 def review(request, talkid):
+	# make sure there is a valid card on file before allowing to access this page,
+	#    or note that there needs to be a card on file and dont let submit
 	talk = Talk.objects.get(id=talkid)
 
 	if request.method == 'POST':
