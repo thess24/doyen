@@ -14,6 +14,7 @@ from datetime import datetime
 import uuid
 import random
 from django.core.mail import EmailMultiAlternatives
+from django.template import Context
 
 
 ########### UTILS --make new file
