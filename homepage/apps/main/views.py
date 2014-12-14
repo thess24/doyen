@@ -262,7 +262,7 @@ def talkrequests(request):
 					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
 				)
 				c = Context({})
-				htmly = render_to_string("user_accept_notify.html",c)
+				htmly = render_to_string("doyen_email/user_accept_notify.html",c)
 
 				msg.attach_alternative(htmly, "text/html")
 				# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
