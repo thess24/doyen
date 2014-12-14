@@ -57,8 +57,8 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 
 	if send_at:
 		print send_at
-		msg.send_at = "2013-11-12 01:02:03"
-		
+		msg.send_at = send_at
+
 	msg.send()
 
 
@@ -306,7 +306,7 @@ def talkrequests(request):
 						body=None,
 						to=talk.expert.email, 
 						html_path="doyen_email/expert_reminder.html",
-						send_at = future_time
+						send_at = "2013-11-12 01:02:03"
 				)
 
 				send_html_email(c, 
@@ -314,7 +314,7 @@ def talkrequests(request):
 						body=None,
 						to=talk.user.email, 
 						html_path="doyen_email/user_reminder.html",
-						send_at = future_time
+						send_at = "2013-11-12 01:02:03"
 				)
 
 				'''
