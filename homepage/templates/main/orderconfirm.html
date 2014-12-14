@@ -54,7 +54,7 @@
 				  </a>
 				  <div class="media-body">
 				    <h4 class="media-heading">1. {{talk.expert}}</h4>
-				    <span>{{talk.time}}</span>
+				    <span>{{ talk.time|date:"N d,  Y -  P T" }}</span>
 				    <span>{{talk.price}}</span>
 				    <div>{{talk.qualifications}}</div>
 				  </div>

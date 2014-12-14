@@ -40,9 +40,9 @@
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.last_name}}</h4>
-	    <h5>Request for <span class='timehigh'>{{r.time}}</span></h5>
+	    <h5>Request for <span class='timehigh'>{{ r.time|date:"N d,  Y -  P T" }}</span></h5>
 	    <p>{{r.message}}</p>
-	    <div class='datesubmitted'>December 21st at 2pm</div>
+	    <div class='datesubmitted'>{{r.created}}</div>
 	    <div style='padding:15px 0px'>
 	    	<span>
 	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}">Respond</button>

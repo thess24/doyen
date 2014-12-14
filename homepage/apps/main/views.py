@@ -11,11 +11,11 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from twilio import twiml
 from django_twilio.decorators import twilio_view
 from datetime import datetime, timedelta
-import uuid
-import random
+import uuid, random
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 
 ########### UTILS --make new file
@@ -25,7 +25,6 @@ def generatepin(digits=6, expert=False):
 	maxpin = int('9'*digits)
 	used_pins = ConferenceLine.objects.values_list('pin',flat=True)
 	# filter on time here--none in same 3 day span
-
 
 
 	pin = random.randrange(maxpin)
@@ -55,9 +54,10 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
 	# msg.metadata = {'user_id': "8675309"}
 
-	if send_at:
-		print send_at
-		msg.send_at = send_at
+	# uncomment once mandrill is set up
+	# if send_at:
+	# 	print send_at
+	# 	msg.send_at = send_at
 
 	msg.send()
 
@@ -234,7 +234,6 @@ def favorites(request):
 
 @login_required
 def talks(request):
-
 	# only times for future
 	# revise for fewer queries
 	# talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
@@ -306,7 +305,7 @@ def talkrequests(request):
 						body=None,
 						to=talk.expert.email, 
 						html_path="doyen_email/expert_reminder.html",
-						send_at = "2013-11-12 01:02:03"
+						send_at = future_time
 				)
 
 				send_html_email(c, 
@@ -314,7 +313,7 @@ def talkrequests(request):
 						body=None,
 						to=talk.user.email, 
 						html_path="doyen_email/user_reminder.html",
-						send_at = "2013-11-12 01:02:03"
+						send_at = future_time
 				)
 
 				'''
