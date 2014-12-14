@@ -13,6 +13,8 @@ from django_twilio.decorators import twilio_view
 from datetime import datetime
 import uuid
 import random
+from django.core.mail import EmailMultiAlternatives
+
 
 ########### UTILS --make new file
 def generatepin(digits=6, expert=False):
@@ -191,8 +193,6 @@ def expertfind(request):
 def favorites(request):
 	favorites = Favorite.objects.filter(user=request.user)
 
-	# import pdb; pdb.set_trace()
-
 	context = {'favorites':favorites}
 	return render(request, 'main/favorites.html', context)
 
@@ -250,6 +250,25 @@ def talkrequests(request):
 				talk.user_pin = otherpin
 
 				talk.save()
+
+
+
+				msg = EmailMultiAlternatives(
+					subject="Your Talk was Accepted!",
+					body="This is the text email body",
+					from_email="Investor Doyen <admin@investordoyen.com>",
+					to=[talk.user.email],
+					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				)
+				c = Context({})
+				htmly = render_to_string("user_accept_notify.html",c)
+
+				msg.attach_alternative(htmly, "text/html")
+				# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
+				# msg.metadata = {'user_id': "8675309"}
+				msg.send()
+
+
 				'''
 				for callback from call in--may need to track callback id (store in db)
 				to make sure we track expert vs others and can see when they call in
