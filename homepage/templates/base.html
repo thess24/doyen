@@ -49,7 +49,7 @@
           <ul class="nav navbar-nav">
             <li><a href="{% url 'expertfind' %}">Find an Expert</a></li>
             <li><a href="{% url 'talks' %}">Talks</a></li>
-            {% if request.user.experprofile.online %}
+            {% if request.user.expertprofile.online %}
             <li><a href="{% url 'talkrequests' %}">Requests</a></li>
             {% endif %}
             <li><a href="{% url 'messages' %}">{{ message_count }} Messages</a></li>
