@@ -57,7 +57,7 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 
 	if send_at:
 		print send_at
-		msg.send_at = send_at
+		msg.send_at = "2013-11-12 01:02:03"
 		
 	msg.send()
 
