@@ -24,11 +24,14 @@ admin.site.register(CallIn, CallInAdmin)
 
 ### TODO 
 
-# 1. get time of call - process payments
-# 2. accept cc info and check cards before charged
 
 
 
+# do invoice email tempate
+# do payment email template
+# make email out into function -- more concise
+# finish templates for emails
+# add .txt files for emails
 # dont allow changing request once submitted by accessing url
 # add categories
 # submit 3 times at once
@@ -40,5 +43,4 @@ admin.site.register(CallIn, CallInAdmin)
 # check image size on upload
 # alerts for form submits - bootstrap growl
 # check to see if conference is allowed at time, and if one is scheduled w pin
-
 # change datetime.now() to timezone.now() from django utils -lookup in docs

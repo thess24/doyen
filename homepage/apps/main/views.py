@@ -38,23 +38,32 @@ def generatepin(digits=6, expert=False):
 
 
 
-# def send_html_email(to=None, html_path=None, con):
+def send_html_email(context, subject=None,body=None,to=None, html_path=None, send_at=None):
 
-# 	msg = EmailMultiAlternatives(
-# 		subject="Your Talk was Accepted!",
-# 		body="This is the text email body",
-# 		from_email="Investor Doyen <admin@investordoyen.com>",
-# 		to=[talk.user.email],
-# 		# headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
-# 	)
-# 	c = Context({})
-# 	htmly = render_to_string("doyen_email/user_accept_notify.html",c)
+	msg = EmailMultiAlternatives(
+		subject=subject,
+		body=body,
+		from_email="Investor Doyen <admin@investordoyen.com>",
+		to=[to],
+		# headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+	)
 
-# 	msg.attach_alternative(htmly, "text/html")
-# 	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
-# 	# msg.metadata = {'user_id': "8675309"}
-# 	msg.send()
+	if send_at:
+		msg.send_at = send_at
 
+	c = Context(context)
+	htmly = render_to_string(html_path,c)
+	msg.attach_alternative(htmly, "text/html")
+	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
+	# msg.metadata = {'user_id': "8675309"}
+	msg.send()
+
+
+
+
+
+
+####### Views
 
 def index(request):
 	context= {}
@@ -231,9 +240,7 @@ def talks(request):
 @login_required
 def talkrequests(request):
 	expert = get_object_or_404(ExpertProfile, user=request.user)
-
 	reqtalks = Talk.objects.filter(expert = request.user,requested=True)
-
 
 	talkreplyform = TalkReplyForm()
 
@@ -242,60 +249,63 @@ def talkrequests(request):
 		reqinstance = reqtalks.get(id=reqid)
 
 		if 'acceptform' in request.POST:
-
 			form = TalkReplyForm(request.POST,instance=reqinstance)
 			if form.is_valid():
 				instance = form.save(commit=False)
-
 				instance.cancelled_at = None
 				instance.accepted_at = datetime.now()
 				instance.requested = False
 				instance.price = expert.price
 				instance.room = uuid.uuid4()
-
 				instance.save()
 
 
 				talk = Talk.objects.get(id=reqid)
-
 
 				expertpin = generatepin(expert=True)
 				otherpin = generatepin()
 
 				talk.expert_pin = expertpin
 				talk.user_pin = otherpin
-
 				talk.save()
 
 
 				## email out
-				msg = EmailMultiAlternatives(
-					subject="Your Talk was Accepted!",
-					body="This is the text email body",
-					from_email="Investor Doyen <admin@investordoyen.com>",
-					to=[talk.user.email],
-					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				c = {'talk':talk}
+
+				send_html_email(c, 
+						subject="Investor Doyen - You Accepted a Talk!",
+						body=None,
+						to=talk.expert.email, 
+						html_path="doyen_email/expert_accept_notify.html"
 				)
-				c = Context({})
-				htmly = render_to_string("doyen_email/user_accept_notify.html",c)
-				msg.attach_alternative(htmly, "text/html")
-				msg.send()
 
-
-				msg = EmailMultiAlternatives(
-					subject="You Accepted a Talk!",
-					body="This is the text email body",
-					from_email="Investor Doyen <admin@investordoyen.com>",
-					to=[talk.expert.email],
-					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				send_html_email(c, 
+						subject="Investor Doyen - Your Talk was Accepted!",
+						body=None,
+						to=talk.user.email, 
+						html_path="doyen_email/user_accept_notify.html"
 				)
-				c = Context({})
-				htmly = render_to_string("doyen_email/expert_accept_notify.html",c)
-				msg.attach_alternative(htmly, "text/html")
-				msg.send()
 
+				## reminder emails
+				future_time = talk.time - timedelta(days=1)
 
+				send_html_email(c, 
+						subject="Investor Doyen - Reminder for your upcoming talk!",
+						body=None,
+						to=talk.expert.email, 
+						html_path="doyen_email/expert_reminder.html",
+						send_at = future_time
+				)
 
+				send_html_email(c, 
+						subject="Investor Doyen - Reminder for your upcoming talk!",
+						body=None,
+						to=talk.user.email, 
+						html_path="doyen_email/user_reminder.html",
+						send_at = future_time
+				)
+				
 				'''
 				for callback from call in--may need to track callback id (store in db)
 				to make sure we track expert vs others and can see when they call in
@@ -315,17 +325,27 @@ def talkrequests(request):
 				instance.save()
 
 				## email out
-				msg = EmailMultiAlternatives(
-					subject="Your Talk was Accepted!",
-					body="This is the text email body",
-					from_email="Investor Doyen <admin@investordoyen.com>",
-					to=[talk.user.email],
-					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+
+				c = {'talk':talk}
+				send_html_email(c, 
+						subject="Investor Doyen - Your talk has been declined",
+						body=None,
+						to=talk.user.email, 
+						html_path="doyen_email/user_reject_notify.html"
 				)
-				c = Context({})
-				htmly = render_to_string("doyen_email/user_reject_notify.html",c)
-				msg.attach_alternative(htmly, "text/html")
-				msg.send()
+
+
+				# msg = EmailMultiAlternatives(
+				# 	subject="Your Talk was Accepted!",
+				# 	body="This is the text email body",
+				# 	from_email="Investor Doyen <admin@investordoyen.com>",
+				# 	to=[talk.user.email],
+				# 	headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				# )
+				# c = Context({})
+				# htmly = render_to_string("doyen_email/user_reject_notify.html",c)
+				# msg.attach_alternative(htmly, "text/html")
+				# msg.send()
 
 
 				return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
@@ -518,28 +538,19 @@ def review(request, talkid):
 			talk.save()
 
 			## email out
-			msg = EmailMultiAlternatives(
-				subject="You requested a talk!",
-				body="This is the text email body",
-				from_email="Investor Doyen <admin@investordoyen.com>",
-				to=[talk.user.email],
+			c = {'talk':talk}
+			send_html_email(c, 
+					subject="Investor Doyen - You requested a talk",
+					body=None,
+					to=talk.user.email, 
+					html_path="doyen_email/user_request_notify.html"
 			)
-			c = Context({})
-			htmly = render_to_string("doyen_email/user_request_notify.html",c)
-			msg.attach_alternative(htmly, "text/html")
-			msg.send()
-
-
-			msg = EmailMultiAlternatives(
-				subject="A talk is requested from you!",
-				body="This is the text email body",
-				from_email="Investor Doyen <admin@investordoyen.com>",
-				to=[talk.expert.email],
+			send_html_email(c, 
+					subject="Investor Doyen - Someone requested a talk!",
+					body=None,
+					to=talk.expert.email, 
+					html_path="doyen_email/expert_request_notify.html"
 			)
-			c = Context({})
-			htmly = render_to_string("doyen_email/expert_request_notify.html",c)
-			msg.attach_alternative(htmly, "text/html")
-			msg.send()
 
 
 			context = {'talk':talk}
