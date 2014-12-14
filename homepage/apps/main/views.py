@@ -38,7 +38,22 @@ def generatepin(digits=6, expert=False):
 
 
 
+# def send_html_email(to=None, html_path=None, con):
 
+# 	msg = EmailMultiAlternatives(
+# 		subject="Your Talk was Accepted!",
+# 		body="This is the text email body",
+# 		from_email="Investor Doyen <admin@investordoyen.com>",
+# 		to=[talk.user.email],
+# 		# headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+# 	)
+# 	c = Context({})
+# 	htmly = render_to_string("doyen_email/user_accept_notify.html",c)
+
+# 	msg.attach_alternative(htmly, "text/html")
+# 	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
+# 	# msg.metadata = {'user_id': "8675309"}
+# 	msg.send()
 
 
 def index(request):
@@ -253,7 +268,7 @@ def talkrequests(request):
 				talk.save()
 
 
-
+				## email out
 				msg = EmailMultiAlternatives(
 					subject="Your Talk was Accepted!",
 					body="This is the text email body",
@@ -263,11 +278,22 @@ def talkrequests(request):
 				)
 				c = Context({})
 				htmly = render_to_string("doyen_email/user_accept_notify.html",c)
-
 				msg.attach_alternative(htmly, "text/html")
-				# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
-				# msg.metadata = {'user_id': "8675309"}
 				msg.send()
+
+
+				msg = EmailMultiAlternatives(
+					subject="You Accepted a Talk!",
+					body="This is the text email body",
+					from_email="Investor Doyen <admin@investordoyen.com>",
+					to=[talk.expert.email],
+					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				)
+				c = Context({})
+				htmly = render_to_string("doyen_email/expert_accept_notify.html",c)
+				msg.attach_alternative(htmly, "text/html")
+				msg.send()
+
 
 
 				'''
@@ -287,6 +313,20 @@ def talkrequests(request):
 
 				instance.user=request.user
 				instance.save()
+
+				## email out
+				msg = EmailMultiAlternatives(
+					subject="Your Talk was Accepted!",
+					body="This is the text email body",
+					from_email="Investor Doyen <admin@investordoyen.com>",
+					to=[talk.user.email],
+					headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
+				)
+				c = Context({})
+				htmly = render_to_string("doyen_email/user_reject_notify.html",c)
+				msg.attach_alternative(htmly, "text/html")
+				msg.send()
+
 
 				return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
 
@@ -476,6 +516,31 @@ def review(request, talkid):
 		if 'order' in request.POST:
 			talk.requested = True
 			talk.save()
+
+			## email out
+			msg = EmailMultiAlternatives(
+				subject="You requested a talk!",
+				body="This is the text email body",
+				from_email="Investor Doyen <admin@investordoyen.com>",
+				to=[talk.user.email],
+			)
+			c = Context({})
+			htmly = render_to_string("doyen_email/user_request_notify.html",c)
+			msg.attach_alternative(htmly, "text/html")
+			msg.send()
+
+
+			msg = EmailMultiAlternatives(
+				subject="A talk is requested from you!",
+				body="This is the text email body",
+				from_email="Investor Doyen <admin@investordoyen.com>",
+				to=[talk.expert.email],
+			)
+			c = Context({})
+			htmly = render_to_string("doyen_email/expert_request_notify.html",c)
+			msg.attach_alternative(htmly, "text/html")
+			msg.send()
+
 
 			context = {'talk':talk}
 			return render(request, 'main/orderconfirm.html', context)	
