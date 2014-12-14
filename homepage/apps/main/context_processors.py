@@ -7,3 +7,4 @@ def message_count(request):
         return {'message_count': count}
     else:
         return {}
+

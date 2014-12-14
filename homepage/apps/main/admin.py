@@ -24,12 +24,10 @@ admin.site.register(CallIn, CallInAdmin)
 
 ### TODO 
 
-
-
-
-# do invoice email tempate
+# add image to emails
+# fix reminders email to send at later date
+# do invoice email template
 # do payment email template
-# make email out into function -- more concise
 # finish templates for emails
 # add .txt files for emails
 # dont allow changing request once submitted by accessing url
@@ -37,7 +35,6 @@ admin.site.register(CallIn, CallInAdmin)
 # submit 3 times at once
 # fix tagging
 # social auth creds
-# restrict reviews only if youve had call
 # ability to send ajax messages from /messages
 # ability to send ajax messages from expert page if logged in
 # check image size on upload

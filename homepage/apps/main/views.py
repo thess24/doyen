@@ -109,6 +109,11 @@ def expert(request, expertid):
 	finished_talks = Talk.objects.filter(user=request.user,time__gt=currenttime).exclude(accepted_at=None)
 	# finished_talks = Talk.objects.filter(user=request.user,accepted=True,time__gt=currenttime)
 
+	if request.user.id in finished_talks.values_list('user_id',flat=True):
+		eligible_to_review = True
+	else:
+		eligible_to_review = False
+
 
 	messageform = MessageForm()
 	requestform = TalkForm()
@@ -138,6 +143,9 @@ def expert(request, expertid):
 				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
 		if 'ratingform' in request.POST:
+			if not eligible_to_review:
+				raise Http404
+
 			form = RatingForm(request.POST)
 			if form.is_valid():
 				instance = form.save(commit=False)
@@ -157,7 +165,7 @@ def expert(request, expertid):
 
 			return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
-	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform}
+	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform, 'eligible_to_review':eligible_to_review}
 	return render(request, 'main/expert.html',context)
 
 def expertprofile(request):
