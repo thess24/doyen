@@ -234,12 +234,11 @@ class TalkForm(ModelForm):
 	# 			StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
 	# 	)
 
-class TalkTimeForm(ModelForm):
-    message = forms.CharField()
+class TalkTimeForm(forms.Form):
+    time1 = forms.DateTimeField()
+    time2 = forms.DateTimeField()
+    time3 = forms.DateTimeField()
 
-    class Meta:
-        model = TalkTime
-        fields=('time',)
 
 
 class TalkReplyForm(ModelForm):

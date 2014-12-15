@@ -36,10 +36,7 @@
 
         {{requestform}}
 
-	    {{ talkformset.management_form }}
-	    {% for form in talkformset %}
-	    	{{ form.as_p }}
-	    {% endfor %}
+        {{talkformset.as_table}}
 		</div>
 		<button type='submit' name='requestform' class='btn btn-lg btn-primary'>Submit</button>
 	</form>
