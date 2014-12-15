@@ -60,7 +60,7 @@ class ExpertProfile(models.Model):
 class Talk(models.Model):
 	user = models.ForeignKey(User, related_name='talk_user')
 	expert = models.ForeignKey(User, related_name='talk_expert')
-	time = models.DateTimeField()
+	time = models.DateTimeField(blank=True,null=True)
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
 	room = models.CharField(max_length=100,blank=True,null=True)
@@ -115,7 +115,17 @@ class Talk(models.Model):
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)
-		
+
+
+class TalkTime(models.Model):
+	talk = models.ForeignKey(Talk, blank=True,null=True)
+	time = models.DateTimeField()
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return str(self.time)
+
+	
 
 class Rating(models.Model):
 	user = models.ForeignKey(User, related_name='rating_user')
@@ -210,20 +220,27 @@ class ExpertProfileForm(ModelForm):
 class TalkForm(ModelForm):
 	class Meta:
 		model = Talk
-		fields = ['time', 'message']
+		fields = ['message']
 
-	def __init__(self, *args, **kwargs):
-		super(TalkForm, self).__init__(*args, **kwargs)
-		self.helper= FormHelper()
-		self.helper.form_class = 'form-horizontal'
-		self.helper.form_id = 'upload-form'
-		self.helper.label_class = 'col-lg-3'
-		self.helper.field_class = 'col-lg-9'
-		self.helper.layout = Layout(
-				'time',
-				'message' ,
-				StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
-		)
+	# def __init__(self, *args, **kwargs):
+	# 	super(TalkForm, self).__init__(*args, **kwargs)
+	# 	self.helper= FormHelper()
+	# 	self.helper.form_class = 'form-horizontal'
+	# 	self.helper.form_id = 'upload-form'
+	# 	self.helper.label_class = 'col-lg-3'
+	# 	self.helper.field_class = 'col-lg-9'
+	# 	self.helper.layout = Layout(
+	# 			'message' ,
+	# 			StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
+	# 	)
+
+class TalkTimeForm(ModelForm):
+    message = forms.CharField()
+
+    class Meta:
+        model = TalkTime
+        fields=('time',)
+
 
 class TalkReplyForm(ModelForm):
 	class Meta:

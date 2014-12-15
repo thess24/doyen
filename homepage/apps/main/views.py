@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn
+from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn
 from apps.main.models import TalkForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -16,6 +16,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.forms.models import modelformset_factory
 
 
 ########### UTILS --make new file
@@ -84,22 +85,32 @@ def tagsearch(request,tags):
 def requesttalk(request,expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	requestform = TalkForm()
+	talkformset = modelformset_factory(TalkTime,fields=('time',), extra=3)
 
 	if request.method=='POST':
 	# make ajax form here, also make sure user signed up
 		if 'requestform' in request.POST:
 			form = TalkForm(request.POST)
+			formset = talkformset(request.POST)
+
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
 				instance.save()
-
 				talkid = str(instance.id)
+
+
+			if formset.is_valid():
+				for f in formset:
+					f.talk = instance 
+					print f.talk
+					f.save()
+					print f
 
 				return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid)))
 	
-	context = {'expert':expert,'requestform':requestform}
+	context = {'expert':expert,'requestform':requestform, 'talkformset':talkformset}
 	return render(request, 'main/requesttalk.html',context)
 
 

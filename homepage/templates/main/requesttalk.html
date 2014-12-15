@@ -31,11 +31,18 @@
 
 {% if user.is_authenticated %}
 
+	<form method='post'> {% csrf_token %}
 		<div>
-		{% load crispy_forms_tags %}
-             {% crispy requestform %}
 
+        {{requestform}}
+
+	    {{ talkformset.management_form }}
+	    {% for form in talkformset %}
+	    	{{ form.as_p }}
+	    {% endfor %}
 		</div>
+		<button type='submit' name='requestform' class='btn btn-lg btn-primary'>Submit</button>
+	</form>
 
 {% else %}
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn, Favorite
+from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn, Favorite,TalkTime
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -12,6 +12,7 @@ admin.site.register(ExpertProfile)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(Message)
+admin.site.register(TalkTime)
 admin.site.register(Favorite)
 admin.site.register(CallIn, CallInAdmin)
 # admin.site.register(UserCard)
@@ -24,25 +25,21 @@ admin.site.register(CallIn, CallInAdmin)
 # 2. submit 3 requests at once
 # 3. save cc info into db
 # 4. finish email templates
+	# do invoice email template
+	# do payment email template
 # 5. add text email template fallbacks
 # 6. approve payments area for jon
 
 
 
-# make send message work
+# make reply message work
 # mandrill needs cc info to send future email
-# do invoice email template
-# do payment email template
-# finish templates for emails
-# add .txt files for emails
 # dont allow changing request once submitted by accessing url
 # add categories
 # submit 3 times at once
 # fix tagging
 # make tagging page template
-# change datetime.now() to timezone.now() from django utils -lookup in docs
 # check to see if conference is allowed at time, and if one is scheduled w pin
-# make area to approve of payments
 
 
 
