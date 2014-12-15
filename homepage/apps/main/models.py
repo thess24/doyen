@@ -28,6 +28,7 @@ from timezone_field import TimeZoneField
 # 	def __unicode__(self):
 # 		return self.user.email
 
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	stripe_id = models.CharField(max_length=200)  

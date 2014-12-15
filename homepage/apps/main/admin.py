@@ -23,8 +23,10 @@ admin.site.register(CallIn, CallInAdmin)
 
 ### Necessary
 # 2. submit 3 requests at once
+	# make so expert can pick one of 3
 # 3. save cc info into db
 # 4. finish email templates
+	# add 'times' to accept, reject, reminder emails
 	# do invoice email template
 	# do payment email template
 # 5. add text email template fallbacks
@@ -32,11 +34,12 @@ admin.site.register(CallIn, CallInAdmin)
 
 
 
+
+# dont allow submitting empty request
 # make reply message work
 # mandrill needs cc info to send future email
 # dont allow changing request once submitted by accessing url
 # add categories
-# submit 3 times at once
 # fix tagging
 # make tagging page template
 # check to see if conference is allowed at time, and if one is scheduled w pin

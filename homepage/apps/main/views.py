@@ -263,12 +263,15 @@ def talks(request):
 def talkrequests(request):
 	expert = get_object_or_404(ExpertProfile, user=request.user)
 	reqtalks = Talk.objects.filter(expert = request.user,requested=True)
-
+	talktimes = TalkTime.objects.filter(talk__in=reqtalks)
+	# import ipdb; ipdb.set_trace()
 	talkreplyform = TalkReplyForm()
 
 	if request.method=='POST':
 		reqid = request.POST.get('requestid','')
 		reqinstance = reqtalks.get(id=reqid)
+		talk = Talk.objects.get(id=reqid)
+		times = TalkTime.objects.filter(talk=talk)
 
 		if 'acceptform' in request.POST:
 			form = TalkReplyForm(request.POST,instance=reqinstance)
@@ -281,9 +284,6 @@ def talkrequests(request):
 				instance.room = uuid.uuid4()
 				instance.save()
 
-
-				talk = Talk.objects.get(id=reqid)
-
 				expertpin = generatepin(expert=True)
 				otherpin = generatepin()
 
@@ -293,7 +293,7 @@ def talkrequests(request):
 
 
 				## email out
-				c = {'talk':talk}
+				c = {'talk':talk, 'times':times}
 
 				send_html_email(c, 
 						subject="Investor Doyen - You Accepted a Talk!",
@@ -356,24 +356,10 @@ def talkrequests(request):
 						html_path="doyen_email/user_reject_notify.html"
 				)
 
-
-				# msg = EmailMultiAlternatives(
-				# 	subject="Your Talk was Accepted!",
-				# 	body="This is the text email body",
-				# 	from_email="Investor Doyen <admin@investordoyen.com>",
-				# 	to=[talk.user.email],
-				# 	headers={'Reply-To': "Service <support@example.com>"} # optional extra headers
-				# )
-				# c = Context({})
-				# htmly = render_to_string("doyen_email/user_reject_notify.html",c)
-				# msg.attach_alternative(htmly, "text/html")
-				# msg.send()
-
-
 				return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
 
 
-	context = {'reqtalks':reqtalks , 'talkreplyform': talkreplyform}
+	context = {'reqtalks':reqtalks , 'talkreplyform': talkreplyform, 'talktimes':talktimes}
 	return render(request, 'main/requestedtalks.html', context)	
 
 

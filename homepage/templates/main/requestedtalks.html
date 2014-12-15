@@ -40,7 +40,13 @@
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.last_name}}</h4>
-	    <h5>Request for <span class='timehigh'>{{ r.time|date:"N d,  Y -  P T" }}</span></h5>
+
+      {% for tt in talktimes %}
+        {% ifequal tt.talk.id r.id%}
+	    <h5>Request for <span class='timehigh'>{{ tt.time|date:"N d,  Y -  P T" }}</span></h5>
+        {% endifequal %}
+      {% endfor %}
+
 	    <p>{{r.message}}</p>
 	    <div class='datesubmitted'>{{r.created}}</div>
 	    <div style='padding:15px 0px'>
