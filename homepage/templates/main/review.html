@@ -34,9 +34,9 @@
 		<div class="panel panel-default">
 		  <div class="panel-body">
 		  	<h4>Payment Information <small>  <a href="{% url 'talkpayment' talk.id %}">edit</a></small></h4>
-		  	<div>Brand</div>
-		  	<div>Card</div>
-		  	<div>Expires</div>
+		  	<div>{{talk.card.brand}}</div>
+		  	<div>**** **** **** {{talk.card.last4}}</div>
+		  	<div>{{talk.card.exp_month}}{{talk.card.exp_year}}</div>
 		  </div>
 		</div>
 

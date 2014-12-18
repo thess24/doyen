@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn
+from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn, UserCard
 from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -258,7 +258,7 @@ def talks(request):
 	return render(request, 'main/talks.html', context)	
 
 
-# should add decorator where only experts can access or else redirect to forbidden page alert
+# should add decorator where only experts (online=True) can access or else redirect to forbidden page alert
 @login_required
 def talkrequests(request):
 	expert = get_object_or_404(ExpertProfile, user=request.user)
@@ -269,11 +269,18 @@ def talkrequests(request):
 
 	if request.method=='POST':
 		reqid = request.POST.get('requestid','')
+
 		reqinstance = reqtalks.get(id=reqid)
-		talk = Talk.objects.get(id=reqid)
+		talk = reqinstance	
+		# reqinstance = reqtalks.get(id=reqid)
+		# talk = Talk.objects.get(id=reqid)
 		times = TalkTime.objects.filter(talk=talk)
 
 		if 'acceptform' in request.POST:
+			talktimeid = request.POST.get('talktimeid','')
+			print talktimeid
+			acceptedtime = times.get(id=talktimeid)
+
 			form = TalkReplyForm(request.POST,instance=reqinstance)
 			if form.is_valid():
 				instance = form.save(commit=False)
@@ -289,11 +296,13 @@ def talkrequests(request):
 
 				talk.expert_pin = expertpin
 				talk.user_pin = otherpin
+
+				talk.time = acceptedtime.time
 				talk.save()
 
 
 				## email out
-				c = {'talk':talk, 'times':times}
+				c = {'talk':talk, 'acceptedtime':acceptedtime}
 
 				send_html_email(c, 
 						subject="Investor Doyen - You Accepted a Talk!",
@@ -348,7 +357,7 @@ def talkrequests(request):
 
 				## email out
 
-				c = {'talk':talk}
+				c = {'talk':talk, 'times':times}
 				send_html_email(c, 
 						subject="Investor Doyen - Your talk has been declined",
 						body=None,
@@ -470,29 +479,67 @@ def talkpayment(request, talkid):
 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
 
-	if newcustomer.stripe_id:
-		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-		card = customer.cards.retrieve(customer.default_card)
+	user_cards = UserCard.objects.filter(user=request.user) # get all cards on file
+	default_card = newcustomer.default_card 
 
 	if request.method == "POST":
-		token = request.POST.get('stripeToken')
+		if 'usecard' in request.POST:
+			# check card here to see if it works, then add to talk
 
-		customer = stripe.Customer.create(
-			card=token,
-			description=request.user.email
-		)
+			card_id = request.POST.get('card_id','')
+			selected_card = user_cards.get(id=card_id)
 
-		card = customer.cards.retrieve(customer.default_card)
+			''' validate card by updating in stripe and checking 
+			exp date or throw error that card doesnt work'''
+
+			talk.card = selected_card
+			talk.save()
+			return HttpResponseRedirect(reverse('apps.main.views.review', args=(talkid,)))
+
+		
+		else:
+			token = request.POST.get('stripeToken')
+
+			if not newcustomer.stripe_id:  
+				# create customer if user submits card and doesnt have a stripeid on file
+				customer = stripe.Customer.create(
+					card=token,
+					description=request.user.email
+				)
+
+				# print "CUSTOMER "+customer
+
+				newcustomer.stripe_id = customer.id
+				card = customer.cards.retrieve(customer.default_card) #should be the card just submitted
+
+			else:  
+				# if they already have a stripe account
+				print newcustomer
+				print newcustomer.stripe_id
+				customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+				card = customer.cards.create(card=token)
 
 
-		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
-		newcustomer.stripe_id = customer.id
-		newcustomer.save()
-		context = {'card':card, 'talk':talk}
+			newcard = UserCard(
+							user = request.user,
+							# name = card.name,
+							brand = card.brand,
+							last4 = card.last4,
+							exp_month = card.exp_month,
+							exp_year = card.exp_year,
+							stripe_id = card.id
+							)
+			newcard.save()
+
+			newcustomer = UserProfile.objects.get(user=request.user)
+			newcustomer.default_card = newcard
+			newcustomer.save()
+
+			return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
 
 
 
-	context = {'talk':talk}
+	context = {'talk':talk, 'user_cards':user_cards, 'default_card':default_card}
 	return render(request, 'main/talkpayment.html', context)
 
 

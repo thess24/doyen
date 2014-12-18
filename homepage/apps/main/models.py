@@ -15,25 +15,26 @@ from timezone_field import TimeZoneField
  
 
 
-# class UserCard(models.Model):
-# 	user = models.ForeignKey(User)
-# 	brand = models.CharField(max_length=100)
-# 	last4 = models.CharField(max_length=4)
-# 	exp_month = models.CharField(max_length=2)
-# 	exp_year = models.CharField(max_length=4)
-# 	last_used = models.DateTimeField(auto_now=True)
-#	stripe_id = models.CharField(max_length=100)
-# 	active = models.BooleanField(default=True)
+class UserCard(models.Model):
+	user = models.ForeignKey(User)
+	# name = models.CharField(max_length=150)
+	brand = models.CharField(max_length=100)
+	last4 = models.CharField(max_length=4)
+	exp_month = models.CharField(max_length=2)
+	exp_year = models.CharField(max_length=4)
+	last_used = models.DateTimeField(auto_now=True)
+	stripe_id = models.CharField(max_length=100)
+	active = models.BooleanField(default=True)
 
-# 	def __unicode__(self):
-# 		return self.user.email
+	def __unicode__(self):
+		return self.user.email
 
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	stripe_id = models.CharField(max_length=200)  
 	picture = models.ImageField(upload_to='profilepics')
-	# default_card = models.ForeignKey(UserCard)
+	default_card = models.ForeignKey(UserCard, blank=True,null=True)
 
 	def __unicode__(self):
 		return self.user.email
@@ -84,7 +85,7 @@ class Talk(models.Model):
 	completed = models.BooleanField(default=False)
 
 	paid_at = models.DateTimeField(blank=True,null=True)
-	# card = models.ForeignKey(UserCard)
+	card = models.ForeignKey(UserCard,blank=True,null=True)
 
 
 	def accepted(self):

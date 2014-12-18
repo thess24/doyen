@@ -41,21 +41,22 @@
 	  <div class="media-body">
 	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.last_name}}</h4>
 
+	    <h5>Requests for </h5>
       {% for tt in talktimes %}
         {% ifequal tt.talk.id r.id%}
-	    <h5>Request for <span class='timehigh'>{{ tt.time|date:"N d,  Y -  P T" }}</span></h5>
+        <div class='timehigh' data-talktimeid="{{tt.id}}">{{ tt.time|date:"N d,  Y -  P T" }}</div>
         {% endifequal %}
       {% endfor %}
 
 	    <p>{{r.message}}</p>
 	    <div class='datesubmitted'>{{r.created}}</div>
-	    <div style='padding:15px 0px'>
-	    	<span>
-	    		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}">Respond</button>
-	    	</span>
-	    </div>
+	    <button type="button" class="btn btn-primary modalbtn" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}" style='margin: 10px 0px'>Respond</button>
 	  </div>
 	</div>
+{% empty %}
+
+<div class='row'>No requests at this time</div>
+
 {% endfor %}
 
 
@@ -74,10 +75,15 @@
          <div class="form-group">
             <p><span id='responsename'></span> at <span id='responsetime'></span></p>
           </div>
-          <div class="form-group">
+          <div class="form-group" id='formdataarea'>
           
               {% csrf_token %}
-            <label for="id_message" class="control-label">Message:</label>
+
+            <!-- <div><input type='radio' name='talktimeid' class='ttimeid'>1</div> -->
+
+
+
+            <label for="id_message" class="control-label" id='message_label'>Message:</label>
             <textarea cols="40" id="id_reply_message" maxlength="500" name="reply_message" rows="7" class='form-control'></textarea>
             <input type='hidden' value='' id='requestid' name='requestid'>
             <!-- {{talkreplyform}} -->
@@ -112,16 +118,35 @@
 
 $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
+  var talkoptions = button.prevAll('.timehigh')
   var responsetime = button.data('time') // Extract info from data-* attributes
   var responsename = button.data('name') // Extract info from data-* attributes
   var requestid = button.data('reqid') // Extract info from data-* attributes
+
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
+
+  // first delete all label options
+  modal.find('.ttimewrapper').remove()
+
   modal.find('.modal-title').text('Response to ' + responsename)
   modal.find('#responsetime').text(responsetime)
   modal.find('#responsename').text(responsename)
   modal.find('#requestid').val(requestid)
+  var message_label = modal.find('#formdataarea')
+
+  $.each( talkoptions, function(index,value) {
+
+    var timeid = value.dataset.talktimeid
+    var timetext = value.innerText
+    message_label.prepend("<div class='ttimewrapper'><input type='radio' name='talktimeid' class='ttimeid' value='"+timeid+"'>"+timetext+"</div>")
+
+  });
+
+
+
+
 })
 
 </script>

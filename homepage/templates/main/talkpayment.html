@@ -28,26 +28,63 @@
 
 
 <div class='row'>
+  <form method='post'>{% csrf_token %}
+    <div class='col-md-8'>
 
-  <div class='col-md-8'>
-    <div class='well'>
-      <h4>Talk Request</h4>
-      <div>{{talk.expert}}</div>
-      <div>{{talk.time}}</div>
-      <div>{{talk.price}}</div>
-    </div>
-  </div>
-  <div class='col-md-4'>
-    <div class='well'>
-      <h4>Card on File</h4>
-      <div>{{card.brand}}</div>
-      <div>Card: **** **** **** {{card.last4}}</div>
-      <div>Expires: {{card.exp_month}} / {{card.exp_year}}</div>
-    </div>
-  </div>
-</div>
+{% if default_card %}
 
-<a href="{% url 'review' talk.id %}">Proceed to Checkout</a>
+      <h3>Card on File</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <input type='radio' value='{{default_card.id}}' name='card_id'>
+            <div>{{default_card.brand}}</div>
+            <div>Card: **** **** **** {{default_card.last4}}</div>
+            <div>Expires: {{default_card.exp_month}} / {{default_card.exp_year}}</div>
+        </div>
+      </div>
+
+
+
+      <h4>Other Cards</h4>
+      {% for c in user_cards %}
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <input type='radio' value='{{c.id}}' name='card_id'>
+                  <div>{{c.brand}}</div>
+                  <div>Card: **** **** **** {{c.last4}}</div>
+                  <div>Expires: {{c.exp_month}} / {{c.exp_year}}</div>
+              </div>
+            </div>
+          {% empty %}
+          <div>None</div>
+      {% endfor %}
+
+{% else %}
+      <div>Please add a card</div>
+{% endif %}
+
+    </div>
+
+    <div class='col-md-4'>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <button type='submit' class='btn btn-primary' style='width:100%' name='usecard'>Continue to Checkout</button>
+        </div>
+      </div>
+
+      <div class='well'>
+        <h4>Talk Request</h4>
+        <div>{{talk.expert}}</div>
+        <div>{{talk.time}}</div>
+        <div>{{talk.price}}</div>
+      </div>
+    </div>
+
+
+  </form>
+</div><!-- end row -->
+
+
 
 
 <h3>Add new card</h3>
@@ -87,7 +124,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button type="submit" class="btn btn-success">Add Card</button>
+          <button type="submit" class="btn btn-success" name='addcard'>Add Card</button>
         </div>
       </div>
     </fieldset>
