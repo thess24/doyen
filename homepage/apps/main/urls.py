@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 	url(r'^review/(?P<talkid>.+)/$', views.review, name='review'),
 	url(r'^invoice/$', views.invoice, name='invoice'),
 
-	# url(r'^chargedashboard/$', views.chargedashboard, name='chargedashboard'),
+	url(r'^chargedashboard/$', views.chargedashboard, name='chargedashboard'),
 
 
 	# twilio views

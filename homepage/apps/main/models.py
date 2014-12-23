@@ -27,7 +27,7 @@ class UserCard(models.Model):
 	active = models.BooleanField(default=True)
 
 	def __unicode__(self):
-		return self.user.email
+		return "{} - {}".format(self.user.email, self.last4)
 
 
 class UserProfile(models.Model):
@@ -113,7 +113,7 @@ class Talk(models.Model):
 			return minutes
 
 	def cost(self):
-		return self.call_length * price
+		return self.call_length * self.price
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)

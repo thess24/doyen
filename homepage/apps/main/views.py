@@ -122,7 +122,6 @@ def expert(request, expertid):
 	reviews = Rating.objects.filter(expert_id=expertid)
 	favorites = Favorite.objects.filter(user=request.user).values_list('expert_id',flat=True)
 	finished_talks = Talk.objects.filter(user=request.user,time__gt=currenttime).exclude(accepted_at=None)
-	# finished_talks = Talk.objects.filter(user=request.user,accepted=True,time__gt=currenttime)
 
 	if request.user.id in finished_talks.values_list('user_id',flat=True):
 		eligible_to_review = True
@@ -623,6 +622,38 @@ def invoice(request):
 	context = {}
 	return render(request, 'main/invoice.html', context)	
 
+def chargedashboard(request):
+	# need to to limit this to only highest level admins
+
+	talks = Talk.objects.filter(completed=True,paid_at=None)
+	if request.method == "POST":
+		talk_id = request.POST.get('talk_id','')  
+		# error handling here
+		talk = Talk.objects.get(id=talk_id)
+		# price = talk.cost * 100
+
+		# customer_id = talk.user.userprofile.stripe_id
+		# card_id = talk.user.card
+
+		# # https://stripe.com/docs/api#create_charge
+		# # should pass customer and card
+
+		# try:
+		# 	charge = stripe.Charge.create(
+		# 		amount= price, # amount in cents, again
+		# 		currency="usd",
+		# 		customer=customer_id,
+		# 		card=card_id,
+		# 		description= talk.expert.get_full_name()
+		# 	)
+		# except stripe.CardError, e:
+		# 	# The card has been declined
+		# 	raise Http404
+
+
+
+	context = {'talks':talks}
+	return render(request, 'main/chargedashboard.html', context)	
 
 def charge(request):
 	# # stripe.api_key = "sk_test_9ucD3dSakYLAivmgxMqOJd0r"  #only for universal, this is a marketplace so every vendor has their own

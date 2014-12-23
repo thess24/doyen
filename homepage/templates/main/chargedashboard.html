@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+
+	.createdtime-media{
+		font-size: .8em;
+		position: absolute;
+		right: 0px;
+	}
+
+	.schedtime-media{
+		background-color: rgb(253, 253, 225);
+		padding: 3px;
+	}
+
+	.accepted{
+		color: rgb(0, 179, 0);
+	}
+
+	.cancelled{
+		color: rgb(220, 0, 0);
+	}
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+<div class="page-header">
+
+  <div class='row'>
+    <div class='col-md-12'>
+          <h3 id='mainheader'>Completed Talks</h3>
+    </div>
+  </div>
+</div>
+
+<div>
+
+	<table class="table">
+	      <caption>Optional table caption.</caption>
+	      <thead>
+	        <tr>
+	          <th>#</th>
+	          <th>User Name</th>
+	          <th>Expert Name</th>
+	          <th>Price Per Minute</th>
+	          <th>Call Length</th>
+	          <th>Start Time</th>
+	          <th>End Time</th>
+	          <th class='right'>Cost</th>
+	          <th></th>
+	        </tr>
+	      </thead>
+	      <tbody>
+
+{% for t in talks%}
+
+	        <tr>
+	          <td>{{t.id}}</td>
+	          <td>{{t.user.last_name}}, {{t.user.first_name}}</td>
+	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
+	          <td>$ {{t.price}}</td>
+	          <td>{{t.call_length}} minutes</td>
+	          <td>{{t.start_time}}</td>
+	          <td>{{t.end_time}}</td>
+	          <td class='right'>Cost</td>
+	          <td>
+	          	<form method='post'>
+	          		<input type='hidden' value='{{t.id}}' name='talk_id'>
+	          		<button class='btn btn-sm' type='submit'>Collect Payment</button>
+				</form>
+	          </td>
+	        </tr>
+{% empty %} 
+			<tr>None</tr>
+{% endfor %}
+
+	      </tbody>
+	    </table>
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+
