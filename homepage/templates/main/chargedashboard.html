@@ -44,7 +44,7 @@
 <div>
 
 	<table class="table">
-	      <caption>Optional table caption.</caption>
+	      <caption>Completed talks that have not been reviewed to be charged</caption>
 	      <thead>
 	        <tr>
 	          <th>#</th>
@@ -68,8 +68,8 @@
 	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
 	          <td>$ {{t.price}}</td>
 	          <td>{{t.call_length}} minutes</td>
-	          <td>{{t.start_time}}</td>
-	          <td>{{t.end_time}}</td>
+	          <td>{{t.time_started}}</td>
+	          <td>{{t.time_ended}}</td>
 	          <td class='right'>Cost</td>
 	          <td>
 	          	<form method='post'>
@@ -79,7 +79,9 @@
 	          </td>
 	        </tr>
 {% empty %} 
-			<tr>None</tr>
+			<tr>
+			<td>None</td>	
+			</tr>
 {% endfor %}
 
 	      </tbody>

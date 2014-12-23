@@ -32,10 +32,8 @@ admin.site.register(UserCard)
 
 
 
-# add text email template fallbacks
 # dont allow submitting empty request
 # make reply message work
-# mandrill needs cc info to send future email
 # dont allow changing request once submitted by accessing url
 # add categories
 # fix tagging
@@ -47,6 +45,7 @@ admin.site.register(UserCard)
 
 ### Nice to have
 
+# add text email template fallbacks
 # make time select dropdown work better
 # status indicator for checkout process (how many steps left)
 # social auth creds

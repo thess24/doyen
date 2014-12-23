@@ -55,10 +55,9 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 	# msg.tags = ["one tag", "two tag", "red tag", "blue tag"]
 	# msg.metadata = {'user_id': "8675309"}
 
-	# uncomment once mandrill is set up
-	# if send_at:
-	# 	print send_at
-	# 	msg.send_at = send_at
+	if send_at:
+		print send_at
+		msg.send_at = send_at
 
 	msg.send()
 
@@ -649,6 +648,9 @@ def chargedashboard(request):
 		# except stripe.CardError, e:
 		# 	# The card has been declined
 		# 	raise Http404
+
+		talk.paid_at = datetime.now()
+		talk.save()
 
 
 

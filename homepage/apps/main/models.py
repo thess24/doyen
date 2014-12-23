@@ -17,7 +17,7 @@ from timezone_field import TimeZoneField
 
 class UserCard(models.Model):
 	user = models.ForeignKey(User)
-	# name = models.CharField(max_length=150)
+	name = models.CharField(max_length=150)
 	brand = models.CharField(max_length=100)
 	last4 = models.CharField(max_length=4)
 	exp_month = models.CharField(max_length=2)
@@ -51,7 +51,7 @@ class ExpertProfile(models.Model):
 	location = models.CharField(max_length=100)
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
-	# categories = models.   Many to Many
+	category = models.CharField(max_length=100)
 
 	tags = TaggableManager()
 
