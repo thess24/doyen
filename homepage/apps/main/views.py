@@ -17,7 +17,7 @@ from django.template import Context
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.forms.models import modelformset_factory
-
+from taggit.models import Tag
 
 ########### UTILS --make new file
 def generatepin(digits=6, expert=False):
@@ -72,19 +72,22 @@ def index(request):
 	context= {}
 	return render(request, 'main/index.html', context)
 
+def editsettings(request):
+	context= {}
+	return render(request, 'main/profileeditmain.html', context)
+
 def tagsearch(request,tags):
 	taglist = tags.split("+")
 	experts = ExpertProfile.objects.filter(tags__name__in=taglist).distinct()
 	print taglist
 	# for e in experts:
 	# 	print e.tags.all()
-	context = {'experts':experts}
+	context = {'experts':experts, 'areacategory':True}
 	return render(request, 'main/expertfind.html', context)	
 
 def requesttalk(request,expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	requestform = TalkForm()
-	# talkformset = modelformset_factory(TalkTime,fields=('time',), extra=3)
 	talkformset = TalkTimeForm()
 
 	if request.method=='POST':
@@ -97,9 +100,9 @@ def requesttalk(request,expertid):
 				instance = form.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
+				instance.price = expert.price
 				instance.save()
 				talkid = instance.id
-				print talkid
 
 			if talktimeform.is_valid():
 				data = talktimeform.cleaned_data
@@ -232,7 +235,30 @@ def expertfind(request):
 	else:
 		favorites = []
 
-	context = {'experts':experts}
+	context = {'experts':experts, 'areacategory':False}
+	return render(request, 'main/expertfind.html', context)	
+
+def expertfindcategory(request, category):
+	experts = ExpertProfile.objects.filter(online=True,category=category)
+	experts_flat = experts.values_list('id',flat=True)
+	tags = Tag.objects.filter(expertprofile__id__in=experts_flat)
+
+	if request.user.is_authenticated:
+		favorites = Favorite.objects.filter(user=request.user)
+	else:
+		favorites = []
+
+	# import ipdb; ipdb.set_trace()
+
+	# for e in experts:
+	# 	print e.tags.all()
+	# add these into set or collection and find ones with highest number
+
+
+
+	# see taglist -- need to list all tags for people in this category
+
+	context = {'experts':experts, 'areacategory':category, 'tags':tags}
 	return render(request, 'main/expertfind.html', context)	
 
 @login_required
@@ -473,6 +499,7 @@ def call_hook(request):
 ##### checkout flow #####
 def talkpayment(request, talkid):
 	talk = Talk.objects.get(id=talkid)
+	talktimes = TalkTime.objects.filter(talk=talk)
 
 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
@@ -537,49 +564,49 @@ def talkpayment(request, talkid):
 
 
 
-	context = {'talk':talk, 'user_cards':user_cards, 'default_card':default_card}
+	context = {'talk':talk, 'user_cards':user_cards, 'default_card':default_card, 'talktimes':talktimes}
 	return render(request, 'main/talkpayment.html', context)
 
 
 
-def payment(request):
-	''' if customer has submitted card before, displays card on file
-		if they havent, it gets info from them '''
+# def payment(request):
+# 	''' if customer has submitted card before, displays card on file
+# 		if they havent, it gets info from them '''
 
 
-	# need to:
-	# add card model to store cards for user
-	# add card fk for talk to know what card to charge
-	# handle errors
-	# add button to move to review page, also add selected/inputted card to talk model instance
-	# BEFORE PROD - change api key to real one and make env variable
+# 	# need to:
+# 	# add card model to store cards for user
+# 	# add card fk for talk to know what card to charge
+# 	# handle errors
+# 	# add button to move to review page, also add selected/inputted card to talk model instance
+# 	# BEFORE PROD - change api key to real one and make env variable
 
 
-	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
-	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+# 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
+# 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
 
-	if newcustomer.stripe_id:
-		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-		card = customer.cards.retrieve(customer.default_card)
+# 	if newcustomer.stripe_id:
+# 		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+# 		card = customer.cards.retrieve(customer.default_card)
 
-	if request.method == "POST":
-		token = request.POST.get('stripeToken')
+# 	if request.method == "POST":
+# 		token = request.POST.get('stripeToken')
 
-		customer = stripe.Customer.create(
-			card=token,
-			description=request.user.email
-		)
+# 		customer = stripe.Customer.create(
+# 			card=token,
+# 			description=request.user.email
+# 		)
 
-		card = customer.cards.retrieve(customer.default_card)
-
-
-		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
-		newcustomer.stripe_id = customer.id
-		newcustomer.save()
+# 		card = customer.cards.retrieve(customer.default_card)
 
 
-	context = {'card':card}
-	return render(request, 'main/payment.html', context)	
+# 		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
+# 		newcustomer.stripe_id = customer.id
+# 		newcustomer.save()
+
+
+# 	context = {'card':card}
+# 	return render(request, 'main/payment.html', context)	
 
 
 def review(request, talkid):

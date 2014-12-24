@@ -56,7 +56,7 @@ class ExpertProfile(models.Model):
 	tags = TaggableManager()
 
 	def __unicode__(self):
-		return self.user.email
+		return "{}- {}".format(self.user.id, self.user.email)
 
 
 class Talk(models.Model):

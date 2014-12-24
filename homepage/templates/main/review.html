@@ -33,10 +33,10 @@
 	<div class='col-md-9 col-sm-8'>
 		<div class="panel panel-default">
 		  <div class="panel-body">
-		  	<h4>Payment Information <small>  <a href="{% url 'talkpayment' talk.id %}">edit</a></small></h4>
+		  	<h4><i class="fa fa-credit-card"></i> Payment Information <small>  <a href="{% url 'talkpayment' talk.id %}">edit</a></small></h4>
 		  	<div>{{talk.card.brand}}</div>
 		  	<div>**** **** **** {{talk.card.last4}}</div>
-		  	<div>{{talk.card.exp_month}}{{talk.card.exp_year}}</div>
+		  	<div>{{talk.card.exp_month}} / {{talk.card.exp_year}}</div>
 		  </div>
 		</div>
 
@@ -53,16 +53,7 @@
 				    <div>{{talk.qualifications}}</div>
 				  </div>
 				</div>
-				<div class="media">
-				  <a class="media-left" href="#">
-				    <i class='fa fa-phone fa-5x'></i>
-				  </a>
-				  <div class="media-body">
-				    <h4 class="media-heading">2. Call Download</h4>
-				    <span>$10.00</span>
-				    <div>This is the download for the call</div>
-				  </div>
-				</div>
+
 		  </div>
 		</div>
 

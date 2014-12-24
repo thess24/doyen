@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+
+
+
+</style>
+{% endblock %}
+ 
+
+{% block content %} 
+        <div class="page-header">
+
+          <div class='row'>
+            <div class='col-md-12'>
+                  <h1 id='mainheader'>Edit Profile</h1>
+            </div>
+          </div>
+        </div>
+
+
+        <div class='row'>
+        	<div><a href="/accounts/password/change">Change Password</a></div>
+        	<div><a href="">Basic Profile</a></div>
+        	<div><a href="{% url 'expertprofile' %}">Expert Profile Settings (and Application)</a></div>
+        </div>
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+</script>
+
+{% endblock %}
+
+
+

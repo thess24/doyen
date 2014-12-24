@@ -7,7 +7,16 @@
 .experttag a{
 	text-decoration: none;
 	color: white;
+}
 
+.categorybox{
+	background-color: rgb(248, 244, 255);
+	border: 5px white solid;
+}
+
+
+.horiztaglist{
+	padding:10px;
 }
 
 </style>
@@ -32,9 +41,39 @@
 		          <h1 id='mainheader'>Experts</h1>
 		    </div>
 		  </div>
+		  {% if areacategory %}
+		<div>{{areacategory}}</div>
+		  {% endif %}
 		</div>
 
+{% if not areacategory %}
+		<div class='row'>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Energy</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>M and A</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Mutual Funds</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Commodities</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Hedge Funds</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Private Equity</div></a>
+		</div>
+		<div class='row'>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Other</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Major</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Category</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Here</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Hedge Funds</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Private Equity</div></a>
+		</div>
+		<hr>
+{% else %}
+		<div class='row'>
+			{% for t in tags %}
+			<span class='horiztaglist'><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
+			{% endfor %}
+		</div>
+		<hr>
+{% endif %}
 
+		<br>
 		{% for e in experts %}
 		  <div class="col-sm-6 col-md-3">
 		    <div class="thumbnail">

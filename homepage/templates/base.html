@@ -48,16 +48,32 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'expertfind' %}">Find an Expert</a></li>
-            <li><a href="{% url 'talks' %}">Talks</a></li>
+            <li><a href="{% url 'talks' %}">
+              <i class="fa fa-phone" ></i>
+              Talks
+            </a></li>
             {% if request.user.expertprofile.online %}
             <li><a href="{% url 'talkrequests' %}">Requests</a></li>
             {% endif %}
-            <li><a href="{% url 'messages' %}">{{ message_count }} Messages</a></li>
-            <li><a href="{% url 'payment' %}">Payment</a></li>
-            <li><a href="{% url 'review' 1 %}">Review</a></li>
-            <li><a href="{% url 'invoice' %}">Invoice</a></li>
-            <li><a href="{% url 'favorites' %}">Favorites</a></li>
+
+            {% ifequal message_count 0 %}
+            <li><a href="{% url 'messages' %}"> <i class="fa fa-envelope-o"></i> Messages</a></li>
+            {% else %}
+            <li><a href="{% url 'messages' %}"> 
+              <i class="fa fa-envelope-o" style='color:orange'></i> 
+              Messages
+            </a></li>
+            {% endifequal %}
+            <!-- <li><a href="{% url 'invoice' %}">Invoice</a></li> -->
+            <li><a href="{% url 'favorites' %}">
+              <i class="fa fa-heart-o" ></i>
+              Favorites
+            </a></li>
+
+            {% if request.user.is_superuser %}
             <li><a href="{% url 'chargedashboard' %}">Charge Dashboard</a></li>
+            {% endif %}
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
@@ -66,8 +82,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <i class="fa fa-cog"></i>  {{request.user}} <span class="caret"></span></a>
               <ul class="dropdown-menu"> 
-                <li><a href="/accounts/password/change">Change Password</a></li>
-                <li><a href="{% url 'expertprofile' %}">Update Profile</a></li>
+                <li><a href="{% url 'editsettings' %}">Profile</a></li>
                 <li><a href="/accounts/logout">Logout</a></li>
               </ul>
             </li>

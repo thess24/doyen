@@ -74,9 +74,13 @@
 
       <div class='well'>
         <h4>Talk Request</h4>
-        <div>{{talk.expert}}</div>
-        <div>{{talk.time}}</div>
-        <div>{{talk.price}}</div>
+        <div>Expert: <a href="{% url 'expert' talk.expert.id %}">{{talk.expert}}</a></div> 
+        <div>${{talk.price}} per minute</div>
+        
+        <h5>Times:</h5>
+        {% for t in talktimes %}
+        <div>{{t.time}}</div>
+        {% endfor %}
       </div>
     </div>
 
