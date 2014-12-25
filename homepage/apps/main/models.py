@@ -52,6 +52,7 @@ class ExpertProfile(models.Model):
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
 	category = models.CharField(max_length=100)
+	# add stripe connect info?
 
 	tags = TaggableManager()
 
@@ -147,6 +148,7 @@ class Message(models.Model):
 	title = models.CharField(max_length=100)
 	sent_at = models.DateTimeField(auto_now_add=True)
 	read_at = models.DateTimeField(null=True,blank=True)
+	# responded_at = models.DateTimeField(null=True,blank=True)
 
 	def new(self):
 		"""returns whether the recipient has read the message or not"""
@@ -223,6 +225,9 @@ class TalkForm(ModelForm):
 	class Meta:
 		model = Talk
 		fields = ['message']
+		# widgets = {
+		# 	'name': Textarea(attrs={'class':'form-control'}),
+		# }
 
 	# def __init__(self, *args, **kwargs):
 	# 	super(TalkForm, self).__init__(*args, **kwargs)
@@ -237,9 +242,9 @@ class TalkForm(ModelForm):
 	# 	)
 
 class TalkTimeForm(forms.Form):
-    time1 = forms.DateTimeField()
-    time2 = forms.DateTimeField()
-    time3 = forms.DateTimeField()
+    time1 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
+    time2 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
+    time3 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
 
 
 

@@ -211,20 +211,27 @@ def messages(request):
 	outbox = Message.objects.filter(sender = request.user)
 
 
-	form = MessageForm()
 
-	# if request.method=='POST':
-	# 	if 'sendmessage' in request.POST:
-	# 		form = ExpertProfileForm(request.POST)
-	# 		if form.is_valid():
-	# 			instance = form.save(commit=False)
-	# 			instance.user=request.user
-	# 			instance.save()
+	if request.method=='POST':
+		if 'sendmessage' in request.POST:
+			messagetext = request.POST.get('messagetext')
+			messageid = request.POST.get('messageid')
 
-	# 			return HttpResponseRedirect(reverse('apps.main.views.messages', args=()))	
+			recievedmessage = Message.objects.get(id=messageid)
+			if not recievedmessage.reciever == request.user:
+				raise Http404  # make sure user is replying to someone whos contacted them
+
+			replytitle = "RE: {}".format(recievedmessage.title)
+			message = Message(message=messagetext,
+				sender=request.user,
+				reciever=recievedmessage.sender, 
+				title = replytitle)
+			message.save()
+
+			return HttpResponseRedirect(reverse('apps.main.views.messages', args=()))	
 
 
-	context = {'inbox':inbox,'outbox':outbox, 'form':form}
+	context = {'inbox':inbox,'outbox':outbox}
 	return render(request, 'main/messages.html', context)	
 
 def expertfind(request):
@@ -454,7 +461,6 @@ def process_pin(request):
 	talk.save()
 	r = twiml.Response()
 	r.dial(action='/call_hook/').conference(name=talk.room)
-	# r.dial(record='record-from-answer',action='/call_hook/').conference(name=digits_pressed)
 	return r
 
 
@@ -499,6 +505,13 @@ def call_hook(request):
 ##### checkout flow #####
 def talkpayment(request, talkid):
 	talk = Talk.objects.get(id=talkid)
+
+	if not talk.requested:
+		# need to change this to show what error is
+		# this currently stops showing only after expert accepts--should stop after submitted
+		raise Http404
+
+
 	talktimes = TalkTime.objects.filter(talk=talk)
 
 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod

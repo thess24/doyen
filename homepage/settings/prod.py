@@ -132,7 +132,7 @@ SECRET_KEY = environ.get('SECRET_KEY', SECRET_KEY)
 
 ########## ALLOWED HOSTS CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.herokuapp.com',]
+ALLOWED_HOSTS = ['.herokuapp.com','.investordoyen.com']
 ########## END ALLOWED HOST CONFIGURATION
 
 
@@ -141,9 +141,6 @@ ALLOWED_HOSTS = ['.herokuapp.com',]
 ############ ALL AUTH
 
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
-
-
-
 SECURE_SSL_REDIRECT=True
 
 
@@ -161,3 +158,9 @@ TWILIO_AUTH_TOKEN = environ.get('TWILIO_AUTH_TOKEN', "")
 ####### DJRILL - MANDRILL EMAIL
 
 MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
+
+
+
+####### STRIPE
+
+STRIPE_API_KEY = environ.get('STRIPE_API_KEY', "")

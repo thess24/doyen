@@ -33,35 +33,34 @@ admin.site.register(UserCard)
 
 
 # dont allow submitting empty request -- it still shows up in requests for expert
-# make reply message work in message url area
 # give errors when message fails to send (if not putting both fields)
-# make message send via ajax
-# favorite via ajax
 # mark message as read once you click on it (ajax)
 # give error for time request if times not filled out
 # fix error if no card and try to go to checkout
-# dont allow changing request (time) once submitted by accessing url
-# dont allow changing card info once submitted by accessing url
-# fix tagging
 # make tagging page template
-# make time select dropdown work better
 # redo talk area to show dial in info
 # have talks show up for expert to see what they have scheduled
 # put stripe keys in settings and reference in views -- make env variables
+# test sendat feature of emails
+# test conference calls and make sure everything is properly logged
+# check to see if conference is allowed at time, and if one is scheduled w pin
+
+
 # make frontpage
 # redo footer
 # make faq page
 # make tos page
 # make about us page
 # make privacy policy page
-# test sendat feature of emails
-# test conference calls and make sure everything is properly logged
-# check to see if conference is allowed at time, and if one is scheduled w pin
+# dont allow changing request (time) once submitted by accessing url
+# dont allow changing card info once submitted by accessing url
 
 
 
 ### Nice to have
 
+# make message send via ajax
+# favorite via ajax
 # add text email template fallbacks
 # status indicator for checkout process (how many steps left)
 # social auth creds
