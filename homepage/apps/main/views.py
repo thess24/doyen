@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Message, Favorite, UserProfile, ConferenceLine, CallIn, UserCard
-from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingForm, MessageForm, TalkReplyForm
+from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Favorite, UserProfile, ConferenceLine, CallIn, UserCard
+from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from settings.common import MEDIA_ROOT
@@ -131,7 +131,6 @@ def expert(request, expertid):
 		eligible_to_review = False
 
 
-	messageform = MessageForm()
 	requestform = TalkForm()
 	ratingform = RatingForm()
 
@@ -144,16 +143,6 @@ def expert(request, expertid):
 				instance = form.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
-				instance.save()
-
-				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
-
-		if 'sendmessage' in request.POST:
-			form = MessageForm(request.POST)
-			if form.is_valid():
-				instance = form.save(commit=False)
-				instance.reciever = expert.user
-				instance.sender = request.user
 				instance.save()
 
 				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
@@ -181,7 +170,7 @@ def expert(request, expertid):
 
 			return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
 
-	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'messageform':messageform, 'ratingform':ratingform, 'eligible_to_review':eligible_to_review}
+	context = {'expert':expert,'favorites':favorites, 'reviews':reviews, 'requestform':requestform, 'ratingform':ratingform, 'eligible_to_review':eligible_to_review}
 	return render(request, 'main/expert.html',context)
 
 def expertprofile(request):
@@ -205,34 +194,6 @@ def expertprofile(request):
 	context= {'expert':expert, 'form':form}
 	return render(request, 'main/expertprofile.html', context)	
 
-@login_required
-def messages(request):
-	inbox = Message.objects.filter(reciever = request.user)
-	outbox = Message.objects.filter(sender = request.user)
-
-
-
-	if request.method=='POST':
-		if 'sendmessage' in request.POST:
-			messagetext = request.POST.get('messagetext')
-			messageid = request.POST.get('messageid')
-
-			recievedmessage = Message.objects.get(id=messageid)
-			if not recievedmessage.reciever == request.user:
-				raise Http404  # make sure user is replying to someone whos contacted them
-
-			replytitle = "RE: {}".format(recievedmessage.title)
-			message = Message(message=messagetext,
-				sender=request.user,
-				reciever=recievedmessage.sender, 
-				title = replytitle)
-			message.save()
-
-			return HttpResponseRedirect(reverse('apps.main.views.messages', args=()))	
-
-
-	context = {'inbox':inbox,'outbox':outbox}
-	return render(request, 'main/messages.html', context)	
 
 def expertfind(request):
 	experts = ExpertProfile.objects.filter(online=True)
@@ -493,8 +454,10 @@ def call_hook(request):
 
 	if talk.expert_count == 0 and talk.time_started and not talk.time_ended:
 		talk.time_ended = datetime.now()
+		talk.completed = True
 	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0 and not talk.time_ended:
 		talk.time_ended = datetime.now()
+		talk.completed = True
 
 
 	talk.save()

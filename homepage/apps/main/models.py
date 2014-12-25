@@ -69,6 +69,7 @@ class Talk(models.Model):
 	room = models.CharField(max_length=100,blank=True,null=True)
 	message = models.TextField(max_length=500, blank=True, null=True)
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
+	# minutes_estimated = models.IntegerField()
 
 	accepted_at = models.DateTimeField(blank=True,null=True)
 	cancelled_at = models.DateTimeField(blank=True,null=True)
@@ -128,7 +129,6 @@ class TalkTime(models.Model):
 	def __unicode__(self):
 		return str(self.time)
 
-	
 
 class Rating(models.Model):
 	user = models.ForeignKey(User, related_name='rating_user')
@@ -140,24 +140,6 @@ class Rating(models.Model):
 
 	def __unicode__(self):
 		return self.expert.email
-
-class Message(models.Model):
-	sender = models.ForeignKey(User, related_name='message_sender')
-	reciever = models.ForeignKey(User, related_name='messege_reciever')
-	message = models.TextField()
-	title = models.CharField(max_length=100)
-	sent_at = models.DateTimeField(auto_now_add=True)
-	read_at = models.DateTimeField(null=True,blank=True)
-	# responded_at = models.DateTimeField(null=True,blank=True)
-
-	def new(self):
-		"""returns whether the recipient has read the message or not"""
-		if self.read_at is not None:
-			return False
-		return True
-
-	def __unicode__(self):
-		return self.title    
 
 
 class ConferenceLine(models.Model):
@@ -207,7 +189,6 @@ class ExpertProfileForm(ModelForm):
 		self.helper.label_class = 'col-lg-3'
 		self.helper.field_class = 'col-lg-9'
 		self.helper.layout = Layout(
-				'background' ,
 				'qualifications' ,
 				'title',
 				'time_zone',
@@ -215,6 +196,7 @@ class ExpertProfileForm(ModelForm):
 				'price' ,
 				'tags',
 				'picture',
+				'category',
 				'twitter',
 				'linkedin',
 				StrictButton('Submit', name='updateprofile', type='submit',css_class='btn-primary btn-lg'),
@@ -282,24 +264,6 @@ class RatingForm(ModelForm):
 				'rating' ,
 				'comment' ,
 				# StrictButton('Submit', name='ratingform', type='submit',css_class='btn-primary btn-lg'),
-		)
-
-class MessageForm(ModelForm):
-	class Meta:
-		model = Message
-		exclude = ['sender', 'reciever', 'sent_at', 'read_at']
-
-	def __init__(self, *args, **kwargs):
-		super(MessageForm, self).__init__(*args, **kwargs)
-		self.helper= FormHelper()
-		self.helper.form_class = 'form-horizontal'
-		self.helper.form_id = 'upload-form'
-		self.helper.label_class = 'col-lg-3'
-		self.helper.field_class = 'col-lg-9'
-		self.helper.layout = Layout(
-				'title' ,
-				'message' ,
-				# StrictButton('Send', name='sendmessage', type='submit',css_class='btn-primary btn-lg'),
 		)
 
 

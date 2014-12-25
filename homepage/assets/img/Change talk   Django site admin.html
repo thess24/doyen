@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://doyen.herokuapp.com/admin/main/talk/1/ -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Change talk | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="./Change talk   Django site admin_files/base.css">
+<link rel="stylesheet" type="text/css" href="./Change talk   Django site admin_files/forms.css">
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="https://investordoyen.s3.amazonaws.com/static/admin/css/ie.css" /><![endif]-->
+
+<script type="text/javascript">window.__admin_media_prefix__ = "https://investordoyen.s3.amazonaws.com/static/admin";</script>
+<script type="text/javascript">window.__admin_utc_offset__ = "\u002D18000";</script>
+
+<script type="text/javascript" src="./Change talk   Django site admin_files/saved_resource"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/core.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/jquery.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/jquery.init.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/actions.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/calendar.js"></script>
+<script type="text/javascript" src="./Change talk   Django site admin_files/DateTimeShortcuts.js"></script>
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-main model-talk change-form" style="zoom: 1;">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="http://doyen.herokuapp.com/admin/">Django administration</a></h1>
+
+        </div>
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>taylor</strong>.
+            
+            
+                
+                
+                    <a href="http://doyen.herokuapp.com/admin/doc/">Documentation</a> /
+                
+                
+                <a href="http://doyen.herokuapp.com/admin/password_change/">Change password</a> /
+                
+                <a href="http://doyen.herokuapp.com/admin/logout/">Log out</a>
+            
+        </div>
+        
+        
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="http://doyen.herokuapp.com/admin/">Home</a>
+› <a href="http://doyen.herokuapp.com/admin/main/">Main</a>
+› <a href="http://doyen.herokuapp.com/admin/main/talk/">Talks</a>
+› 1 - jonathan.swanson@outlook.com
+</div>
+
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Change talk</h1>
+        <div id="content-main">
+
+
+  <ul class="object-tools">
+    
+    <li>
+        
+        <a href="http://doyen.herokuapp.com/admin/main/talk/1/history/" class="historylink">History</a>
+    </li>
+    
+    
+  </ul>
+
+
+<form enctype="multipart/form-data" action="" method="post" id="talk_form" novalidate=""><input type="hidden" name="csrfmiddlewaretoken" value="JZxCc5NrEOoeSeW7cpjFYQ1yuJGq7qCV">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-user">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_user">User:</label>
+                        
+                            <select id="id_user" name="user">
+<option value="">---------</option>
+<option value="2" selected="selected">jonathanswanson</option>
+<option value="1">taylor</option>
+</select><a href="http://doyen.herokuapp.com/admin/auth/user/add/?_to_field=id" class="add-another" id="add_id_user" onclick="return showAddAnotherPopup(this);"> <img src="./Change talk   Django site admin_files/icon_addlink.gif" width="10" height="10" alt="Add Another"></a>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-expert">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_expert">Expert:</label>
+                        
+                            <select id="id_expert" name="expert">
+<option value="">---------</option>
+<option value="2">jonathanswanson</option>
+<option value="1" selected="selected">taylor</option>
+</select><a href="http://doyen.herokuapp.com/admin/auth/user/add/?_to_field=id" class="add-another" id="add_id_expert" onclick="return showAddAnotherPopup(this);"> <img src="./Change talk   Django site admin_files/icon_addlink.gif" width="10" height="10" alt="Add Another"></a>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-time">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_time_0">Time:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_time_0" name="time_0" size="10" type="text" value="2014-12-26"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(0);" id="calendarlink0"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_time_1" name="time_1" size="8" type="text" value="13:00:00"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(0, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(0);" id="clocklink0"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-price">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_price">Price:</label>
+                        
+                            <input id="id_price" name="price" step="0.01" type="number" value="3.00">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-room">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_room">Room:</label>
+                        
+                            <input class="vTextField" id="id_room" maxlength="100" name="room" type="text" value="c254c02d-e741-4bff-ad0c-f47acd26e4c3">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-message">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_message">Message:</label>
+                        
+                            <textarea class="vLargeTextField" cols="40" id="id_message" maxlength="500" name="message" rows="10">hi tay,
+
+lets talk about aapl.
+
+jon</textarea>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-reply_message">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_reply_message">Reply message:</label>
+                        
+                            <textarea class="vLargeTextField" cols="40" id="id_reply_message" maxlength="500" name="reply_message" rows="10"></textarea>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-accepted_at">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_accepted_at_0">Accepted at:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_accepted_at_0" name="accepted_at_0" size="10" type="text" value="2014-12-25"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(1, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(1);" id="calendarlink1"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_accepted_at_1" name="accepted_at_1" size="8" type="text" value="13:58:54"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(1, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(1);" id="clocklink1"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-cancelled_at">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_cancelled_at_0">Cancelled at:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_cancelled_at_0" name="cancelled_at_0" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(2, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(2);" id="calendarlink2"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_cancelled_at_1" name="cancelled_at_1" size="8" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(2, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(2);" id="clocklink2"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-requested">
+            
+            
+                <div class="checkbox-row">
+                    
+                    
+                        <input id="id_requested" name="requested" type="checkbox"><label class="vCheckboxLabel" for="id_requested">Requested</label>
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-expert_pin">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_expert_pin">Expert pin:</label>
+                        
+                            <input class="vTextField" id="id_expert_pin" maxlength="10" name="expert_pin" type="text" value="1235772">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-user_pin">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_user_pin">User pin:</label>
+                        
+                            <input class="vTextField" id="id_user_pin" maxlength="10" name="user_pin" type="text" value="883876">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-expert_count">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_expert_count">Expert count:</label>
+                        
+                            <input class="vIntegerField" id="id_expert_count" name="expert_count" type="text" value="0">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-user_count">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_user_count">User count:</label>
+                        
+                            <input class="vIntegerField" id="id_user_count" name="user_count" type="text" value="0">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-disconnected">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_disconnected_0">Disconnected:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_disconnected_0" name="disconnected_0" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(3, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(3);" id="calendarlink3"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_disconnected_1" name="disconnected_1" size="8" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(3, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(3);" id="clocklink3"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-time_started">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_time_started_0">Time started:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_time_started_0" name="time_started_0" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(4, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(4);" id="calendarlink4"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_time_started_1" name="time_started_1" size="8" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(4, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(4);" id="clocklink4"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-time_ended">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_time_ended_0">Time ended:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_time_ended_0" name="time_ended_0" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(5, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(5);" id="calendarlink5"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_time_ended_1" name="time_ended_1" size="8" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(5, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(5);" id="clocklink5"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-completed">
+            
+            
+                <div class="checkbox-row">
+                    
+                    
+                        <input id="id_completed" name="completed" type="checkbox"><label class="vCheckboxLabel" for="id_completed">Completed</label>
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-paid_at">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_paid_at_0">Paid at:</label>
+                        
+                            <p class="datetime">Date: <input class="vDateField" id="id_paid_at_0" name="paid_at_0" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(6, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(6);" id="calendarlink6"><img src="./Change talk   Django site admin_files/icon_calendar.gif" alt="Calendar"></a></span><br>Time: <input class="vTimeField" id="id_paid_at_1" name="paid_at_1" size="8" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleClockQuicklink(6, -1);">Now</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openClock(6);" id="clocklink6"><img src="./Change talk   Django site admin_files/icon_clock.gif" alt="Clock"></a></span><br><span class="timezonewarning">Note: You are 1 hour behind server time.</span></p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-card">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_card">Card:</label>
+                        
+                            <select id="id_card" name="card">
+<option value="">---------</option>
+<option value="1" selected="selected">jonathan.swanson@outlook.com - 4242</option>
+</select><a href="http://doyen.herokuapp.com/admin/main/usercard/add/?_to_field=id" class="add-another" id="add_id_card" onclick="return showAddAnotherPopup(this);"> <img src="./Change talk   Django site admin_files/icon_addlink.gif" width="10" height="10" alt="Add Another"></a>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+<input type="submit" value="Save" class="default" name="_save">
+
+    
+    <p class="deletelink-box"><a href="http://doyen.herokuapp.com/admin/main/talk/1/delete/" class="deletelink">Delete</a></p>
+
+
+<input type="submit" value="Save and add another" name="_addanother">
+<input type="submit" value="Save and continue editing" name="_continue">
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(django.jQuery);
+</script>
+
+
+</div>
+</form></div>
+
+        
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+
+
+<div class="calendarbox module" id="calendarbox0" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(0);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(0);" class="calendarnav-next">&gt;</a></div><div id="calendarin0" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[0].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[0].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+0).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(0);">Cancel</a></p></div><div class="clockbox module" id="clockbox0" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(0, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(0, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(0, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(0, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(0);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox1" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(1);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(1);" class="calendarnav-next">&gt;</a></div><div id="calendarin1" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[1].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[1].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+1).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(1, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(1, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(1, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(1);">Cancel</a></p></div><div class="clockbox module" id="clockbox1" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(1, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(1, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(1, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(1, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(1);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox2" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(2);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(2);" class="calendarnav-next">&gt;</a></div><div id="calendarin2" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[2].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[2].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+2).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(2, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(2, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(2, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(2);">Cancel</a></p></div><div class="clockbox module" id="clockbox2" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(2, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(2, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(2, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(2, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(2);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox3" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(3);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(3);" class="calendarnav-next">&gt;</a></div><div id="calendarin3" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[3].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[3].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+3).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(3, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(3, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(3, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(3);">Cancel</a></p></div><div class="clockbox module" id="clockbox3" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(3, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(3, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(3, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(3, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(3);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox4" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(4);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(4);" class="calendarnav-next">&gt;</a></div><div id="calendarin4" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[4].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[4].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+4).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(4, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(4, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(4, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(4);">Cancel</a></p></div><div class="clockbox module" id="clockbox4" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(4, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(4, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(4, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(4, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(4);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox5" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(5);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(5);" class="calendarnav-next">&gt;</a></div><div id="calendarin5" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[5].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[5].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+5).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(5, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(5, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(5, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(5);">Cancel</a></p></div><div class="clockbox module" id="clockbox5" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(5, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(5, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(5, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(5, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(5);">Cancel</a></p></div><div class="calendarbox module" id="calendarbox6" style="display: none; position: absolute;"><div><a href="javascript:DateTimeShortcuts.drawPrev(6);" class="calendarnav-previous">&lt;</a><a href="javascript:DateTimeShortcuts.drawNext(6);" class="calendarnav-next">&gt;</a></div><div id="calendarin6" class="calendar"><table><caption>December 2014</caption><tbody><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr><td class="nonday"> </td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,1));">1</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,2));">2</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,3));">3</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,4));">4</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,5));">5</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,6));">6</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,7));">7</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,8));">8</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,9));">9</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,10));">10</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,11));">11</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,12));">12</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,13));">13</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,14));">14</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,15));">15</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,16));">16</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,17));">17</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,18));">18</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,19));">19</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,20));">20</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,21));">21</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,22));">22</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,23));">23</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,24));">24</a></td><td class="today"><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,25));">25</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,26));">26</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,27));">27</a></td></tr><tr><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,28));">28</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,29));">29</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,30));">30</a></td><td class=""><a href="javascript:void(function(y, m, d) { DateTimeShortcuts.calendarInputs[6].value = new Date(y, m-1, d).strftime('%Y-%m-%d');DateTimeShortcuts.calendarInputs[6].focus();document.getElementById(DateTimeShortcuts.calendarDivName1+6).style.display='none';}(2014,12,31));">31</a></td><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(6, -1);">Yesterday</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(6, 0);">Today</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(6, +1);">Tomorrow</a></div><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissCalendar(6);">Cancel</a></p></div><div class="clockbox module" id="clockbox6" style="display: none; position: absolute;"><h2>Choose a time</h2><ul class="timelist"><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(6, -1);">Now</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(6, 0);">Midnight</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(6, 6);">6 a.m.</a></li><li><a href="javascript:DateTimeShortcuts.handleClockQuicklink(6, 12);">Noon</a></li></ul><p class="calendar-cancel"><a href="javascript:DateTimeShortcuts.dismissClock(6);">Cancel</a></p></div></body></html>

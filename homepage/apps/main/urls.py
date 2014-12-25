@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
 	url(r'^talks/$', views.talks, name='talks'),
 	url(r'^talkpayment/(?P<talkid>.+)/$', views.talkpayment, name='talkpayment'),
-	url(r'^messages/$', views.messages, name='messages'),
+	# url(r'^messages/$', views.messages, name='messages'),
 	url(r'^requests/$', views.talkrequests, name='talkrequests'),
 	url(r'^expertfind/$', views.expertfind, name='expertfind'),
 	url(r'^expertfind/(?P<category>.+)/$', views.expertfindcategory, name='expertfindcategory'),

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.main.models import ExpertProfile, Talk, Rating, Message, CallIn, Favorite, TalkTime, UserCard
+from apps.main.models import ExpertProfile, Talk, Rating, CallIn, Favorite, TalkTime, UserCard
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -11,7 +11,6 @@ class CallInAdmin(admin.ModelAdmin):
 admin.site.register(ExpertProfile)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
-admin.site.register(Message)
 admin.site.register(TalkTime)
 admin.site.register(Favorite)
 admin.site.register(CallIn, CallInAdmin)
@@ -44,13 +43,29 @@ admin.site.register(UserCard)
 # test sendat feature of emails
 # test conference calls and make sure everything is properly logged
 # check to see if conference is allowed at time, and if one is scheduled w pin
+# change call routing to 6 digits-make sure zero shows up
+# make rating expert work
+# send reminder email to rate
+# short bio and mini resume instead of qualification in expertprof model
+# make hourly rate instead of minute rate
+# everywhere this is 'talk', put 'appointment'
+# make expertfind is a row, not tiled
+# take our messages
+# add field for how much time is needed
+
 
 
 # make frontpage
+	# logo and one sentence catch phrase
+	# how it works
+	# about investor doyen - why it exists, problem it solves why now
+	# about us - who we are
+	# small faq
+
+
 # redo footer
 # make faq page
 # make tos page
-# make about us page
 # make privacy policy page
 # dont allow changing request (time) once submitted by accessing url
 # dont allow changing card info once submitted by accessing url
