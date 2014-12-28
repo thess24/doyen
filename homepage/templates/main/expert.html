@@ -224,11 +224,19 @@
       </div>
       <div class="modal-body">
 
-			<input type='hidden' name='csrfmiddlewaretoken' value='JeLI5RFcPUkfYAXELzJfvrrTotfYAXvx' /> 
+			{% csrf_token %}
 
 			<div id="div_id_title" class="form-group"><label for="id_title" class="control-label col-lg-3 requiredField">Title<span class="asteriskField">*</span></label><div class="controls col-lg-9"><input class="textinput textInput form-control" id="id_title" maxlength="100" name="title" type="text" /> </div></div>
+<!-- 
+			<div id="div_id_rating" class="form-group"><label for="id_rating" class="control-label col-lg-3 requiredField">Rating<span class="asteriskField">*</span></label><div class="controls col-lg-9"><input class="numberinput form-control" id="id_rating" name="rating" type="number" min='1' max='5'/> </div></div> -->
 
-			<div id="div_id_rating" class="form-group"><label for="id_rating" class="control-label col-lg-3 requiredField">Rating<span class="asteriskField">*</span></label><div class="controls col-lg-9"><input class="numberinput form-control" id="id_rating" name="rating" type="number" min='1' max='5'/> </div></div>
+<div class="btn-group" role="group" aria-label="...">
+	<input type='radio' value='1' class='btn btn-default' name='rating'>
+	<input type='radio' value='2' class='btn btn-default' name='rating'>
+	<input type='radio' value='3' class='btn btn-default' name='rating'>
+	<input type='radio' value='4' class='btn btn-default' name='rating'>
+	<input type='radio' value='5' class='btn btn-default' name='rating'>
+</div>
 
 			<div id="div_id_comment" class="form-group"><label for="id_comment" class="control-label col-lg-3 requiredField">Comment<span class="asteriskField">*</span></label><div class="controls col-lg-9"><textarea class="textarea form-control" cols="40" id="id_comment" name="comment" rows="10"></textarea></div></div>
 

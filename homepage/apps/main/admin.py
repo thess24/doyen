@@ -25,7 +25,6 @@ admin.site.register(UserCard)
 # make sure conf call is working
 	# test conference calls and make sure everything is properly logged
 	# check to see if conference is allowed at time, and if one is scheduled w pin
-	# change call routing to 6 digits-make sure zero shows up
 # show errors on form submits
 	# dont allow submitting empty request -- it still shows up in requests for expert
 	# give error for time request if times not filled out
@@ -34,6 +33,7 @@ admin.site.register(UserCard)
 	# add 'times' to accept, reject, reminder emails
 	# do invoice email template
 	# do payment email template
+	# do rating email
 # 6. approve payments area for jon
 	# make charges actually submit
 
@@ -43,7 +43,7 @@ admin.site.register(UserCard)
 # test sendat feature of emails
 # make rating expert work
 # make hourly rate instead of minute rate
-
+# notify expert (popup) when their submission goes through to become expert
 
 
 # redo footer

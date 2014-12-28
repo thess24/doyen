@@ -196,7 +196,7 @@ def expertprofile(request):
 				form.save_m2m()
 
 
-				return HttpResponseRedirect(reverse('apps.main.views.expertprofile', args=()))
+				return HttpResponseRedirect(reverse('apps.main.views.editsettings', args=()))
 
 	context= {'expert':expert, 'form':form}
 	return render(request, 'main/expertprofile.html', context)	
