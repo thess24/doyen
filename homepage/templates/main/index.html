@@ -1,29 +1,823 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block title %}
+    <title>Investor Doyen</title>
+    {% endblock %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
 
 
-{% block head %}
-<style type="text/css">
+    <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet">
+
+    {% block head %}
+    {% endblock %}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+
+          .intro {
+              background-image: url({{STATIC_URL}}img/frontimage.jpg);
+              background-attachment: fixed;
+              -webkit-background-size: cover;
+                      background-size: cover;
+          }
+
+          .headerpill{
+            padding: 5px !important;
+            margin: 25px 10px !important;
+            background: rgba(0, 43, 96, 0.1);
+          }
+
+          .testemonial{
+            padding: 10px;
+          }
+          
+
+    </style>
+  </head>
+
+  <body>
+
+<!-- begin preloader -->
+<div class="preloader">
+    <div class="preloader-content-wrapper">
+        <div class="preloader-content">
+            <i class="fa fa-cog fa-3x fa-spin"></i>
+        </div>
+    </div>
+</div>
+<!-- end preloader -->
+
+<!-- begin nav -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span>Menu</span>
+      </button>
+      <!-- begin logo in navigation -->
+      <a class="navbar-brand" href="/">
+        <img src="{{STATIC_URL}}img/logo_small.png" style='width:200px'>
+      </a>
+      <!-- end logo in navigation -->
+    </div>  
+  
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav pull-right">
+        <!-- begin navigation items -->
+        <li><a href="#howitworks">How it Works</a></li>
+        <li><a href="#about">About Investor Doyen</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="{% url 'expertfind' %}" class='headerpill'>Browse Investment Experts</a></li>
+        <li><a href="/accounts/signup" class='headerpill'>Signup</a></li>
+        <!-- end navigation items -->
+      </ul> 
+    </div>
+  </div>
+</nav>
+<!-- end nav -->
+
+<!-- begin intro section -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="intro-section">
+          <!-- begin logo intro section -->
+          <img src="{{STATIC_URL}}img/logo_small_notext_white.png">
+          <!-- end logo intro section -->
+          <h1>Expert Investment Advice, When You Need It</h1>
+          <ul class="list-inline">
+            <li>
+              <a href="#" class="btn btn-custom">
+                <i class="fa fa-cloud-download"></i>
+                Browse Investment Experts
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn-custom-border">
+                <i class="fa fa-align-left"></i>
+                Sign Up
+              </a>
+            </li>
+          </ul>
+
+          <a href="#" class="mouse">
+            <i class="fa fa-angle-down Drop animated"></i>
+          </a>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <span class="mouse"></span>
+</section>
+<!-- end intro section -->
+
+<!-- begin features section -->
+<section class="features" id="features">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="120" data-wow-duration="1.5s">
+          <h1>Features</h1>
+          <p>You can show your app features</p>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="features-left wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-tablet"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">Responsive layout</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-pencil"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">Modern design</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-code"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">Clean Code</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+          
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <!-- begin feature image -->
+        <figure class="image-features wow bounceIn animated animated" data-wow-offset="120" data-wow-duration="1.5s">
+          <img src="images/iphone5_white.png" alt="iphone">
+        </figure>
+        <!-- end feature image -->
+      </div>
+      
+      <div class="col-md-4">
+        <div class="features-right wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-thumbs-up"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">Font Awesome</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-refresh"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">Cross Browser</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+
+          <!-- begin single feature item -->
+          <div class="feature">
+            <div class="icon-container">
+              <div class="icon">
+              <i class="fa fa-support"></i>
+              </div>
+            </div>
+
+            <div class="fetaure-details">
+              <h4 class="main-color">24/7 Support</h4>
+              <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              </p>
+            </div>
+          </div>
+          <!-- end single feature item -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- end features section -->
+
+<!-- begin reviews section -->
+<section class="reviews" id="howitworks">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <h1>How it Works</h1>
+          <p>The Investor Doyen Process in 3 easy steps</p>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="testemonials wow fadeInUp animated" data-wow-offset="10" data-wow-duration="1s">
+        
+        <!-- begin single testomial item -->
+        <div class="testemonial row">
+          <div class="col-md-3 client-data">
+            <div class="client-image">
+              1
+            </div>
+            <div><i class="fa fa-bullseye fa-4x"></i></div>
+            <div>
+              <h4>Find an Expert</h4>
+              <p>Art Director at Appcreator</p>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12">
+            <div class="client-quote">
+              <p>"Software innovation, like almost every other kind of innovation, requires the ability to collaborate and share ideas with other people, and to sit down and talk with customers and get their feedback and understand their needs."</p>
+            </div>
+          </div>
+        </div>
+        <!-- end single testomial item -->
+        <!-- begin single testomial item -->
+        <div class="testemonial row">
+          <div class="col-md-3 client-data">
+            <div class="client-image">
+              2
+            </div>
+            <div><i class="fa fa-calendar fa-4x"></i></div>
+
+            <div>
+              <h4>Schedule an Appointment</h4>
+              <p>Art Director at Appcreator</p>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12">
+            <div class="client-quote">
+              <p>"Software innovation, like almost every other kind of innovation, requires the ability to collaborate and share ideas with other people, and to sit down and talk with customers and get their feedback and understand their needs."</p>
+            </div>
+          </div>
+        </div>
+        <!-- end single testomial item -->
+        <!-- begin single testomial item -->
+        <div class="testemonial row">
+          <div class="col-md-3 client-data">
+            <div class="client-image">
+              3
+            </div>
+            <div><i class="fa fa-phone fa-4x"></i></div>
+
+            <div>
+              <h4>Talk to the Expert</h4>
+              <p>Art Director at Appcreator</p>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12">
+            <div class="client-quote">
+              <p>"Software innovation, like almost every other kind of innovation, requires the ability to collaborate and share ideas with other people, and to sit down and talk with customers and get their feedback and understand their needs."</p>
+            </div>
+          </div>
+        </div>
+        <!-- end single testomial item -->
+      </div>
+    </div>
+
+  </div>  
+</section>
+<!-- end reviews section -->
+
+<div class="divider"></div>
+
+<!-- begin services section -->
+<section class="services" id="about">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <h1>About Investor Doyen</h1>
+          <p>You can list all your awesome services</p>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <!-- begin single service item -->
+        <div class="service wow fadeIn animated" data-wow-offset="10">
+          <i class="fa fa-tablet"></i>
+          <h4>Responsive Design</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+        </div>
+        <!-- end single service item -->
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <!-- begin single service item -->
+        <div class="service wow fadeIn animated delay" data-wow-offset="10">
+          <i class="fa fa-code"></i>
+          <h4>Clean Code</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+        </div>
+        <!-- end single service item -->
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <!-- begin single service item -->
+        <div class="service wow fadeIn animated delay-long" data-wow-offset="10">
+          <i class="fa fa-support"></i>
+          <h4>24/7 Support</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+        </div>
+        <!-- end single service item -->
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <!-- begin single service item -->
+        <div class="service wow fadeIn animated delay-longer" data-wow-offset="10">
+          <i class="fa fa-pencil"></i>
+          <h4>Modern Design</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+        </div>
+        <!-- end single service item -->
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- end services section -->
 
 
-</style>
-{% endblock %}
- 
+<div class="divider"></div>
+
+<!-- begin packages section -->
+<section class="packages" id="faq">
+  
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <h1>FAQ</h1>
+          <p>Let your visitors know what package is the best for them</p>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row wow bounceIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+      
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    How do I become an expert?
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    How much does it cost to speak with an investment expert?
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Collapsible Group Item #3
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div> <!-- end accordian faq section-->
+
+
+
+    </div>
+
+  </div>
+</section>
+<!-- end packages section -->
+
+<!-- begin extra section -->
+<section class="extra" id="extra">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12 tabs">
+        
+        <!-- begin tab pane nav tabs -->
+        <ul class="nav nav-tabs wow fadeInUp animated" role="tablist">
+          <li class="active">
+            <a href="#first-tab" role="tab" data-toggle="tab">
+              <i class="fa fa-cog"></i>
+              Customize
+            </a>
+          </li>
+          <li>
+            <a href="#second-tab" role="tab" data-toggle="tab">
+              <i class="fa fa-cloud"></i>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="#third-tab" role="tab" data-toggle="tab">
+              <i class="fa fa-refresh"></i>
+              Feature
+            </a>
+          </li>
+        </ul>
+        <!-- end tab pane nav tabs -->
+
+      </div>
+    </div>
+
+    <div class="row">
+      
+      <div class="tab-content">
+        
+        <!-- begin first tab content -->
+        <div class="tab-pane fade in active" id="first-tab">
+          <div class="col-md-5">
+            <figure class="wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+              <img src="images/iphones_skew.png" alt="iphones skew">
+            </figure>
+          </div>
+          
+          <div class="col-md-6 col-md-offset-1">
+            <div class="brief-content wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+              <h1>If you can't make it good, at least make it look good.</h1>
+              <div class="underline"></div>
+              <p>
+                What's amazing is, if young people understood how doing well in school makes the rest of their life so much interesting, they would be more motivated. It's so far away in time that they can't appreciate what it means for their whole life. They would be more motivated. It's so far away in time.
+              </p>
+              <p>
+                If young people understood how doing well in school makes the rest of their life so much interesting, they would be more.
+              </p>
+              
+              <div class="col-md-6 nopadding">
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-support"></i>
+                    </div>
+                    24/7 Support
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-cogs"></i>
+                    </div>
+                    Easy to Customize
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="col-md-6 nopadding">
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-rocket"></i>
+                    </div>
+                    Quick Install
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-magic"></i>
+                    </div>
+                    Another Feature
+                  </li>
+                </ul>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <!-- end first tab content -->
+        
+        <!-- begin second tab content -->
+        <div class="tab-pane fade in" id="second-tab">
+          <div class="col-md-6">
+            <div class="brief-content fadeInLeft animated" data-wow-duration="1.5s">
+              <h1>If you can't make it good, at least make it look good.</h1>
+              <div class="underline"></div>
+              <p>
+                What's amazing is, if young people understood how doing well in school makes the rest of their life so much interesting, they would be more motivated. It's so far away in time that they can't appreciate what it means for their whole life. They would be more motivated. It's so far away in time.
+              </p>
+              <p>
+                If young people understood how doing well in school makes the rest of their life so much interesting, they would be more.
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <figure class="fadeInRight animated" data-wow-duration="1.5s">
+              <img src="images/iphone5_two.png" alt="iphones two">
+            </figure>
+          </div>
+        </div>
+        <!-- end second tab content -->
+        
+        <!-- begin third tab content -->
+        <div class="tab-pane fade in" id="third-tab">
+          
+          <div class="col-md-6">
+            <figure class="fadeInLeft animated" data-wow-duration="1.5s">
+              <img src="images/iphone5_two.png" alt="iphones two">
+            </figure>
+          </div>
+
+          <div class="col-md-6">
+            <div class="brief-content fadeInRight animated" data-wow-duration="1.5s">
+              <h1>If you can't make it good, at least make it look good.</h1>
+              <div class="underline"></div>
+              <p>
+                What's amazing is, if young people understood how doing well in school makes the rest of their life so much interesting, they would be more motivated. It's so far away in time that they can't appreciate what it means for their whole life. They would be more motivated. It's so far away in time.
+              </p>
+              <p>
+                If young people understood how doing well in school makes the rest of their life so much interesting, they would be more.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- end third tab content -->
+
+      </div>
+    </div>
+    
+  </div>
+</section>
+<!-- end extra section -->
 
 
 
 
+<!-- begin footer section -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="row wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+      <div class="col-md-3 col-sm-3">
+        <!-- begin logo footer -->
+        <img src="{{STATIC_URL}}img/logo_small.png" style='width:150px' alt='footer logo'>
+        <!-- end logo footer -->
+        <p>
+          Lorem ipsum dolor sit amet, 
+          consectetur adipiscing elit. Aliquam 
+          sem, nec iaculis nulla.
+        </p>
+      </div>
 
-{% block content %} 
+      <div class="col-md-2 col-md-offset-1 col-sm-3">
+        <h4>Sample Links</h4>
+        <div class="underline-small"></div>
+        <ul>
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li>
+            <a href="#">
+            Jobs
+            <span class="jobs">We're hiring!</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">Plans &amp; Pricing</a>
+          </li>
+          <li>
+            <a href="#">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#">Terms &amp; Condition</a>
+          </li>
+        </ul>
+      </div>
 
-{% endblock %}
+      <div class="col-md-2 col-md-offset-1 col-sm-3">
+        <h4>Reach out to us!</h4>
+        <div class="underline-small"></div>
+        <ul>
+          <li>Lamap</li>
+          <li>Address</li>
+          <li>Phonenumber</li>
+          <li>
+            <a href="mailto:info@yourdomain.com">info@domain.com</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-2 col-md-offset-1 col-sm-3">
+        <h4>Get Social</h4>
+        <div class="underline-small"></div>
+        <ul class="list-inline">
+          <li>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-vimeo-square"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="row wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+      <div class="col-md-12 text-center">
+        <p><small>Copyright &copy; 2015 InvestorDoyen</small></p>
+      </div>
+    </div>
+
+  </div>
+</footer>
+<!-- end footer section -->
 
 
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.14/jquery.scrollTo.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.0.2/wow.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script>
 
 
-{% block scripts %}
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
-{% endblock %}
+    {% block scripts %}
+    {% endblock %}
+
+<script type="text/javascript">
+
+      $(document).ready(function() {
+
+        // Preloader
+        $(window).load(function(){
+          $('.preloader').fadeOut();
+        });
+
+        // Initiat WOW.js
+        var wow = new WOW(
+          {
+            mobile: false
+          }
+        );
+        wow.init();
+
+        // .intro-section reduce opacity when scrolling down
+        $(window).scroll(function(){
+          if($(window).width() > 1260) {
+            windowScroll = $(window).scrollTop();
+            contentOpacity = 1 - (windowScroll / ($('#intro').offset().top+$('#intro').height()));
+            $('.intro-section').css('transform','translateY('+Math.floor(windowScroll*0.16)+'px)');
+            $('.intro-section').css('-webkit-transform','translateY('+Math.floor(windowScroll*0.16)+'px)');
+            $('.intro-section').css('opacity',contentOpacity.toFixed(2));
+          }
+        });
+
+        // Fixed navigation
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 500) {
+                $('.navbar').addClass('fixednav');
+            } else {
+              $('.navbar').removeClass('fixednav');
+            }
+        });
+
+        // Initiat onepageNav.js
+        $('.nav').onePageNav({
+          currentClass: 'current',
+          'scrollOffset': 500
+        });
+
+        // Hide Mobile Nav when clicking item
+        $(".nav a, .navbar-header a").click(function(event) {
+          $(".navbar-collapse").removeClass("in").addClass("collapse");
+        });
+
+        /* Buttons Scroll to Div */
+        $('.navbar-brand').click(function () {
+          $.scrollTo('.intro', 1000);
+        return false;
+        });
+
+        $('.btn-custom').click(function () {
+          $.scrollTo('.download', 1000);
+        return false;
+        });
+
+        $('.btn-custom-border, a.mouse').click(function () {
+          $.scrollTo('.features', 1000);
+        return false;
+        });
+       
+      });
+
+</script>
 
 
-
+  </body>
+</html>

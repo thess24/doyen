@@ -42,7 +42,8 @@ class UserProfile(models.Model):
 
 class ExpertProfile(models.Model):
 	user = models.OneToOneField(User)
-	qualifications = models.TextField()  
+	short_bio = models.TextField()  
+	resume = models.TextField()  
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picture = models.ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
@@ -52,6 +53,7 @@ class ExpertProfile(models.Model):
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
 	category = models.CharField(max_length=100)
+	
 	# add stripe connect info?
 
 	tags = TaggableManager()
@@ -69,7 +71,7 @@ class Talk(models.Model):
 	room = models.CharField(max_length=100,blank=True,null=True)
 	message = models.TextField(max_length=500, blank=True, null=True)
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
-	# minutes_estimated = models.IntegerField()
+	time_estimated = models.IntegerField(default=0)
 
 	accepted_at = models.DateTimeField(blank=True,null=True)
 	cancelled_at = models.DateTimeField(blank=True,null=True)
@@ -189,7 +191,8 @@ class ExpertProfileForm(ModelForm):
 		self.helper.label_class = 'col-lg-3'
 		self.helper.field_class = 'col-lg-9'
 		self.helper.layout = Layout(
-				'qualifications' ,
+				'short_bio' ,
+				'resume' ,
 				'title',
 				'time_zone',
 				'location',
@@ -269,8 +272,8 @@ class RatingForm(ModelForm):
 
 # extended form for allauth
 class SignupForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
+    first_name = forms.CharField(max_length=30, label='First Name', required=True)
+    last_name = forms.CharField(max_length=30, label='Last Name', required=True)
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']

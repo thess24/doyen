@@ -16,14 +16,12 @@ urlpatterns = patterns('',
 
 	url(r'^talks/$', views.talks, name='talks'),
 	url(r'^talkpayment/(?P<talkid>.+)/$', views.talkpayment, name='talkpayment'),
-	# url(r'^messages/$', views.messages, name='messages'),
 	url(r'^requests/$', views.talkrequests, name='talkrequests'),
 	url(r'^expertfind/$', views.expertfind, name='expertfind'),
 	url(r'^expertfind/(?P<category>.+)/$', views.expertfindcategory, name='expertfindcategory'),
 	url(r'^favorites/$', views.favorites, name='favorites'),
 	url(r'^tagsearch/(?P<tags>.+)/$', views.tagsearch, name='tagsearch'),
 
-	# url(r'^payment/$', views.payment, name='payment'),
 	url(r'^charge/$', views.charge, name='charge'),
 	url(r'^review/(?P<talkid>.+)/$', views.review, name='review'),
 	url(r'^invoice/$', views.invoice, name='invoice'),
@@ -43,5 +41,6 @@ urlpatterns = patterns('',
 
 	(r'^media/(?P<path>.*)$', 'django.views.static.serve',
 		{'document_root': MEDIA_ROOT}),
+	# move this outside only if in debug mode
 )
 

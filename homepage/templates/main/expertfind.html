@@ -10,8 +10,11 @@
 }
 
 .categorybox{
-	background-color: rgb(248, 244, 255);
+	/*background-color: rgb(248, 244, 255);*/
 	border: 5px white solid;
+/*	height: 60px;
+	line-height: 3;*/
+	font-weight: bold;
 }
 
 
@@ -48,20 +51,31 @@
 
 {% if not areacategory %}
 		<div class='row'>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Energy</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>M and A</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Mutual Funds</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Commodities</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Hedge Funds</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Private Equity</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"> <div class='col-md-3 categorybox btn'><i class="fa fa-pie-chart"></i>  Asset Allocation</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+				<div class='col-md-3 categorybox btn'> <i class="fa fa-line-chart"></i>  Equities</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+				<div class='col-md-3 categorybox btn'> <i class="fa fa-laptop"></i>  Sector Investing</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}">
+				<div class='col-md-3 categorybox btn'> <i class="fa fa-bitcoin"></i> Alternative Investments</div>
+			</a>
 		</div>
 		<div class='row'>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Other</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Major</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Category</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Here</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Hedge Funds</div></a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"><div class='col-md-2 categorybox btn'>Private Equity</div></a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}">
+				<div class='col-md-3 categorybox btn'><i class="fa fa-globe"></i>  Geopolitics</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}">
+				<div class='col-md-3 categorybox btn'><i class="fa fa-list-ol"></i>  Finanical Planning</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}">
+				<div class='col-md-3 categorybox btn'><i class="fa fa-bank"></i>  Fixed Income</div>
+			</a>
+			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+				<div class='col-md-3 categorybox btn'><i class="fa fa-area-chart"></i> Other</div>
+			</a>
 		</div>
 		<hr>
 {% else %}
@@ -75,21 +89,32 @@
 
 		<br>
 		{% for e in experts %}
-		  <div class="col-sm-6 col-md-3">
-		    <div class="thumbnail">
-		      <img src="{{MEDIA_URL}}{{e.picture}}" alt="...">
-		      <div class="caption">
-		        <h3>{{e.user.first_name}} {{e.user.last_name}}</h3>
-		        <p>
-		        	{% for t in e.tags.all %}
-		        	<span class="label label-default experttag"><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
-		        	{% endfor %}
+		  <div class="row">
+		  	<div class='col-md-9'>
+			  	<div class="media">
+				  <a class="media-left" href="#">
+				    <img src="{{MEDIA_URL}}{{e.picture}}" style='height:140px' alt="profile image">
+				  </a>
+				  <div class="media-body">
+				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}}</h3>
+				    <h4> {{e.title}}- <small>{{e.location}}</small></h4>
+			        <p>
+			        	{% for t in e.tags.all %}
+			        	<span class="label label-default experttag"><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
+			        	{% endfor %}
 
-		        </p>
-		        <p><a href="{% url 'expert' e.id%}" class="btn btn-success" role="button" style='width:100%'>View Profile</a></p>
-		      </div>
-		    </div>
+			        </p>
+			        <p>{{e.short_bio|truncatechars:250}}</p>
+
+				  </div>
+				</div>
+			</div>
+			<div class='col-md-3'>
+			        <p><a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;margin:60px 0px'>View Profile</a></p>
+			</div>
+
 		  </div>
+		  <hr>
 		{% endfor %}
 
   </div>

@@ -19,18 +19,25 @@ from django.utils import timezone
 from django.forms.models import modelformset_factory
 from taggit.models import Tag
 
+
+
+
+
 ########### UTILS --make new file
 def generatepin(digits=6, expert=False):
 	'''expert pins start with 1, user pins start with 0'''
 
 	maxpin = int('9'*digits)
 	used_pins = ConferenceLine.objects.values_list('pin',flat=True)
-	# filter on time here--none in same 3 day span
 
+	# start_range = talktime - timedelta(days=2)
+	# end_range = talktime + timedelta(days=2)
+	# need to pass talktime in here from accepted talk
+	# used_pins = ConferenceLine.objects.filter(time__range=[]).values_list('pin',flat=True)
 
 	pin = random.randrange(maxpin)
-	if expert: pin = int("1"+str(pin))
-	else: pin = int("0"+str(pin))
+	if expert: pin = "1"+str(pin)
+	else: pin = "0"+str(pin)
 
 	if pin in used_pins:
 		generatepin()
@@ -198,10 +205,10 @@ def expertprofile(request):
 def expertfind(request):
 	experts = ExpertProfile.objects.filter(online=True)
 
-	if request.user.is_authenticated:
-		favorites = Favorite.objects.filter(user=request.user)
-	else:
-		favorites = []
+	# if request.user.is_authenticated:
+	# 	favorites = Favorite.objects.filter(user=request.user)
+	# else:
+	# 	favorites = []
 
 	context = {'experts':experts, 'areacategory':False}
 	return render(request, 'main/expertfind.html', context)	
@@ -244,7 +251,7 @@ def talks(request):
 	talks = Talk.objects.filter(user=request.user).exclude(accepted_at=None)
 	# talks = Talk.objects.filter(user=request.user, accepted=True)
 	reqtalks = Talk.objects.filter(user=request.user)
-
+	# import ipdb; ipdb.set_trace()
 
 	context = {'talks':talks, 'reqtalks':reqtalks}
 	return render(request, 'main/talks.html', context)	
@@ -283,6 +290,7 @@ def talkrequests(request):
 				instance.room = uuid.uuid4()
 				instance.save()
 
+				# whats going on here?
 				expertpin = generatepin(expert=True)
 				otherpin = generatepin()
 
@@ -455,14 +463,44 @@ def call_hook(request):
 	if talk.expert_count == 0 and talk.time_started and not talk.time_ended:
 		talk.time_ended = datetime.now()
 		talk.completed = True
+
+		c = {'talk':talk}
+		send_html_email(c, 
+				subject="Investor Doyen - Talk Completed!",
+				body=None,
+				to=talk.expert.email, 
+				html_path="doyen_email/user_request_notify.html"
+			)
+
+		send_html_email(c, 
+				subject="Investor Doyen - Please Rate!",
+				body=None,
+				to=talk.user.email, 
+				html_path="doyen_email/user_request_notify.html"
+			)
+		
 	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0 and not talk.time_ended:
 		talk.time_ended = datetime.now()
 		talk.completed = True
 
+		c = {'talk':talk}
+		send_html_email(c, 
+				subject="Investor Doyen - Talk Completed!",
+				body=None,
+				to=talk.expert.email, 
+				html_path="doyen_email/user_request_notify.html"
+			)
+
+		send_html_email(c, 
+				subject="Investor Doyen - Please Rate!",
+				body=None,
+				to=talk.user.email, 
+				html_path="doyen_email/user_request_notify.html"
+			)
 
 	talk.save()
 
-	print request.POST
+	# print request.POST
 
 
 ##### checkout flow #####

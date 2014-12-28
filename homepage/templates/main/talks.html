@@ -22,9 +22,77 @@
 	.cancelled{
 		color: rgb(220, 0, 0);
 	}
+
+/*	.voicebox{
+	    display: block;
+	    margin-top: 10px;
+	    border: 1px solid #d9d9d9;
+	    padding: 10px;
+	    border-radius: 4px;
+	    font-size: 12px;
+	    line-height: 21px;
+	    color: #606060;
+	    position: relative;
+	    background: #f7f7f7;
+	    text-decoration: none;
+	 }
+
+	 .voicebox::before{
+	 	top: -10px;
+		left: 21px;
+		height: 0;
+		width: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 5px;
+		border-bottom-color: #f7f7f7;
+		z-index: 2;
+		display: block;
+		position: absolute;
+		}*/
+
+		.bubble {
+		font-size: 12px;
+		margin-top:10px;
+		position: relative;
+		padding: 10px;
+		background: #FAFAFA;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		border: #7F7F7F solid 1px;
+		}
+
+		.bubble:after {
+		content: '';
+		position: absolute;
+		border-style: solid;
+		border-width: 0 15px 12px;
+		border-color: #FAFAFA transparent;
+		display: block;
+		width: 0;
+		z-index: 1;
+		top: -12px;
+		left: 48px;
+		}
+
+		.bubble:before {
+		content: '';
+		position: absolute;
+		border-style: solid;
+		border-width: 0 15px 12px;
+		border-color: #7F7F7F transparent;
+		display: block;
+		width: 0;
+		z-index: 0;
+		top: -13px;
+		left: 48px;
+		}
+
+
 </style>
 {% endblock %}
- 
+  
 
 
 
@@ -32,73 +100,145 @@
 
 {% block content %} 
 
-<div class="page-header">
+<div class='row'>
+	<div class='col-md-6'>
+			<div class="page-header">
+			  <div class='row'>
+			    <div class='col-md-12'>
+			          <h3 id='mainheader'>Upcoming Appointments</h3> 
+			    </div>
+			  </div>
+			</div>
+	{% for t in talks%}
 
-  <div class='row'>
-    <div class='col-md-12'>
-          <h3 id='mainheader'>Scheduled Talks</h3>
-    </div>
-  </div>
-</div>
+			<div class="media">
+			  <a class="media-left" href="#">
+				<img src="{{MEDIA_URL}}{{t.expert.expertprofile.picture}}" alt="..." style='width:100px'>
+			  </a>
+			  <div class="media-body" style='width:100%;position:relative'>
+			    <h3 class="media-heading">{{t.expert.first_name}} {{t.expert.last_name}}</h3>
+			    <div>Talk scheduled for <span class='schedtime-media'>{{ t.time|date:"N d,  Y -  P T" }}</span></div>
+			    <div>${{t.price}} per minute</div>
+			    <div>{{t.message}}</div>
+			    <div>{{t.reply_message}}</div>
+			    <span>Number: (201) 561-8303</span>
+			    <span style='padding:0px 5px'>Pin: {{t.user_pin}}</span>
+			  	<span class='createdtime-media'>Made on {{t.created}}</span>
+			  </div>
+			</div>
+
+			{% if talk.reply_message %}
+			<div class='bubble'>{{talk.reply_message}}</div>
+			{% endif %}
+
+	{% empty %} 
+		<div>None</div>
+	{% endfor %}
 
 
-{% for t in talks%}
-	<div class="panel panel-default">
-	  <div class="panel-body">
-		<div class="media">
-		  <a class="media-left" href="#">
-			<i class="fa fa-phone fa-5x"></i>
-		  </a>
-		  <div class="media-body" style='width:100%;position:relative'>
-		    <h3 class="media-heading">{{t.expert.first_name}} {{t.expert.last_name}}</h3>
-		    <div>Talk scheduled for <span class='schedtime-media'>{{ t.time|date:"N d,  Y -  P T" }}</span></div>
-		    <div>${{t.price}} per minute</div>
-		    <div>{{t.message}}</div>
-		    <div>{{t.reply_message}}</div>
-		  	<span class='createdtime-media'>Made on {{t.created}}</span>
-		  </div>
-		</div>
-	   </div>
-	</div>
+	<br> <!-- break btwn upcoming and history -->
+
+			<div class="page-header">
+			  <div class='row'>
+			    <div class='col-md-12'>
+			          <h3 id='mainheader'>History</h3> 
+			    </div>
+			  </div>
+			</div>
+	{% for t in talks%}
+
+	<table class="table">
+	      <thead>
+	        <tr>
+	          <th></th>
+	          <th>Expert</th>
+	          <th>Time</th>
+	          <th></th>
+	        </tr>
+	      </thead>
+	      <tbody>
+
+{% for t in reqtalks%}
+
+	        <tr>
+	          {% if t.cancelled_at%}<td><i class="fa fa-times-circle-o"></i></td>{% endif %}
+	          {% if t.accepted_at%}<td><i class="fa fa-check-circle-o"></i></td>{% endif %}
+	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
+	          <td>{{t.time}}</td>
+	          <td>
+	          	<a href="">More</a>
+	          </td>
+	        </tr>
 {% empty %} 
-	<div>None</div>
+			<tr>
+			<td>None</td>	
+			</tr>
 {% endfor %}
 
+	      </tbody>
+	    </table>
 
+	{% empty %} 
+		<div>None</div>
+	{% endfor %}
+
+	</div>
+
+
+	<div class='col-md-6'>
 <div class="page-header">
   <div class='row'>
     <div class='col-md-12'>
-          <h3 id='mainheader'>History</h3> 
+          <h3 id='mainheader'>Completed Appointments</h3> 
     </div>
   </div>
 </div>
 
-{% for r in reqtalks%}
-	<div class="panel panel-default">
-	  <div class="panel-body">
-		<div class="media">
-		  <a class="media-left" href="#">
-		  	{% if r.requested %}
-			<i class="fa fa-clock-o fa-3x"></i>
-		  	{% elif r.cancelled_at %}
-			<i class="fa fa-times fa-3x cancelled"></i>
-		  	{% elif r.accepted_at %}
-			<i class="fa fa-check-square-o fa-3x accepted"></i>
-		  	{% endif %}
+	<table class="table">
+	      <thead>
+	        <tr>
+	          <th>Expert</th>
+	          <th>Time</th>
+	          <th>Price Per Minute</th>
+	          <th>Call Length</th>
+	          <th class='right'>Cost</th>
+	          <th></th>
+	        </tr>
+	      </thead>
+	      <tbody>
 
-		  </a>
-		  <div class="media-body" style='position:relative;width:100%'>
-		    <h4 class="media-heading">{{r.expert.first_name}} {{r.expert.last_name}}</h4>
-		    <h5>Talk Requested for {{ r.time|date:"N d,  Y -  P T" }}</h5>
+{% for t in reqtalks%}
 
-		  	<span class='createdtime-media'>Requested on {{r.created}}</span>
-		  </div>
-		</div>
-	   </div>
-	</div>
-{% empty %}
-	<div>None</div>
+	        <tr>
+	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
+	          <td>{{t.time}}</td>
+	          <td>$ {{t.price}}</td>
+	          <td>{{t.call_length}} minutes</td>
+	          <td class='right'>Cost</td>
+	          <td>
+	          	<button class='btn btn-sm' type='submit'>More</button>
+	          </td>
+	        </tr>
+{% empty %} 
+			<tr>
+			<td>None</td>	
+			</tr>
 {% endfor %}
+
+	      </tbody>
+	    </table>
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
 
 {% endblock %}
 

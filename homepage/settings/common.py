@@ -35,7 +35,7 @@ TEMPLATE_DEBUG = DEBUG
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ('Your Name', 'your_email@example.com'),
+    ('Admin', 'admin@investordoyen.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -136,7 +136,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
-    "apps.main.context_processors.message_count",
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
