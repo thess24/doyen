@@ -40,11 +40,11 @@ admin.site.register(UserCard)
 
 # have talks show up for expert to see what they have scheduled
 # put stripe keys in settings and reference in views -- make env variables
-# test sendat feature of emails
 # make rating expert work
 # make hourly rate instead of minute rate
 # notify expert (popup) when their submission goes through to become expert
-
+# only can review expert once
+# make email with uuid for user to go to and review person
 
 # redo footer
 # make faq page

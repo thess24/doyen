@@ -27,7 +27,7 @@
           <tr>
             <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:10px 10px 10px 10px;background-color:#fbf7e1" align="center">{{talk.desc}} this is the description for the talk t jlasdk fj;as djf ipojasd fj;lk;wehf;akshdf;oiwqhejas;ld f ;as dfjl; asdjf ;als dja; flj a;sdjf;laksdj f;qweh f;as df;laksj df;hasd fh</td>
           </tr>
-        </tbody></table></td></tr>
+        </tbody></table></td></tr> 
       </tbody></table>
 
 
@@ -46,18 +46,13 @@
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Number</td>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Time</td>
         </tr>
+        {% for t in times%}
         <tr>
-          <td style="border-bottom:1px dashed #cccccc">1</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time1}}</td>
+          <td style="border-bottom:1px dashed #cccccc">{{forloop.counter}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{t.time}}</td>
         </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">2</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time2}}</td>
-        </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">3</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time3}}</td>
-        </tr>
+        {% endfor %}
+
        
       </tbody></table>
 
@@ -70,7 +65,7 @@
                 <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;border-bottom:1px solid #cccccc;padding:0 0 15px 0" align="left">Payment Details</td>
               </tr>
               <tr>
-                <td colspan="2" style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;width:140px;padding:10px 0 0 0">Discover ending in ****-4671</td>
+                <td colspan="2" style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;width:140px;padding:10px 0 0 0">Discover ending in ****-{{4671}}</td>
               </tr>
             </tbody></table>
           </td>

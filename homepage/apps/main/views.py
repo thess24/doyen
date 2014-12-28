@@ -469,14 +469,21 @@ def call_hook(request):
 				subject="Investor Doyen - Talk Completed!",
 				body=None,
 				to=talk.expert.email, 
-				html_path="doyen_email/user_request_notify.html"
+				html_path="doyen_email/expert_payment.html"
 			)
 
 		send_html_email(c, 
 				subject="Investor Doyen - Please Rate!",
 				body=None,
 				to=talk.user.email, 
-				html_path="doyen_email/user_request_notify.html"
+				html_path="doyen_email/user_rate_expert.html"
+			)
+
+		send_html_email(c, 
+				subject="Investor Doyen - Invoice",
+				body=None,
+				to=talk.user.email, 
+				html_path="doyen_email/user_invoice.html"
 			)
 		
 	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0 and not talk.time_ended:
@@ -488,14 +495,21 @@ def call_hook(request):
 				subject="Investor Doyen - Talk Completed!",
 				body=None,
 				to=talk.expert.email, 
-				html_path="doyen_email/user_request_notify.html"
+				html_path="doyen_email/expert_payment.html"
 			)
 
 		send_html_email(c, 
 				subject="Investor Doyen - Please Rate!",
 				body=None,
 				to=talk.user.email, 
-				html_path="doyen_email/user_request_notify.html"
+				html_path="doyen_email/user_rate_expert.html"
+			)
+
+		send_html_email(c, 
+				subject="Investor Doyen - Invoice",
+				body=None,
+				to=talk.user.email, 
+				html_path="doyen_email/user_invoice.html"
 			)
 
 	talk.save()
@@ -628,13 +642,15 @@ def review(request, talkid):
 	#    or note that there needs to be a card on file and dont let submit
 	talk = Talk.objects.get(id=talkid)
 
+	times = TalkTime.objects.filter(talk=talk)
+
 	if request.method == 'POST':
 		if 'order' in request.POST:
 			talk.requested = True
 			talk.save()
 
 			## email out
-			c = {'talk':talk}
+			c = {'talk':talk, 'times': times}
 			send_html_email(c, 
 					subject="Investor Doyen - You requested a talk",
 					body=None,
