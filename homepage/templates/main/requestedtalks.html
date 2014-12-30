@@ -27,7 +27,7 @@
 
   <div class='row'>
     <div class='col-md-12'>
-          <h1 id='mainheader'>Requested Appointments</h1>
+          <h3 id='mainheader'>Requested Appointments</h3>
     </div>
   </div>
 </div>
@@ -58,6 +58,62 @@
 <div class='row'>No requests at this time</div>
 
 {% endfor %}
+
+
+
+
+<div class="page-header">
+  <div class='row'>
+    <div class='col-md-12'>
+          <h3 id='mainheader'>History</h3> 
+    </div>
+  </div>
+</div>
+
+
+  <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Time</th>
+            <th>Call Length</th>
+            <th class='right'>Cost</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+{% for t in talks%}
+
+          <tr>
+            <td>{{t.user.last_name}}, {{t.user.first_name}}</td>
+            <td>{{t.time}}</td>
+            <td>{{t.call_length}} mins</td>
+            <td class='right'>Cost</td>
+            <td>
+              {% if t.completed %}
+              <span class='label label-warning'>Completed</span>
+              {% elif t.requested %}
+              <span class='label label-info'>Requested</span>
+              {% elif t.accepted_at %}
+              <span class='label label-success'>Accepted</span>
+              {% elif t.cancelled_at %}
+              <span class='label label-danger'>Cancelled</span>
+              {% endif %}
+            </td>
+            <td>
+              <button class='btn btn-sm' type='submit'>More</button>
+            </td>
+          </tr>
+{% empty %} 
+      <tr>
+      <td>None</td> 
+      </tr>
+{% endfor %}
+
+        </tbody>
+      </table>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

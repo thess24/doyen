@@ -18,7 +18,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.forms.models import modelformset_factory
 from taggit.models import Tag
-
+from django.contrib import messages
 
 
 
@@ -94,17 +94,16 @@ def tagsearch(request,tags):
 
 def requesttalk(request,expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
-	requestform = TalkForm()
-	talkformset = TalkTimeForm()
+	requestform = TalkForm(prefix='requestform',)
+	talktimeform = TalkTimeForm(prefix='talktimeform',)
 
 	if request.method=='POST':
-	# make ajax form here, also make sure user signed up
 		if 'requestform' in request.POST:
-			form = TalkForm(request.POST)
-			talktimeform = TalkTimeForm(request.POST)
+			requestform = TalkForm(request.POST,prefix='requestform')
+			talktimeform = TalkTimeForm(request.POST, prefix='talktimeform')
 
-			if form.is_valid():
-				instance = form.save(commit=False)
+			if requestform.is_valid():
+				instance = requestform.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
 				instance.price = expert.price
@@ -119,21 +118,25 @@ def requesttalk(request,expertid):
 
 
 				return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
-	
-	context = {'expert':expert,'requestform':requestform, 'talkformset':talkformset}
+
+
+	context = {'expert':expert,'requestform':requestform, 'talktimeform':talktimeform}
 	return render(request, 'main/requesttalk.html',context)
 
 
 def expert(request, expertid):
-	currenttime = datetime.now()
+	currenttime = timezone.now()
 
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
 	favorites = Favorite.objects.filter(user=request.user).values_list('expert_id',flat=True)
-	finished_talks = Talk.objects.filter(user=request.user,time__gt=currenttime).exclude(accepted_at=None)
+	finished_talks = Talk.objects.filter(user=request.user,time__lt=currenttime).exclude(accepted_at=None)
 
+	print finished_talks
 	if request.user.id in finished_talks.values_list('user_id',flat=True):
 		eligible_to_review = True
+		# ratinginstance = Rating.objects.get(user=request.user)
+		# ratingform = RatingForm(instance=ratinginstance)
 	else:
 		eligible_to_review = False
 
@@ -195,8 +198,11 @@ def expertprofile(request):
 				instance.save()
 				form.save_m2m()
 
+				messages.success(request, '''Your profile has successfully been saved.  If this is your first 
+					time submitting your expert information, you will be reviewed by Jon 
+					before your profile goes online!''')
 
-				return HttpResponseRedirect(reverse('apps.main.views.editsettings', args=()))
+				return HttpResponseRedirect(reverse('apps.main.views.expertprofile', args=()))
 
 	context= {'expert':expert, 'form':form}
 	return render(request, 'main/expertprofile.html', context)	
@@ -246,14 +252,14 @@ def favorites(request):
 @login_required
 def talks(request):
 	# only times for future
-	# revise for fewer queries
 	# talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
-	talks = Talk.objects.filter(user=request.user).exclude(accepted_at=None)
-	# talks = Talk.objects.filter(user=request.user, accepted=True)
-	reqtalks = Talk.objects.filter(user=request.user)
-	# import ipdb; ipdb.set_trace()
 
-	context = {'talks':talks, 'reqtalks':reqtalks}
+	talks = Talk.objects.filter(user=request.user)
+	
+	upcomingtalks = talks.filter(user=request.user,time__gt=datetime.now())
+
+
+	context = {'talks':talks, 'upcomingtalks':upcomingtalks}
 	return render(request, 'main/talks.html', context)	
 
 
@@ -261,7 +267,8 @@ def talks(request):
 @login_required
 def talkrequests(request):
 	expert = get_object_or_404(ExpertProfile, user=request.user)
-	reqtalks = Talk.objects.filter(expert = request.user,requested=True)
+	talks = Talk.objects.filter(expert = request.user)
+	reqtalks = talks.filter(requested=True)
 	talktimes = TalkTime.objects.filter(talk__in=reqtalks)
 	# import ipdb; ipdb.set_trace()
 	talkreplyform = TalkReplyForm()
@@ -368,7 +375,7 @@ def talkrequests(request):
 				return HttpResponseRedirect(reverse('apps.main.views.talkrequests', args=()))	
 
 
-	context = {'reqtalks':reqtalks , 'talkreplyform': talkreplyform, 'talktimes':talktimes}
+	context = {'reqtalks':reqtalks , 'talkreplyform': talkreplyform, 'talktimes':talktimes, 'talks':talks}
 	return render(request, 'main/requestedtalks.html', context)	
 
 

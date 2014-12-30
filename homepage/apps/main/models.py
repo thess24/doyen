@@ -69,7 +69,7 @@ class Talk(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
 	room = models.CharField(max_length=100,blank=True,null=True)
-	message = models.TextField(max_length=500, blank=True, null=True)
+	message = models.TextField(max_length=500, blank=True, null=True)  # make mandatory
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
 	time_estimated = models.IntegerField(default=0)
 
@@ -210,9 +210,9 @@ class TalkForm(ModelForm):
 	class Meta:
 		model = Talk
 		fields = ['message']
-		# widgets = {
-		# 	'name': Textarea(attrs={'class':'form-control'}),
-		# }
+		widgets = {
+			'message': forms.Textarea(attrs={'rows':5, 'cols':15, 'class':'form-control'}),
+		}
 
 	# def __init__(self, *args, **kwargs):
 	# 	super(TalkForm, self).__init__(*args, **kwargs)
@@ -227,9 +227,9 @@ class TalkForm(ModelForm):
 	# 	)
 
 class TalkTimeForm(forms.Form):
-    time1 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
-    time2 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
-    time3 = forms.DateTimeField(widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
+    time1 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
+    time2 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
+    time3 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
 
 
 

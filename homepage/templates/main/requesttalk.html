@@ -21,9 +21,15 @@
 	<div class='col-md-12'>
 		<div class="page-header">
 
+			<div class="progress">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
+			    1/3
+			  </div>
+			</div>
+
 		  <div class='row'>
 		    <div class='col-md-12'>
-		          <h1 id='mainheader'>Schedule Call</h1>
+		          <h1 id='mainheader'>Schedule Appointment</h1>
 		    </div>
 		  </div>
 		</div> 
@@ -31,16 +37,50 @@
 
 {% if user.is_authenticated %}
 
-	<form method='post'> {% csrf_token %}
-		<div>
+		<form class="form-horizontal" method='post'>{% csrf_token %}
+			{{ requestform.non_field_errors }}
+			{{ talkformset.non_field_errors }}
+		  <div class="form-group">
+			<label for="{{ requestform.message.id_for_label }}"  class="col-sm-2 control-label">Message:</label>
+		    <div class="col-sm-6">
+	        	{{requestform.message.errors}}
+	        	{{requestform.message}}
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="{{talktimeform.talk1.id_for_label}}" class="col-sm-2 control-label">Time 1</label>
+		    <div class="col-sm-3">
+		      {{talktimeform.time1.errors}}
+		      {{talktimeform.time1}}
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="{{talktimeform.talk2.id_for_label}}" class="col-sm-2 control-label">Time 2</label>
+		    <div class="col-sm-3">
+		      {{talktimeform.time2.errors}}
+		      {{talktimeform.time2}}
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="{{talktimeform.talk3.id_for_label}}" class="col-sm-2 control-label">Time 3</label>
+		    <div class="col-sm-3">
+		      {{talktimeform.time3.errors}}
+		      {{talktimeform.time3}}
+		    </div>
+		  </div>
 
-        {{requestform}}
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		<button type='submit' name='requestform' class='btn btn-primary'>Submit</button>
+		    </div>
+		  </div>
 
-        {{talkformset}}
+<!-- <textarea class="form-control" rows="3" id="id_message" maxlength="500" name="message"></textarea> -->
+
+        {{talkformset.talk1}}
         
 		</div>
 		<br>
-		<button type='submit' name='requestform' class='btn btn-lg btn-primary'>Submit</button>
 	</form>
 
 {% else %}

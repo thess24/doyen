@@ -107,13 +107,13 @@
           <h1>Expert Investment Advice, When You Need It</h1>
           <ul class="list-inline">
             <li>
-              <a href="#" class="btn btn-custom">
+              <a href="{% url 'expertfind' %}" class="btn btn-custom">
                 <i class="fa fa-cloud-download"></i>
                 Browse Investment Experts
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn-custom-border">
+              <a href="/accounts/signup" class="btn btn-custom-border">
                 <i class="fa fa-align-left"></i>
                 Sign Up
               </a>
@@ -651,33 +651,26 @@
         <img src="{{STATIC_URL}}img/logo_small.png" style='width:150px' alt='footer logo'>
         <!-- end logo footer -->
         <p>
-          Lorem ipsum dolor sit amet, 
-          consectetur adipiscing elit. Aliquam 
-          sem, nec iaculis nulla.
+          Expert investment Advice.
+          Now.
         </p>
       </div>
 
       <div class="col-md-2 col-md-offset-1 col-sm-3">
-        <h4>Sample Links</h4>
+        <h4>Links</h4>
         <div class="underline-small"></div>
         <ul>
           <li>
             <a href="#">About us</a>
           </li>
           <li>
-            <a href="#">
-            Jobs
-            <span class="jobs">We're hiring!</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">Plans &amp; Pricing</a>
+            <a href="{% url 'expertfind' %}">Find an Expert</a>
           </li>
           <li>
             <a href="#">Privacy Policy</a>
           </li>
           <li>
-            <a href="#">Terms &amp; Condition</a>
+            <a href="{% url 'tos' %}">Terms &amp; Condition</a>
           </li>
         </ul>
       </div>
@@ -686,11 +679,11 @@
         <h4>Reach out to us!</h4>
         <div class="underline-small"></div>
         <ul>
-          <li>Lamap</li>
-          <li>Address</li>
-          <li>Phonenumber</li>
+          <li>Investor Doyen</li>
+          <li>Des Moines, IA</li>
+          <!-- <li>xxx-xxxx</li> -->
           <li>
-            <a href="mailto:info@yourdomain.com">info@domain.com</a>
+            <a href="mailto:admin@investordoyen.com<">admin@investordoyen.com</a>
           </li>
         </ul>
       </div>

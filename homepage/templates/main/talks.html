@@ -23,33 +23,6 @@
 		color: rgb(220, 0, 0);
 	}
 
-/*	.voicebox{
-	    display: block;
-	    margin-top: 10px;
-	    border: 1px solid #d9d9d9;
-	    padding: 10px;
-	    border-radius: 4px;
-	    font-size: 12px;
-	    line-height: 21px;
-	    color: #606060;
-	    position: relative;
-	    background: #f7f7f7;
-	    text-decoration: none;
-	 }
-
-	 .voicebox::before{
-	 	top: -10px;
-		left: 21px;
-		height: 0;
-		width: 0;
-		border-color: transparent;
-		border-style: solid;
-		border-width: 5px;
-		border-bottom-color: #f7f7f7;
-		z-index: 2;
-		display: block;
-		position: absolute;
-		}*/
 
 		.bubble {
 		font-size: 12px;
@@ -109,7 +82,7 @@
 			    </div>
 			  </div>
 			</div>
-	{% for t in talks%}
+	{% for t in upcomingtalks%}
 
 			<div class="media">
 			  <a class="media-left" href="#">
@@ -127,60 +100,15 @@
 			  </div>
 			</div>
 
-			{% if talk.reply_message %}
-			<div class='bubble'>{{talk.reply_message}}</div>
+			{% if t.reply_message %}
+			<div class='bubble'>{{t.reply_message}}</div>
 			{% endif %}
 
 	{% empty %} 
-		<div>None</div>
+		<div>No upcoming talks</div>
 	{% endfor %}
 
 
-	<br> <!-- break btwn upcoming and history -->
-
-			<div class="page-header">
-			  <div class='row'>
-			    <div class='col-md-12'>
-			          <h3 id='mainheader'>History</h3> 
-			    </div>
-			  </div>
-			</div>
-	{% for t in talks%}
-
-	<table class="table">
-	      <thead>
-	        <tr>
-	          <th></th>
-	          <th>Expert</th>
-	          <th>Time</th>
-	          <th></th>
-	        </tr>
-	      </thead>
-	      <tbody>
-
-{% for t in reqtalks%}
-
-	        <tr>
-	          {% if t.cancelled_at%}<td><i class="fa fa-times-circle-o"></i></td>{% endif %}
-	          {% if t.accepted_at%}<td><i class="fa fa-check-circle-o"></i></td>{% endif %}
-	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
-	          <td>{{t.time}}</td>
-	          <td>
-	          	<a href="">More</a>
-	          </td>
-	        </tr>
-{% empty %} 
-			<tr>
-			<td>None</td>	
-			</tr>
-{% endfor %}
-
-	      </tbody>
-	    </table>
-
-	{% empty %} 
-		<div>None</div>
-	{% endfor %}
 
 	</div>
 
@@ -189,7 +117,7 @@
 <div class="page-header">
   <div class='row'>
     <div class='col-md-12'>
-          <h3 id='mainheader'>Completed Appointments</h3> 
+          <h3 id='mainheader'>History</h3> 
     </div>
   </div>
 </div>
@@ -199,22 +127,32 @@
 	        <tr>
 	          <th>Expert</th>
 	          <th>Time</th>
-	          <th>Price Per Minute</th>
 	          <th>Call Length</th>
 	          <th class='right'>Cost</th>
+	          <th>Status</th>
 	          <th></th>
 	        </tr>
 	      </thead>
 	      <tbody>
 
-{% for t in reqtalks%}
+{% for t in talks%}
 
 	        <tr>
 	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
 	          <td>{{t.time}}</td>
-	          <td>$ {{t.price}}</td>
-	          <td>{{t.call_length}} minutes</td>
+	          <td>{{t.call_length}} mins</td>
 	          <td class='right'>Cost</td>
+	          <td>
+	          	{% if t.completed %}
+	          	<span class='label label-warning'>Completed</span>
+          		{% elif t.requested %}
+	          	<span class='label label-info'>Requested</span>
+	          	{% elif t.accepted_at %}
+	          	<span class='label label-success'>Accepted</span>
+	          	{% elif t.cancelled_at %}
+	          	<span class='label label-danger'>Cancelled</span>
+          		{% endif %}
+	          </td>
 	          <td>
 	          	<button class='btn btn-sm' type='submit'>More</button>
 	          </td>
