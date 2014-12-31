@@ -24,7 +24,7 @@ from django.contrib import messages
 
 
 ########### UTILS --make new file
-def generatepin(digits=6, expert=False):
+def generatepin(digits=5, expert=False):
 	'''expert pins start with 1, user pins start with 0'''
 
 	maxpin = int('9'*digits)
@@ -165,10 +165,14 @@ def expert(request, expertid):
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.expert = expert.user
-				instance.user=request.user
+				instance.user = request.user
 				instance.save()
 
+				messages.success(request, 'Review Submitted!')
+				
 				return HttpResponseRedirect(reverse('apps.main.views.expert', args=(expertid)))
+
+			messages.warning(request, "The review didn't work!")
 
 		if 'favorite' in request.POST:
 
@@ -547,6 +551,10 @@ def talkpayment(request, talkid):
 			# check card here to see if it works, then add to talk
 
 			card_id = request.POST.get('card_id','')
+			if not card_id:
+				messages.warning(request,'Please select a card!')
+				return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
+
 			selected_card = user_cards.get(id=card_id)
 
 			''' validate card by updating in stripe and checking 
@@ -567,8 +575,6 @@ def talkpayment(request, talkid):
 					description=request.user.email
 				)
 
-				# print "CUSTOMER "+customer
-
 				newcustomer.stripe_id = customer.id
 				card = customer.cards.retrieve(customer.default_card) #should be the card just submitted
 
@@ -582,7 +588,7 @@ def talkpayment(request, talkid):
 
 			newcard = UserCard(
 							user = request.user,
-							# name = card.name,
+							name = card.name,
 							brand = card.brand,
 							last4 = card.last4,
 							exp_month = card.exp_month,

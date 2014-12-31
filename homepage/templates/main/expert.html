@@ -73,75 +73,21 @@
 /* radio buttons in form */
 
 
-.radiodiv {
-	clear: both;
-	margin: 0 50px;
+.radio-toolbar input[type="radio"] {
+    display:none; 
 }
 
-.radiolabel {
-  width: 200px;
-  border-radius: 3px;
-  border: 1px solid #D1D3D4
+.radio-toolbar label {
+    display:inline-block;
+    background-color:#ddd;
+    padding:4px 11px;
+    font-family:Arial;
+    font-size:16px;
 }
 
-/* hide input */
-input.radio:empty {
-	margin-left: -999px;
+.radio-toolbar input[type="radio"]:checked + label { 
+    background-color:#bbb;
 }
-
-/* style label */
-input.radio:empty ~ label {
-	position: relative;
-	float: left;
-	line-height: 2.5em;
-	text-indent: 3.25em;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-input.radio:empty ~ label:before {
-	position: absolute;
-	display: block;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	content: '';
-	width: 2.5em;
-	background: #D1D3D4;
-	border-radius: 3px 0 0 3px;
-}
-
-/* toggle hover */
-input.radio:hover:not(:checked) ~ label:before {
-	content:'\2714';
-	text-indent: .9em;
-	color: #C2C2C2;
-}
-
-input.radio:hover:not(:checked) ~ label {
-	color: #888;
-}
-
-/* toggle on */
-input.radio:checked ~ label:before {
-	content:'\2714';
-	text-indent: .9em;
-	color: #9CE2AE;
-	background-color: #4DCB6D;
-}
-
-input.radio:checked ~ label {
-	color: #777;
-}
-
-/* radio focus */
-input.radio:focus ~ label:before {
-	box-shadow: 0 0 0 3px #999;
-}
-
 </style>
 
 <link href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -156,6 +102,15 @@ input.radio:focus ~ label:before {
 {% block content %} 
 
 <div class="page-header">
+
+{% if messages %}
+    {% for message in messages %}
+	<div class="alert {% if message.tags %}alert-{{ message.tags }} {% endif %} alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  {{ message }}
+	</div>
+    {% endfor %}
+{% endif %}
 
   <div class='row'>
     <div class='col-md-12'>
@@ -299,46 +254,35 @@ input.radio:focus ~ label:before {
 
 			{% csrf_token %}
 
-			<div id="div_id_title" class="form-group"><label for="id_title" class="control-label col-lg-3 requiredField">Title<span class="asteriskField">*</span></label><div class="controls col-lg-9"><input class="textinput textInput form-control" id="id_title" maxlength="100" name="title" type="text" /> </div></div>
+			<div id="div_id_title" class="form-group"><label for="id_title" class="control-label col-lg-3 requiredField">Title<span class="asteriskField">*</span></label>
+				<div class="controls col-lg-9">
+			{{ratingform.title}}
+				</div>
+			</div>
 
+			
 
+			<div class="radio-toolbar col-lg-9 col-lg-offset-3">
+			   
+			    <input type="radio" id="radio1" name="rating" value="1">
+			    <label for="radio1">1</label>
 
-<!-- <div class='radiodiv'>
-<input type="radio" name="rating" id="radio1" class="radio" checked/>
-<label for="radio1" class='radiolabel'>1</label>
-</div>
+			    <input type="radio" id="radio2" name="rating"value="2">
+			    <label for="radio2">2</label>
 
-<div class='radiodiv'>
-<input type="radio" name="rating" id="radio2" class="radio"/>
-<label for="radio2" class='radiolabel'>2</label>
-</div>
+			    <input type="radio" id="radio3" name="rating" value="3" checked>
+			    <label for="radio3">3</label> 
 
-<div class='radiodiv'>	
-<input type="radio" name="rating" id="radio3" class="radio"/>
-<label for="radio3" class='radiolabel'>3</label>
-</div>
+			     <input type="radio" id="radio4" name="rating" value="4" >
+			    <label for="radio4">4</label> 
 
-<div class='radiodiv'>	
-<input type="radio" name="rating" id="radio4" class="radio"/>
-<label for="radio4" class='radiolabel'>4</label>
-</div>
+			    <input type="radio" id="radio5" name="rating" value="5">
+			    <label for="radio5">5</label> 
+			</div>
 
-<div class='radiodiv'>	
-<input type="radio" name="rating" id="radio5" class="radio"/>
-<label for="radio5" class='radiolabel'>5</label>
-</div> -->
+			
 
-<br>
-
-<div class="btn-group" role="group" aria-label="...">
-	<input type='radio' value='1' class='btn btn-default' name='rating'>
-	<input type='radio' value='2' class='btn btn-default' name='rating'>
-	<input type='radio' value='3' class='btn btn-default' name='rating'>
-	<input type='radio' value='4' class='btn btn-default' name='rating'>
-	<input type='radio' value='5' class='btn btn-default' name='rating'>
-</div>
-
-			<div id="div_id_comment" class="form-group"><label for="id_comment" class="control-label col-lg-3 requiredField">Comment<span class="asteriskField">*</span></label><div class="controls col-lg-9"><textarea class="textarea form-control" cols="40" id="id_comment" name="comment" rows="10"></textarea></div></div>
+			<div id="div_id_comment" class="form-group"><label for="id_comment" class="control-label col-lg-3 requiredField">Comment<span class="asteriskField">*</span></label><div class="controls col-lg-9">{{ratingform.comment}}</div></div>
 
       </div>
       <div class="modal-footer">

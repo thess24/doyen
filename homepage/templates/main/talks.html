@@ -122,7 +122,7 @@
   </div>
 </div>
 
-	<table class="table">
+	<table class="table table-condensed">
 	      <thead>
 	        <tr>
 	          <th>Expert</th>
@@ -137,7 +137,7 @@
 
 {% for t in talks%}
 
-	        <tr>
+	        <tr data-toggle="collapse" data-target="#row{{t.id}}" class="accordion-toggle">
 	          <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
 	          <td>{{t.time}}</td>
 	          <td>{{t.call_length}} mins</td>
@@ -154,9 +154,12 @@
           		{% endif %}
 	          </td>
 	          <td>
-	          	<button class='btn btn-sm' type='submit'>More</button>
+	          	<button class='btn btn-xs' type='submit'>More</button>
 	          </td>
 	        </tr>
+	        <tr>
+            	<td colspan="6" class="hiddenRow"><div id="row{{t.id}}" class="accordian-body collapse">Need to add other data here -- table expand/collapse works</div></td>
+        	</tr>
 {% empty %} 
 			<tr>
 			<td>None</td>	

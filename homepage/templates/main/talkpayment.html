@@ -3,6 +3,15 @@
 
 {% block head %}
 
+
+
+<style type="text/css">
+
+.radiochecked {
+  background: rgb(247, 247, 255);
+}
+
+</style>
 {% endblock %}
  
 
@@ -25,6 +34,15 @@
         </div>
       </div>
 
+{% if messages %}
+    {% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }} {% endif %} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ message }}
+  </div>
+    {% endfor %}
+{% endif %}
+
 		  <div class='row'>
 		    <div class='col-md-12'>
 		          <h1 id='mainheader'>Payment Information</h1>
@@ -42,23 +60,59 @@
       <h3>Card on File</h3>
       <div class="panel panel-default">
         <div class="panel-body">
-            <input type='radio' value='{{default_card.id}}' name='card_id'>
-            <div>{{default_card.brand}}</div>
-            <div>Card: **** **** **** {{default_card.last4}}</div>
-            <div>Expires: {{default_card.exp_month}} / {{default_card.exp_year}}</div>
+            <input type='radio' value='{{default_card.id}}' name='card_id' id='defaultcard'>
+            <label for='defaultcard'>
+              <div>{{default_card.name}}</div>
+              <div>
+                {% if default_card.brand|lower == 'visa'%}
+                <i class="fa fa-cc-visa fa-2x"></i>
+                {% elif default_card.brand|lower == 'mastercard'%}
+                <i class="fa fa-cc-mastercard fa-2x"></i>
+                {% elif default_card.brand|lower == 'discover'%}
+                <i class="fa fa-cc-discover fa-2x"></i>
+                {% elif default_card.brand|lower == 'amex'%}
+                <i class="fa fa-cc-amex fa-2x"></i>
+                {% else %}
+                <i class="fa fa-credit-card fa-2x"></i>
+                {% endif %}
+
+                {{default_card.brand}}
+
+              </div>
+              <div>Card: **** **** **** {{default_card.last4}}</div>
+              <div>Expires: {{default_card.exp_month}} / {{default_card.exp_year}}</div>
+            </label>
         </div>
       </div>
 
-
+ 
 
       <h4>Other Cards</h4>
       {% for c in user_cards %}
             <div class="panel panel-default">
               <div class="panel-body">
-                <input type='radio' value='{{c.id}}' name='card_id'>
-                  <span>{{c.brand}}</span>
+                <input type='radio' value='{{c.id}}' name='card_id' id='othercard{{c.id}}'>
+                <label for='othercard{{c.id}}'>
+                  <span>
+
+                        {% if c.brand|lower == 'visa'%}
+                        <i class="fa fa-cc-visa"></i>
+                        {% elif c.brand|lower == 'mastercard'%}
+                        <i class="fa fa-cc-mastercard"></i>
+                        {% elif c.brand|lower == 'discover'%}
+                        <i class="fa fa-cc-discover"></i>
+                        {% elif c.brand|lower == 'amex'%}
+                        <i class="fa fa-cc-amex"></i>
+                        {% else %}
+                        <i class="fa fa-credit-card"></i>
+                        {% endif %}
+
+                        {{c.brand}}
+
+                  </span>
                   <span> **** **** **** {{c.last4}}</span>
                   <span>Expires: {{c.exp_month}} / {{c.exp_year}}</span>
+                </label>
               </div>
             </div>
           {% empty %}
@@ -93,18 +147,14 @@
         {% endfor %}
       </div>
     </div>
-
-
   </form>
-</div><!-- end row -->
-
 
 
 
 <h3>Add new card
 <small><i class="fa fa-plus" style='color:green' id='addcardbtn'></i></small>
 </h3>
-  <form class="form-horizontal" role="form" id='payment-form' method='post'> {% csrf_token %}
+  <form class="form-horizontal" role="form" id='payment-form' method='post' style='display:none'> {% csrf_token %}
     <span class="payment-errors"></span>
     <fieldset>
       <div class="form-group">
@@ -145,6 +195,13 @@
       </div>
     </fieldset>
   </form>
+
+</div><!-- end row -->
+
+
+
+
+
 
 
   </div>
@@ -198,6 +255,15 @@
     $('#addcardbtn').click(function(){
         $('#payment-form').toggle();
     });
+
+
+
+
+    $(':radio').click(function () {
+        $('input:not(:checked)').parent().removeClass("radiochecked");
+        $('input:checked').parent().addClass("radiochecked");
+    });    
+
 
   </script>
 {% endblock %}

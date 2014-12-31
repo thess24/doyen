@@ -25,10 +25,6 @@ admin.site.register(UserCard)
 # make sure conf call is working
 	# test conference calls and make sure everything is properly logged
 	# check to see if conference is allowed at time, and if one is scheduled w pin
-# show errors on form submits
-	# dont allow submitting empty request -- it still shows up in requests for expert
-	# give error for time request if times not filled out
-	# fix error if no card and try to go to checkout
 # 4. finish email templates
 	# add 'times' to accept, reject, reminder emails
 	# do invoice email template
@@ -37,15 +33,22 @@ admin.site.register(UserCard)
 # 6. approve payments area for jon
 	# make charges actually submit
 
+# make rating expert work via email
+	# unique uuid that is in link that can be used once and goes to url that conatins rating form for expert
 
-# have talks show up for expert to see what they have scheduled
+# make tags area html work
+# make disconnected button do something
+
+
 # put stripe keys in settings and reference in views -- make env variables
-# make rating expert work
 # make hourly rate instead of minute rate
-# notify expert (popup) when their submission goes through to become expert
 # only can review expert once
-# make email with uuid for user to go to and review person
+# stripe connect
+# check image size on upload, resize for smaller pics
 
+
+# requests page html
+# front page
 # redo footer
 # make faq page
 # make tos page
@@ -55,11 +58,10 @@ admin.site.register(UserCard)
 
 
 
+
 ### Nice to have
 
 # favorite via ajax
 # add text email template fallbacks
-# status indicator for checkout process (how many steps left)
 # social auth creds
-# check image size on upload
 # alerts for form submits - bootstrap growl

@@ -255,19 +255,24 @@ class RatingForm(ModelForm):
 		model = Rating
 		exclude = ['user', 'expert', 'date']
 
-	def __init__(self, *args, **kwargs):
-		super(RatingForm, self).__init__(*args, **kwargs)
-		self.helper= FormHelper()
-		self.helper.form_class = 'form-horizontal'
-		self.helper.form_id = 'upload-form'
-		self.helper.label_class = 'col-lg-3'
-		self.helper.field_class = 'col-lg-9'
-		self.helper.layout = Layout(
-				'title' ,
-				'rating' ,
-				'comment' ,
-				# StrictButton('Submit', name='ratingform', type='submit',css_class='btn-primary btn-lg'),
-		)
+		widgets = {
+			'title': forms.TextInput(attrs={'class':'form-control'}),
+			'comment': forms.Textarea(attrs={'rows':5, 'cols':15, 'class':'form-control'}),
+		}
+
+	# def __init__(self, *args, **kwargs):
+	# 	super(RatingForm, self).__init__(*args, **kwargs)
+	# 	self.helper= FormHelper()
+	# 	self.helper.form_class = 'form-horizontal'
+	# 	self.helper.form_id = 'upload-form'
+	# 	self.helper.label_class = 'col-lg-3'
+	# 	self.helper.field_class = 'col-lg-9'
+	# 	self.helper.layout = Layout(
+	# 			'title' ,
+	# 			'rating' ,
+	# 			'comment' ,
+	# 			# StrictButton('Submit', name='ratingform', type='submit',css_class='btn-primary btn-lg'),
+	# 	)
 
 
 # extended form for allauth
