@@ -79,6 +79,41 @@ def index(request):
 	context= {}
 	return render(request, 'main/index.html', context)
 
+def emailtest(request):
+	# delete once tested
+	context= {}
+	return render(request, 'doyen_email/user_invoice.html', context)
+
+
+def rateexpert(request, id): #done
+	talk = get_object_or_404(Talk, room=id)
+
+	try:
+		instance = Rating.objects.get(user=talk.user, expert=talk.expert)
+		form = RatingForm(instance=instance)
+
+	except Rating.DoesNotExist:
+		form = RatingForm()
+
+	if request.method == "POST":
+
+		try:
+			form = RatingForm(request.POST,instance=instance)
+		except:
+			form = RatingForm(request.POST)
+
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.user = talk.user
+			instance.expert = talk.expert
+			instance.save()
+
+			messages.success(request, 'Review Submitted!')
+			
+			return HttpResponseRedirect(reverse('apps.main.views.rateexpert', args=(id,)))
+	context= {'talk':talk,'form':form}
+	return render(request, 'main/rateexpert.html', context)
+
 def editsettings(request):
 	context= {}
 	return render(request, 'main/profileeditmain.html', context)
@@ -86,9 +121,6 @@ def editsettings(request):
 def tagsearch(request,tags):
 	taglist = tags.split("+")
 	experts = ExpertProfile.objects.filter(tags__name__in=taglist).distinct()
-	print taglist
-	# for e in experts:
-	# 	print e.tags.all()
 	context = {'experts':experts, 'areacategory':True}
 	return render(request, 'main/expertfind.html', context)	
 
@@ -129,24 +161,37 @@ def expert(request, expertid):
 
 	expert = get_object_or_404(ExpertProfile, id=expertid)
 	reviews = Rating.objects.filter(expert_id=expertid)
-	favorites = Favorite.objects.filter(user=request.user).values_list('expert_id',flat=True)
-	finished_talks = Talk.objects.filter(user=request.user,time__lt=currenttime).exclude(accepted_at=None)
 
-	print finished_talks
-	if request.user.id in finished_talks.values_list('user_id',flat=True):
-		eligible_to_review = True
-		# ratinginstance = Rating.objects.get(user=request.user)
-		# ratingform = RatingForm(instance=ratinginstance)
-	else:
+	if request.user.is_authenticated():
+		favorites = Favorite.objects.filter(user=request.user).values_list('expert_id',flat=True)
+		finished_talks = Talk.objects.filter(user=request.user,time__lt=currenttime).exclude(accepted_at=None)
+
+		if request.user.id in finished_talks.values_list('user_id',flat=True):
+			eligible_to_review = True
+			try:
+				ratinginstance = Rating.objects.get(user=request.user)
+				ratingform = RatingForm(instance=ratinginstance)
+			except Rating.DoesNotExist:
+				ratingform = RatingForm()
+
+		else:
+			eligible_to_review = False
+			ratingform = RatingForm()
+
+		requestform = TalkForm()
+
+	else:  # guest user
 		eligible_to_review = False
-
-
-	requestform = TalkForm()
-	ratingform = RatingForm()
+		ratingform = RatingForm()
+		requestform = TalkForm()
+		favorites = []
+		finished_talks = []
 
 
 	if request.method=='POST':
-	# make ajax form here, also make sure user signed up
+		if not request.user.is_authenticated():
+			raise Http404 # only for backup -- will be handled on frontend
+
 		if 'requestform' in request.POST:
 			form = TalkForm(request.POST)
 			if form.is_valid():
@@ -160,8 +205,11 @@ def expert(request, expertid):
 		if 'ratingform' in request.POST:
 			if not eligible_to_review:
 				raise Http404
+			try:
+				form = RatingForm(request.POST,instance=ratinginstance)
+			except:
+				form = RatingForm(request.POST)
 
-			form = RatingForm(request.POST)
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.expert = expert.user
@@ -233,7 +281,6 @@ def expertfindcategory(request, category):
 	else:
 		favorites = []
 
-	# import ipdb; ipdb.set_trace()
 
 	# for e in experts:
 	# 	print e.tags.all()
@@ -255,12 +302,10 @@ def favorites(request):
 
 @login_required
 def talks(request):
-	# only times for future
-	# talks = Talk.objects.filter(user=request.user,time__gt=datetime.now()).exclude(accepted_at=None)
 
 	talks = Talk.objects.filter(user=request.user)
 	
-	upcomingtalks = talks.filter(user=request.user,time__gt=datetime.now())
+	upcomingtalks = talks.filter(user=request.user,time__gt=timezone.now())
 
 
 	context = {'talks':talks, 'upcomingtalks':upcomingtalks}
@@ -274,7 +319,6 @@ def talkrequests(request):
 	talks = Talk.objects.filter(expert = request.user)
 	reqtalks = talks.filter(requested=True)
 	talktimes = TalkTime.objects.filter(talk__in=reqtalks)
-	# import ipdb; ipdb.set_trace()
 	talkreplyform = TalkReplyForm()
 
 	if request.method=='POST':
@@ -282,8 +326,6 @@ def talkrequests(request):
 
 		reqinstance = reqtalks.get(id=reqid)
 		talk = reqinstance	
-		# reqinstance = reqtalks.get(id=reqid)
-		# talk = Talk.objects.get(id=reqid)
 		times = TalkTime.objects.filter(talk=talk)
 
 		if 'acceptform' in request.POST:
@@ -295,13 +337,12 @@ def talkrequests(request):
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.cancelled_at = None
-				instance.accepted_at = datetime.now()
+				instance.accepted_at = timezone.now()
 				instance.requested = False
 				instance.price = expert.price
 				instance.room = uuid.uuid4()
 				instance.save()
 
-				# whats going on here?
 				expertpin = generatepin(expert=True)
 				otherpin = generatepin()
 
@@ -358,7 +399,7 @@ def talkrequests(request):
 			if form.is_valid():
 				instance = form.save(commit=False)
 
-				instance.cancelled_at = datetime.now()
+				instance.cancelled_at = timezone.now()
 				instance.accepted_at = None
 				instance.requested = False
 				instance.price = expert.price
@@ -434,7 +475,7 @@ def process_pin(request):
 
 
 	if talk.expert_count == 1 and talk.user_count >= 1 and not talk.time_started:
-		talk.time_started = datetime.now()
+		talk.time_started = timezone.now()
 
 
 
@@ -461,7 +502,7 @@ def call_hook(request):
 
 	callkey = request.POST.get('CallSid','')
 	callin = CallIn.objects.get(twilio_call_key=callkey)
-	callin.time_ended = datetime.now()
+	callin.time_ended = timezone.now()
 	callin.save()
 
 	talk = callin.talk
@@ -472,7 +513,7 @@ def call_hook(request):
 		talk.user_count-=1
 
 	if talk.expert_count == 0 and talk.time_started and not talk.time_ended:
-		talk.time_ended = datetime.now()
+		talk.time_ended = timezone.now()
 		talk.completed = True
 
 		c = {'talk':talk}
@@ -498,7 +539,7 @@ def call_hook(request):
 			)
 		
 	elif talk.expert_count == 1 and talk.time_started and talk.user_count == 0 and not talk.time_ended:
-		talk.time_ended = datetime.now()
+		talk.time_ended = timezone.now()
 		talk.completed = True
 
 		c = {'talk':talk}
@@ -719,7 +760,7 @@ def chargedashboard(request):
 		# 	# The card has been declined
 		# 	raise Http404
 
-		talk.paid_at = datetime.now()
+		talk.paid_at = timezone.now()
 		talk.save()
 
 

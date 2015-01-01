@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
 
 	url(r'^editsettings/$', views.editsettings, name='editsettings'),
+	url(r'^emailtest/$', views.emailtest, name='emailtest'),
 	url(r'^expertprofile/$', views.expertprofile, name='expertprofile'),
 	url(r'^expert/(?P<expertid>.+)/request/$', views.requesttalk, name='requesttalk'),
 	url(r'^expert/(?P<expertid>.+)/$', views.expert, name='expert'),
@@ -27,6 +28,7 @@ urlpatterns = patterns('',
 	url(r'^invoice/$', views.invoice, name='invoice'),
 
 	url(r'^chargedashboard/$', views.chargedashboard, name='chargedashboard'),
+	url(r'^rateexpert/(?P<id>.+)/$', views.rateexpert, name='rateexpert'),
 
 
 	# twilio views

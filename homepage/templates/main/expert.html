@@ -214,6 +214,7 @@
 			Schedule an Appointment
 		</a>
 
+		{% if request.user.is_authenticated %}
 		<form method="post" >{% csrf_token %}
 			<button class='btn btn-lg' style='width:100%;margin-top:10px' type='submit' name='favorite'>
 				{% if expert.user.id in favorites %}
@@ -225,10 +226,10 @@
 				Favorite
 			</button>
 		</form>
+		{% endif %}
 
 		<div style='padding:0px 30px'>
 			<span class='propricedollarsign'>$</span>
-			<!-- <span class='proprice'>2.00</span> -->
 			<span class='proprice'>2</span>
 			<span class='propricecents'>00</span>
 			<span style='font-weight:bold'> / minute</span>

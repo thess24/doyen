@@ -23,26 +23,22 @@ admin.site.register(UserCard)
 ### Necessary
 
 # make sure conf call is working
-	# test conference calls and make sure everything is properly logged
 	# check to see if conference is allowed at time, and if one is scheduled w pin
 # 4. finish email templates
-	# add 'times' to accept, reject, reminder emails
-	# do invoice email template
-	# do payment email template
-	# do rating email
+	# make sure correct data is passed in
 # 6. approve payments area for jon
 	# make charges actually submit
-
-# make rating expert work via email
-	# unique uuid that is in link that can be used once and goes to url that conatins rating form for expert
 
 # make tags area html work
 # make disconnected button do something
 
 
+#  2 finish email templates
+#  3 call time window
+
+
 # put stripe keys in settings and reference in views -- make env variables
 # make hourly rate instead of minute rate
-# only can review expert once
 # stripe connect
 # check image size on upload, resize for smaller pics
 
@@ -65,3 +61,17 @@ admin.site.register(UserCard)
 # add text email template fallbacks
 # social auth creds
 # alerts for form submits - bootstrap growl
+
+
+## finished templates (besides what is passed in-- so just layout)
+# expertacceptnotify
+# expertreminder
+# useracceptnotify
+# userreminder
+# expertrequestnotify
+# userrequestnotif
+# userrejectnotify
+# userrateexpert
+# userinvoice
+
+

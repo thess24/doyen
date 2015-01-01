@@ -18,14 +18,14 @@
           <td style="font-size:34px;color:#333333;line-height:121%;padding:20px 0 0 0">Hi {{talk.expert}},</td>
         </tr>
         <tr>
-          <td style="font-size:34px;color:#333333;line-height:121%;font-weight:bold">{{talk.user}} requested a talk with you!</td>
+          <td style="font-size:34px;color:#333333;line-height:121%;font-weight:bold">You recieved payment from your recent talk!</td>
         </tr>
         <tr>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:20px 0 20px 0">
-            The talk number is <strong>{{talk.id}}</strong> placed on {{talk.created}}</td>
+            Talk number: <strong>{{talk.id}}</strong> placed on {{talk.created}}</td>
           </tr>
           <tr>
-            <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:10px 10px 10px 10px;background-color:#fbf7e1" align="center">{{talk.desc}} this is the description for the talk t jlasdk fj;as djf ipojasd fj;lk;wehf;akshdf;oiwqhejas;ld f ;as dfjl; asdjf ;als dja; flj a;sdjf;laksdj f;qweh f;as df;laksj df;hasd fh</td>
+            <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:10px 10px 10px 10px;background-color:#fbf7e1" align="center">You made {{talk.cost}} from you call with {{talk.user}}</td>
           </tr>
         </tbody></table></td></tr>
       </tbody></table>
@@ -37,40 +37,27 @@
 
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
-          <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;padding:40px 0 0 0" align="left" valign="bottom">Requested Times</td>
-          <td style="font-size:13px;color:#333333;line-height:117%;font-weight:bold;padding:40px 0 0 0" align="left" valign="bottom"><a href="" style="color:#0185c6;text-decoration:none" target="_blank">Click here to Accept/ Decline</a></td>
+          <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;padding:40px 0 0 0" align="left" valign="bottom">Call Info</td>
+          <!-- <td style="font-size:13px;color:#333333;line-height:117%;font-weight:bold;padding:40px 0 0 0" align="left" valign="bottom"><a href="" style="color:#0185c6;text-decoration:none" target="_blank">View Status</a></td> -->
         </tr>
       </tbody></table>
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Number</td>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Time</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Length</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Price</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Total Cost</td>
         </tr>
         <tr>
-          <td style="border-bottom:1px dashed #cccccc">1</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time1}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.time}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.length}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.price}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.cost}}</td>
         </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">2</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time2}}</td>
-        </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">3</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time3}}</td>
-        </tr>
-       
+
       </tbody></table>
 
-
-
-      <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
-        <tbody><tr>
-          <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;border-bottom:1px solid #cccccc;padding:40px 0 15px 0" align="left">So What's Next?</td>
-        </tr>
-        <tr>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:20px 0 0 0">You have 3 days from <span class="il">purchase</span> to make any changes to your order. <a href="" style="color:#0185c6;text-decoration:none" target="_blank">Edit Your Details</a></td>
-        </tr>
-      </tbody></table>							</td>
+						</td>
     </tr>
   </tbody></table>
   

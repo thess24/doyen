@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+
+<style type="text/css">
+
+.radio-toolbar{
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.radio-toolbar input[type="radio"] {
+    display:none; 
+}
+
+.radio-toolbar label {
+    display:inline-block;
+    background-color:#ddd;
+    padding:4px 11px;
+    font-family:Arial;
+    font-size:16px;
+}
+
+.radio-toolbar input[type="radio"]:checked + label { 
+    background-color:#bbb;
+}
+
+
+</style>
+
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+
+
+<div class="row">
+
+	<div class='col-md-12'>
+		<div class="page-header">
+
+{% if messages %}
+    {% for message in messages %}
+	<div class="alert {% if message.tags %}alert-{{ message.tags }} {% endif %} alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  {{ message }}
+	</div>
+    {% endfor %}
+{% endif %}
+
+		  <div class='row'>
+		    <div class='col-md-12'>
+		          <h1 id='mainheader'>Rate {{talk.expert}}</h1>
+		          <h4>from your talk on {{talk.time}}</h4>
+		    </div>
+		  </div>
+		</div>
+
+  </div>
+</div>
+
+
+
+<div class='row'>
+	<div class='col-md-12'>
+		<form method='post'> {% csrf_token %}
+
+			<div id="div_id_title" class="form-group"><label for="id_title" class="control-label col-lg-3 requiredField">Title<span class="asteriskField">*</span></label>
+				<div class="controls col-lg-9">
+			{{form.title.errors}}
+			{{form.title}}
+				</div>
+			</div>
+
+			
+			<div class="radio-toolbar col-lg-9 col-lg-offset-3">
+			{{form.rating.errors}}
+			   
+			    <input type="radio" id="radio1" name="rating" value="1">
+			    <label for="radio1">1</label>
+
+			    <input type="radio" id="radio2" name="rating"value="2">
+			    <label for="radio2">2</label>
+
+			    <input type="radio" id="radio3" name="rating" value="3">
+			    <label for="radio3">3</label> 
+
+			     <input type="radio" id="radio4" name="rating" value="4" >
+			    <label for="radio4">4</label> 
+
+			    <input type="radio" id="radio5" name="rating" value="5">
+			    <label for="radio5">5</label> 
+			</div>
+
+			
+			
+			<div id="div_id_comment" class="form-group"><label for="id_comment" class="control-label col-lg-3 requiredField">Comment<span class="asteriskField">*</span></label>
+				<div class="controls col-lg-9">
+				{{form.comment.errors}}
+				{{form.comment}}
+				</div>
+			</div>
+
+		<div class='col-md-offset-3' >
+			<button class='btn btn-primary' type='submit' style='margin:20px'>Submit</button>
+		</div>
+		
+		</form>
+
+	</div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

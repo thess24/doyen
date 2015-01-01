@@ -11,7 +11,7 @@
 
 
 
-
+ 
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
           <td style="font-size:34px;color:#333333;line-height:121%;padding:20px 0 0 0">Hi {{talk.expert}},</td>
@@ -26,7 +26,7 @@
           <tr>
             <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:10px 10px 10px 10px;background-color:#F7FFF4" align="center">
               <div style='font-weight:bolder'>Call Number: <span style='font-size:20px;color:rgb(50, 224, 21)'>(201) 561-8303</span></div>
-              <div style='font-weight:bolder'>Call Number: <span style='font-size:20px;color:rgb(50, 224, 21)'>{{talk.expert_pin}}</span></div>
+              <div style='font-weight:bolder'>Pin: <span style='font-size:20px;color:rgb(50, 224, 21)'>{{talk.expert_pin}}</span></div>
 
             </td>
           </tr>
@@ -41,15 +41,19 @@
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
           <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;padding:40px 0 0 0" align="left" valign="bottom">Call Info</td>
-          <td style="font-size:13px;color:#333333;line-height:117%;font-weight:bold;padding:40px 0 0 0" align="left" valign="bottom"><a href="" style="color:#0185c6;text-decoration:none" target="_blank">View Status</a></td>
+          <!-- <td style="font-size:13px;color:#333333;line-height:117%;font-weight:bold;padding:40px 0 0 0" align="left" valign="bottom"><a href="" style="color:#0185c6;text-decoration:none" target="_blank">View Status</a></td> -->
         </tr>
       </tbody></table>
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Time</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Estimated Length</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Estimated Price</td>
         </tr>
         <tr>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time1}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.time}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.time}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.time}}</td>
         </tr>
 
       </tbody></table>
@@ -61,7 +65,7 @@
           <td style="font-size:22px;color:#333333;line-height:119%;font-weight:normal;border-bottom:1px solid #cccccc;padding:40px 0 15px 0" align="left">So What's Next?</td>
         </tr>
         <tr>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:20px 0 0 0">You have 3 days from <span class="il">purchase</span> to make any changes to your order. <a href="" style="color:#0185c6;text-decoration:none" target="_blank">Edit Your Details</a></td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:20px 0 0 0">Call <span style='font-size:20px;color:rgb(50, 224, 21)'>(201) 561-8303</span> on {{talk.time}} and speak with {{talk.user}}. We'll handle the rest from there!</td>
         </tr>
       </tbody></table>							</td>
     </tr>

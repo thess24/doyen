@@ -68,7 +68,7 @@ class Talk(models.Model):
 	time = models.DateTimeField(blank=True,null=True)
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
-	room = models.CharField(max_length=100,blank=True,null=True)
+	room = models.CharField(max_length=100,blank=True,null=True)  # uuid for call room / expert rating
 	message = models.TextField(max_length=500, blank=True, null=True)  # make mandatory
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
 	time_estimated = models.IntegerField(default=0)
