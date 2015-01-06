@@ -27,7 +27,7 @@
             <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;padding:10px 10px 10px 10px;background-color:#F7FFF4" align="center">
               <div style='font-weight:bolder'>
 
-                <a href="" style='padding:5px'>Click Here to Rate</a>
+                <a href="{% url 'rateexpert' talk.room%}" style='padding:5px'>Click Here to Rate</a>
 
               </div>
               <div>You will not have to sign in</div>
@@ -51,9 +51,15 @@
       <table cellpadding="0" cellspacing="0" style="border:0 none;border-spacing:0;font-family:Helvetica,Arial,sans-serif,'Open Sans';color:#000000;font-weight:normal;text-align:left;width:600px" align="center">
         <tbody><tr>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Time</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Length</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Price</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Cost</td>
         </tr>
         <tr>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time1}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.time}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.call_length}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.price}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{talk.cost}}</td>
         </tr>
 
       </tbody></table>

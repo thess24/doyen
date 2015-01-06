@@ -22,23 +22,32 @@ admin.site.register(UserCard)
 
 ### Necessary
 
+
+# 2. expert page html
+# 1. front page html
+# 3. talks page html
+# 4. requests page html
+# 5. call window
+# 6. approve payments works
+# 7. stripe keys online in env vars
+# 8. make sure pins generated properly
+
+
+
+
 # make sure conf call is working
 	# check to see if conference is allowed at time, and if one is scheduled w pin
-# 4. finish email templates
-	# make sure correct data is passed in
 # 6. approve payments area for jon
 	# make charges actually submit
 
-# make tags area html work
 # make disconnected button do something
+# fix how pins are generated -- check times
 
 
-#  2 finish email templates
 #  3 call time window
 
 
 # put stripe keys in settings and reference in views -- make env variables
-# make hourly rate instead of minute rate
 # stripe connect
 # check image size on upload, resize for smaller pics
 

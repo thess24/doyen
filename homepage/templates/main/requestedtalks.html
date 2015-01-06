@@ -13,6 +13,10 @@
     padding: 3px;
   }
 
+  .hiddenRow{
+    padding: 0px !important;
+  }
+
 </style>
 {% endblock %}
  
@@ -33,7 +37,64 @@
 </div>
 
 
+<div class='row'>
+<div class='col-md-9'>
+  <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date Submitted</th>
+            <th>Est. Length</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+{% for t in reqtalks %}
+
+          <tr data-toggle="collapse" data-target="#row{{t.id}}" class="accordion-toggle">
+            <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
+            <td>{{t.created}}</td>
+            <td>{{t.call_length}} mins</td>
+            <td>
+              <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}" >Respond</button>
+
+              <button class='btn btn-xs' type='submit'>More</button>
+            </td>
+          </tr>
+          <tr>
+              <td colspan="6" class="hiddenRow">
+                <div id="row{{t.id}}" class="accordian-body collapse">{{t.message}}
+          {% for tt in talktimes %}
+          {% ifequal tt.talk.id t.id%}
+          <div class='timehigh hiddenRow' data-talktimeid="{{tt.id}}">{{ tt.time|date:"N d,  Y -  P T" }}</div>
+          {% endifequal %}
+          {% endfor %}
+                </div>
+              </td>
+          </tr>
+
+{% empty %} 
+      <tr>
+      <td>None</td> 
+      </tr>
+{% endfor %}
+
+        </tbody>
+      </table>
+</div><!-- end col-md-9 -->
+
+
+<div class='col-md-3'></div>
+
+</div>
+<!-- end row -->
+
 {% for r in reqtalks%}
+
+
+
+
 	<div class="media">
 	  <a class="media-left" href="#">
 		<i class="fa fa-phone fa-4x"></i>
@@ -62,58 +123,8 @@
 
 
 
-<div class="page-header">
-  <div class='row'>
-    <div class='col-md-12'>
-          <h3 id='mainheader'>History</h3> 
-    </div>
-  </div>
-</div>
 
 
-  <table class="table">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Time</th>
-            <th>Call Length</th>
-            <th class='right'>Cost</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-
-{% for t in talks%}
-
-          <tr>
-            <td>{{t.user.last_name}}, {{t.user.first_name}}</td>
-            <td>{{t.time}}</td>
-            <td>{{t.call_length}} mins</td>
-            <td class='right'>Cost</td>
-            <td>
-              {% if t.completed %}
-              <span class='label label-warning'>Completed</span>
-              {% elif t.requested %}
-              <span class='label label-info'>Requested</span>
-              {% elif t.accepted_at %}
-              <span class='label label-success'>Accepted</span>
-              {% elif t.cancelled_at %}
-              <span class='label label-danger'>Cancelled</span>
-              {% endif %}
-            </td>
-            <td>
-              <button class='btn btn-sm' type='submit'>More</button>
-            </td>
-          </tr>
-{% empty %} 
-      <tr>
-      <td>None</td> 
-      </tr>
-{% endfor %}
-
-        </tbody>
-      </table>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

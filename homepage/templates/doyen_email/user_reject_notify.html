@@ -46,18 +46,12 @@
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Number</td>
           <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px solid #cccccc;padding:20px 0 15px 20px" align="left">Time</td>
         </tr>
+        {% for t in times %}
         <tr>
-          <td style="border-bottom:1px dashed #cccccc">1</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time1}}</td>
+          <td style="border-bottom:1px dashed #cccccc">{{forloop.counter}}</td>
+          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{t.time}}</td>
         </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">2</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time2}}</td>
-        </tr>
-        <tr>
-          <td style="border-bottom:1px dashed #cccccc">3</td>
-          <td style="font-size:13px;color:#333333;line-height:170%;font-weight:normal;border-bottom:1px dashed #cccccc;padding:15px 0 15px 20px" align="left">{{time3}}</td>
-        </tr>
+        {% endfor %}
        
       </tbody></table>
 

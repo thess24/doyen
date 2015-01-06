@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style type="text/css">
+
+.experttag a{
+	text-decoration: none;
+	color: white;
+}
+
+.categorybox{
+	/*background-color: rgb(248, 244, 255);*/
+	border: 5px white solid;
+/*	height: 60px;
+	line-height: 3;*/
+	font-weight: bold;
+}
+
+
+.horiztaglist{
+	padding:10px;
+}
+
+</style>
+{% endblock %}
+ 
+
+
+
+
+
+{% block content %} 
+
+
+
+<div class="row">
+
+	<div class='col-md-12'>
+		<div class="page-header">
+
+		  <div class='row'>
+		    <div class='col-md-12'>
+		          <h1 id='mainheader'>Category: {{areacategory}}</h1>
+		    </div>
+		  </div>
+		  
+		</div>
+
+
+		<div class='row'>
+			<h5>Tags:</h5>
+			{% for t in tags %}
+			<span class='horiztaglist'><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
+			{% endfor %}
+		</div>
+		<hr>
+
+
+		<br>
+		{% for e in experts %}
+		  <div class="row">
+		  	<div class='col-md-9'>
+			  	<div class="media">
+				  <a class="media-left" href="{% url 'expert' e.id%}">
+				    <img src="{{MEDIA_URL}}{{e.picture}}" style='height:140px' alt="profile image">
+				  </a>
+				  <div class="media-body">
+				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}}</h3>
+				    <h4> {{e.title}}- <small>{{e.location}}</small></h4>
+			        <p>
+			        	{% for t in e.tags.all %}
+			        	<span class="label label-default experttag"><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
+			        	{% endfor %}
+
+			        </p>
+			        <p>{{e.short_bio|truncatechars:250}}</p>
+
+				  </div>
+				</div>
+			</div>
+			<div class='col-md-3'>
+			        <p><a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;margin:60px 0px'>View Profile</a></p>
+			</div>
+
+		  </div>
+		  <hr>
+		{% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+

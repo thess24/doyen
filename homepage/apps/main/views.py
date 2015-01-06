@@ -77,6 +77,7 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 
 def index(request):
 	context= {}
+	# import ipdb; ipdb.set_trace()
 	return render(request, 'main/index.html', context)
 
 def emailtest(request):
@@ -121,8 +122,8 @@ def editsettings(request):
 def tagsearch(request,tags):
 	taglist = tags.split("+")
 	experts = ExpertProfile.objects.filter(tags__name__in=taglist).distinct()
-	context = {'experts':experts, 'areacategory':True}
-	return render(request, 'main/expertfind.html', context)	
+	context = {'experts':experts, 'tags':taglist}
+	return render(request, 'main/tagsearch.html', context)	
 
 def requesttalk(request,expertid):
 	expert = get_object_or_404(ExpertProfile, id=expertid)
@@ -276,7 +277,7 @@ def expertfindcategory(request, category):
 	experts_flat = experts.values_list('id',flat=True)
 	tags = Tag.objects.filter(expertprofile__id__in=experts_flat)
 
-	if request.user.is_authenticated:
+	if request.user.is_authenticated():
 		favorites = Favorite.objects.filter(user=request.user)
 	else:
 		favorites = []
@@ -291,7 +292,7 @@ def expertfindcategory(request, category):
 	# see taglist -- need to list all tags for people in this category
 
 	context = {'experts':experts, 'areacategory':category, 'tags':tags}
-	return render(request, 'main/expertfind.html', context)	
+	return render(request, 'main/expertfindcategory.html', context)	
 
 @login_required
 def favorites(request):
@@ -354,17 +355,17 @@ def talkrequests(request):
 
 
 				## email out
-				c = {'talk':talk, 'acceptedtime':acceptedtime}
+				c = {'talk':talk}
 
 				send_html_email(c, 
-						subject="Investor Doyen - You Accepted a Talk!",
+						subject="Investor Doyen - You Accepted an Appointment!",
 						body=None,
 						to=talk.expert.email, 
 						html_path="doyen_email/expert_accept_notify.html"
 				)
 
 				send_html_email(c, 
-						subject="Investor Doyen - Your Talk was Accepted!",
+						subject="Investor Doyen - Your Appointment was Accepted!",
 						body=None,
 						to=talk.user.email, 
 						html_path="doyen_email/user_accept_notify.html"
@@ -374,7 +375,7 @@ def talkrequests(request):
 				future_time = talk.time - timedelta(days=1)
 
 				send_html_email(c, 
-						subject="Investor Doyen - Reminder for your upcoming talk!",
+						subject="Investor Doyen - Reminder for your upcoming Appointment!",
 						body=None,
 						to=talk.expert.email, 
 						html_path="doyen_email/expert_reminder.html",
@@ -382,7 +383,7 @@ def talkrequests(request):
 				)
 
 				send_html_email(c, 
-						subject="Investor Doyen - Reminder for your upcoming talk!",
+						subject="Investor Doyen - Reminder for your upcoming appointment!",
 						body=None,
 						to=talk.user.email, 
 						html_path="doyen_email/user_reminder.html",
@@ -411,7 +412,7 @@ def talkrequests(request):
 
 				c = {'talk':talk, 'times':times}
 				send_html_email(c, 
-						subject="Investor Doyen - Your talk has been declined",
+						subject="Investor Doyen - Your appointment has been declined",
 						body=None,
 						to=talk.user.email, 
 						html_path="doyen_email/user_reject_notify.html"
@@ -432,6 +433,10 @@ def process_pin(request):
 	callkey = request.POST.get('CallSid','')
 
 	leaddigit = digits_pressed[0]
+	currenttime = timezone.now()
+
+	starttime = currenttime - timedelta(hours=3)
+	endtime = currenttime + timedelta(hours=4)
 
 	if leaddigit == "1":
 		expert = True
@@ -444,6 +449,9 @@ def process_pin(request):
 
 	if expert:
 		talk = Talk.objects.get(expert_pin=digits_pressed) #filter by date
+		# if talk.time > timezone.now()
+
+
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
 
@@ -518,7 +526,7 @@ def call_hook(request):
 
 		c = {'talk':talk}
 		send_html_email(c, 
-				subject="Investor Doyen - Talk Completed!",
+				subject="Investor Doyen - Appointment Completed!",
 				body=None,
 				to=talk.expert.email, 
 				html_path="doyen_email/expert_payment.html"
