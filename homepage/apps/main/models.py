@@ -53,7 +53,10 @@ class ExpertProfile(models.Model):
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
 	category = models.CharField(max_length=100)
-	
+	# stripe_key = models.CharField(max_length=200)
+	# paypal_key = models.CharField(max_length=200)
+	# payment_notes = models.TextField()
+
 	# add stripe connect info?
 
 	tags = TaggableManager()

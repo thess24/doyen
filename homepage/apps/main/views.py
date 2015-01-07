@@ -24,23 +24,22 @@ from django.contrib import messages
 
 
 ########### UTILS --make new file
-def generatepin(digits=5, expert=False):
+def generatepin(talktime, digits=5, expert=False):
 	'''expert pins start with 1, user pins start with 0'''
 
 	maxpin = int('9'*digits)
-	used_pins = ConferenceLine.objects.values_list('pin',flat=True)
+	# used_pins = ConferenceLine.objects.values_list('pin',flat=True)
 
-	# start_range = talktime - timedelta(days=2)
-	# end_range = talktime + timedelta(days=2)
-	# need to pass talktime in here from accepted talk
-	# used_pins = ConferenceLine.objects.filter(time__range=[]).values_list('pin',flat=True)
+	start_range = talktime - timedelta(days=2)
+	end_range = talktime + timedelta(days=2)
+	used_pins = ConferenceLine.objects.filter(time__range=[start_range,end_range]).values_list('pin',flat=True)
 
 	pin = random.randrange(maxpin)
 	if expert: pin = "1"+str(pin)
 	else: pin = "0"+str(pin)
 
 	if pin in used_pins:
-		generatepin()
+		generatepin(talktime,expert=expert)
 
 	return pin
 
@@ -77,7 +76,6 @@ def send_html_email(context, subject=None,body=None,to=None, html_path=None, sen
 
 def index(request):
 	context= {}
-	# import ipdb; ipdb.set_trace()
 	return render(request, 'main/index.html', context)
 
 def emailtest(request):
@@ -333,6 +331,8 @@ def talkrequests(request):
 			talktimeid = request.POST.get('talktimeid','')
 			print talktimeid
 			acceptedtime = times.get(id=talktimeid)
+			talktime = acceptedtime.time
+
 
 			form = TalkReplyForm(request.POST,instance=reqinstance)
 			if form.is_valid():
@@ -344,13 +344,13 @@ def talkrequests(request):
 				instance.room = uuid.uuid4()
 				instance.save()
 
-				expertpin = generatepin(expert=True)
-				otherpin = generatepin()
+				expertpin = generatepin(talktime,expert=True)
+				otherpin = generatepin(talktime)
 
 				talk.expert_pin = expertpin
 				talk.user_pin = otherpin
 
-				talk.time = acceptedtime.time
+				talk.time = talktime
 				talk.save()
 
 
@@ -449,8 +449,10 @@ def process_pin(request):
 
 	if expert:
 		talk = Talk.objects.get(expert_pin=digits_pressed) #filter by date
-		# if talk.time > timezone.now()
-
+		if not starttime < talk.time < endtime:
+			r = twiml.Response()
+			r.say('Call back at the right time')
+			return r
 
 		## if error go back to enter digit prompt
 		talk.expert_count = 1
@@ -460,6 +462,11 @@ def process_pin(request):
 
 	elif user:
 		talk = Talk.objects.get(user_pin=digits_pressed) #filter by date
+		if not starttime < talk.time < endtime:
+			r = twiml.Response()
+			r.say('Call back at the right time')
+			return r
+
 		## if error go back to enter digit prompt
 		talk.user_count+=1
 
@@ -468,18 +475,8 @@ def process_pin(request):
 
 
 	else:
-		## redirect to pin prompt
-		pass
+		gather_pin()
 
-	## check times here and see if its within window
-		# conftime = conference.talk.time
-		# startwindow = 3 hour before call
-		# endwindow = 3 hour after call
-
-		# if conftime >= startwindow and conftime <= endwindow:
-		# 	were good
-		# else:
-		# 	dont do call
 
 
 	if talk.expert_count == 1 and talk.user_count >= 1 and not talk.time_started:
@@ -574,7 +571,6 @@ def call_hook(request):
 
 	talk.save()
 
-	# print request.POST
 
 
 ##### checkout flow #####
@@ -629,8 +625,6 @@ def talkpayment(request, talkid):
 
 			else:  
 				# if they already have a stripe account
-				print newcustomer
-				print newcustomer.stripe_id
 				customer = stripe.Customer.retrieve(newcustomer.stripe_id)
 				card = customer.cards.create(card=token)
 
@@ -904,3 +898,6 @@ def privacypolicy(request):
 
 def faq(request):
 	return render(request, 'main/faq.html')	
+
+def about(request):
+	return render(request, 'main/about.html')	

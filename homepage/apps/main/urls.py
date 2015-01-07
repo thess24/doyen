@@ -3,6 +3,8 @@ from apps.main import views
 from django.conf import settings
 from django.conf.urls.static import static
 from settings.common import MEDIA_ROOT
+from django.views.generic import TemplateView
+
 
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
@@ -36,9 +38,12 @@ urlpatterns = patterns('',
 	url(r'^gather_pin/$', views.gather_pin, name='gather_pin'),
 	url(r'^call_hook/$', views.call_hook, name='call_hook'),
 
+
+	# static views -- TemplateView not used bc I wanted to route in template
 	url(r'^tos/$', views.tos, name='tos'),
 	url(r'^privacypolicy/$', views.privacypolicy, name='privacypolicy'),
 	url(r'^faq/$', views.faq, name='faq'),
+	url(r'^about/$', views.about, name='about'),
 
 
 	(r'^media/(?P<path>.*)$', 'django.views.static.serve',
