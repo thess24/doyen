@@ -42,9 +42,7 @@ admin.site.register(UserCard)
 
 # make disconnected button do something
 # fix how pins are generated -- check times
-
-
-#  3 call time window
+# call time window
 
 
 # put stripe keys in settings and reference in views -- make env variables
@@ -54,10 +52,7 @@ admin.site.register(UserCard)
 
 # requests page html
 # front page
-# redo footer
-# make faq page
-# make tos page
-# make privacy policy page
+
 # dont allow changing request (time) once submitted by accessing url
 # dont allow changing card info once submitted by accessing url
 
@@ -72,15 +67,5 @@ admin.site.register(UserCard)
 # alerts for form submits - bootstrap growl
 
 
-## finished templates (besides what is passed in-- so just layout)
-# expertacceptnotify
-# expertreminder
-# useracceptnotify
-# userreminder
-# expertrequestnotify
-# userrequestnotif
-# userrejectnotify
-# userrateexpert
-# userinvoice
 
 
