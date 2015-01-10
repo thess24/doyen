@@ -38,6 +38,15 @@
                       background-size: cover;
           }
 
+          .getstarted {
+              background-image: url({{STATIC_URL}}img/city-dark.jpg);
+              /*background-attachment: fixed;*/
+              color: white;
+              -webkit-background-size: cover;
+                      background-size: cover;
+              text-align: center;
+          }
+
           .headerpill{
             padding: 5px !important;
             margin: 25px 10px !important;
@@ -144,9 +153,15 @@
     <div class="row">
       <div class="col-md-12">
         <div class="section-head wow fadeIn animated" data-wow-offset="120" data-wow-duration="1.5s">
-          <h1>Features</h1>
-          <p>You can show your app features</p>
+          <h1>Talk with investment experts</h1>
+          <p>only when you need it</p>
           <span class="underline"></span>
+
+          <div>Financial advisors are expensive and probably aren't experts at what you are looking for</div>
+          <div>Online advice can be unreputable and you can't directly ask questions</div>
+          <br>
+          <h3>Doyen experts only make money by giving advice...not by selling you investments</h3>
+          <div>(something like that...also list areas experts help in)</div>
         </div>
       </div>
     </div>
@@ -278,6 +293,101 @@
 </section>
 <!-- end features section -->
 
+
+<div class="divider"></div>
+
+<!-- begin benefits sections -->
+<section class="benefits" id="benefits">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <h1>Benefits</h1>
+          <p><!-- The Investor Doyen Process in 3 easy steps --></p>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class='row'>
+
+        <div class='col-md-3'>
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Asset Allocation
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Equities
+                  </li>
+                </ul>
+        </div>
+
+        <div class='col-md-3'>
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Sector Investing
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Atlernative Investments
+                  </li>
+                </ul>
+        </div>
+
+        <div class='col-md-3'>
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Geopolitics
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Finanical Planning
+                  </li>
+                </ul>
+        </div>
+
+        <div class='col-md-3'>
+                <ul class="extra-features">
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    Fixed Income
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                    More...
+                  </li>
+                </ul>
+        </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- end benefits section -->
+
+<div class="divider"></div>
+
 <!-- begin reviews section -->
 <section class="reviews" id="howitworks">
   <div class="container">
@@ -362,6 +472,45 @@
 <!-- end reviews section -->
 
 <div class="divider"></div>
+
+<!-- begin getstarted sections -->
+<section class="getstarted" id="getstarted">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <h1>Get Started Now</h1>
+          <span class="underline"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-12'>
+
+          <ul class="list-inline">
+            <li>
+              <a href="{% url 'expertfind' %}" class="btn">
+                <i class="fa fa-cloud-download"></i>
+                Browse Investment Experts
+              </a>
+            </li>
+            <li>
+              <a href="/accounts/signup" class="btn">
+                <i class="fa fa-align-left"></i>
+                Sign Up
+              </a>
+            </li>
+          </ul>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- end getstarted section -->
+
 
 <!-- begin services section -->
 <section class="services" id="about">
