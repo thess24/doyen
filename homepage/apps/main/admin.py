@@ -68,4 +68,8 @@ admin.site.register(UserCard)
 
 
 
+########## known bugs
 
+# messages displays when user has logged in - dont want to do that
+# silent error if password length too short
+# 
