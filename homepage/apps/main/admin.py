@@ -60,7 +60,6 @@ admin.site.register(UserCard)
 
 ### Nice to have
 
-# favorite via ajax
 # add text email template fallbacks
 # social auth creds
 # alerts for form submits - bootstrap growl

@@ -80,27 +80,27 @@ span.stars span {
 		<div class='row'>
 			<a href="{% url 'expertfindcategory' 'Energy' %}"> <div class='col-md-3 categorybox'><i class="fa fa-pie-chart"></i>  Asset Allocation</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+			<a href="{% url 'expertfindcategory' 'Equities' %}"> 
 				<div class='col-md-3 categorybox'> <i class="fa fa-line-chart"></i>  Equities</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+			<a href="{% url 'expertfindcategory' 'Sector Investing' %}"> 
 				<div class='col-md-3 categorybox'> <i class="fa fa-laptop"></i>  Sector Investing</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}">
+			<a href="{% url 'expertfindcategory' 'Alternative Investments' %}">
 				<div class='col-md-3 categorybox'> <i class="fa fa-bitcoin"></i> Alternative Investments</div>
 			</a>
 		</div>
 		<div class='row'>
-			<a href="{% url 'expertfindcategory' 'Energy' %}">
+			<a href="{% url 'expertfindcategory' 'Geopolitics' %}">
 				<div class='col-md-3 categorybox'><i class="fa fa-globe"></i>  Geopolitics</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}">
+			<a href="{% url 'expertfindcategory' 'Finanical Planning' %}">
 				<div class='col-md-3 categorybox'><i class="fa fa-list-ol"></i>  Finanical Planning</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}">
+			<a href="{% url 'expertfindcategory' 'Fixed Income' %}">
 				<div class='col-md-3 categorybox'><i class="fa fa-bank"></i>  Fixed Income</div>
 			</a>
-			<a href="{% url 'expertfindcategory' 'Energy' %}"> 
+			<a href="{% url 'expertfindcategory' 'Other' %}"> 
 				<div class='col-md-3 categorybox'><i class="fa fa-area-chart"></i> Other</div>
 			</a>
 		</div>
@@ -123,8 +123,8 @@ span.stars span {
 				    <img src="{{MEDIA_URL}}{{e.picture}}" style='height:140px' alt="profile image">
 				  </a>
 				  <div class="media-body">
-				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}} <span class="stars">{{e.rating_score}}</span></h3>
-				    <div>({{e.rating_count}} reviews)</div>
+				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}} </h3>
+				    
 				    <h4> {{e.title}}- <small>{{e.location}}</small></h4>
 			        <p>
 			        	{% for t in e.tags.all %}
@@ -138,9 +138,13 @@ span.stars span {
 				</div>
 			</div>
 			<div class='col-md-3'>
-			        <p>
+			        <p style= 'padding-top:40px'>
 					
-			        	<a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;margin:60px 0px'>View Profile</a>
+			        	<a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;'>View Profile</a>
+			        	<div style='padding:0px 80px'>
+				        	<span class="stars">{{e.rating_score}}</span>
+				        	<div>({{e.rating_count}} reviews)</div>
+			        	</div>
 			        </p>
 			</div>
 
