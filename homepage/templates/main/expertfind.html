@@ -10,10 +10,7 @@
 }
 
 .categorybox{
-	/*background-color: rgb(248, 244, 255);*/
 	border: 5px white solid;
-/*	height: 60px;
-	line-height: 3;*/
 	font-weight: bold;
 
 	
@@ -35,12 +32,21 @@
 	user-select: none;
 	background-image: none;
 
-
 }
-
 
 .horiztaglist{
 	padding:10px;
+}
+
+span.stars, span.stars span {
+	display: block;
+	background: url({{STATIC_URL}}img/stars.png) 0 -16px repeat-x;
+	width: 80px;
+	height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
 }
 
 </style>
@@ -117,7 +123,8 @@
 				    <img src="{{MEDIA_URL}}{{e.picture}}" style='height:140px' alt="profile image">
 				  </a>
 				  <div class="media-body">
-				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}}</h3>
+				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}} <span class="stars">{{e.rating_score}}</span></h3>
+				    <div>({{e.rating_count}} reviews)</div>
 				    <h4> {{e.title}}- <small>{{e.location}}</small></h4>
 			        <p>
 			        	{% for t in e.tags.all %}
@@ -131,7 +138,10 @@
 				</div>
 			</div>
 			<div class='col-md-3'>
-			        <p><a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;margin:60px 0px'>View Profile</a></p>
+			        <p>
+					
+			        	<a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;margin:60px 0px'>View Profile</a>
+			        </p>
 			</div>
 
 		  </div>
@@ -148,7 +158,30 @@
 
 
 {% block scripts %}
+<script type="text/javascript">
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
 
+
+$(function() {
+
+    $('span.stars').stars();
+
+});
+
+
+
+</script>
 {% endblock %}
 
 

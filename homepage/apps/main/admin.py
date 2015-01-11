@@ -33,7 +33,7 @@ admin.site.register(UserCard)
 # 8. make sure pins generated properly
 
 
-
+ 
 
 # make sure conf call is working
 	# check to see if conference is allowed at time, and if one is scheduled w pin
@@ -46,7 +46,6 @@ admin.site.register(UserCard)
 
 
 # put stripe keys in settings and reference in views -- make env variables
-# stripe connect
 # check image size on upload, resize for smaller pics
 
 

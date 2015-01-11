@@ -4,7 +4,7 @@ from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingFo
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from settings.common import MEDIA_ROOT
-from django.db.models import Sum
+from django.db.models import Sum, Avg, Count
 import stripe
 import requests
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -159,6 +159,7 @@ def expert(request, expertid):
 	currenttime = timezone.now()
 
 	expert = get_object_or_404(ExpertProfile, id=expertid)
+
 	reviews = Rating.objects.filter(expert_id=expertid)
 
 	if request.user.is_authenticated():
@@ -260,7 +261,12 @@ def expertprofile(request):
 
 
 def expertfind(request):
-	experts = ExpertProfile.objects.filter(online=True)
+	experts = ExpertProfile.objects.filter(online=True) \
+		.annotate(rating_score=Avg('user__rating_expert__rating')) \
+		.annotate(rating_count=Count('user__rating_expert__rating'))
+
+
+	# User.objects.annotate(rating_score=Avg('rating_expert__rating'))
 
 	# if request.user.is_authenticated:
 	# 	favorites = Favorite.objects.filter(user=request.user)
