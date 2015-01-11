@@ -28,7 +28,6 @@ def generatepin(talktime, digits=5, expert=False):
 	'''expert pins start with 1, user pins start with 0'''
 
 	maxpin = int('9'*digits)
-	# used_pins = ConferenceLine.objects.values_list('pin',flat=True)
 
 	start_range = talktime - timedelta(days=2)
 	end_range = talktime + timedelta(days=2)
@@ -741,32 +740,34 @@ def invoice(request):
 	return render(request, 'main/invoice.html', context)	
 
 def chargedashboard(request):
-	# need to to limit this to only highest level admins
+	if not request.user.is_superuser:
+		raise Http404
 
 	talks = Talk.objects.filter(completed=True,paid_at=None)
 	if request.method == "POST":
 		talk_id = request.POST.get('talk_id','')  
 		# error handling here
-		talk = Talk.objects.get(id=talk_id)
-		# price = talk.cost * 100
+		talk = talks.get(id=talk_id)
+		cost_in_cents = talk.cost() * 100
 
-		# customer_id = talk.user.userprofile.stripe_id
-		# card_id = talk.user.card
+		customer_id = talk.user.userprofile.stripe_id
+		card_id = talk.card.stripe_id
 
 		# # https://stripe.com/docs/api#create_charge
 		# # should pass customer and card
 
-		# try:
-		# 	charge = stripe.Charge.create(
-		# 		amount= price, # amount in cents, again
-		# 		currency="usd",
-		# 		customer=customer_id,
-		# 		card=card_id,
-		# 		description= talk.expert.get_full_name()
-		# 	)
-		# except stripe.CardError, e:
-		# 	# The card has been declined
-		# 	raise Http404
+		try:
+			charge = stripe.Charge.create(
+				amount= cost_in_cents, # amount in cents
+				currency="usd",
+				customer=customer_id,
+				card=card_id,
+				description= talk.expert.get_full_name()
+			)
+		except stripe.CardError, e:
+			# The card has been declined
+			# send message to screen?
+			raise Http404
 
 		talk.paid_at = timezone.now()
 		talk.save()
@@ -775,124 +776,6 @@ def chargedashboard(request):
 
 	context = {'talks':talks}
 	return render(request, 'main/chargedashboard.html', context)	
-
-def charge(request):
-	# # stripe.api_key = "sk_test_9ucD3dSakYLAivmgxMqOJd0r"  #only for universal, this is a marketplace so every vendor has their own
-
-	# talk = Talk.objects.get(id=)
-	# price = talk.cost * 100
-
-	# customer_id = talk.user.userprofile.stripe_id
-	# card_id = talk.user.card
-
-	## https://stripe.com/docs/api#create_charge
-	## should pass customer and card
-
-	# try:
-	# 	charge = stripe.Charge.create(
-	# 		amount= price, # amount in cents, again
-	# 		currency="usd",
-	# 		customer=customer_id,
-	#		card=card_id,
-	# 		description= talk.expert.get_full_name()
-	# 	)
-	# except stripe.CardError, e:
-	# 	# The card has been declined
-	# 	raise Http404
-
-	return render(request, 'main/invoice.html', context)
-
-
-
-
-	# # Set your secret key: remember to change this to your live secret key in production
-	# # See your keys here https://manage.stripe.com/account
-	# # stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"  #only for universal, this is a marketplace so every vendor has their own
-
-	# token = request.POST.get('stripeToken')
-	# email = request.POST.get('stripeEmail')
-	# try:productid = request.POST['productid']
-	# except: raise Http404  #put better error here
-
-	# product = Product.objects.get(id=productid)
-	# product_price = product.price
-	# product_amt = product_price*100
-	# mycut = product_amt*3/10
-
-	# a,b = UserProfile.objects.get_or_create(user=request.user)
-	# publishkey = product.user_created.userprofile.stripe_publishable_key
-	# accesstoken = product.user_created.userprofile.access_token
-
-
-	# try:
-	# 	charge = stripe.Charge.create(
-	# 		amount=product_amt, 
-	# 		currency="usd",
-	# 		card=token,
-	# 		description=email,
-	# 		application_fee= mycut,
-	# 		api_key = accesstoken,
-	# 	)
-	# except stripe.CardError, e:
-	#   # The card has been declined
-	#   # render error template
-	# 	pass
-
-
-	# # create purchase record
-	# if request.user.is_authenticated():
-	# 	purchase = Purchase(user=request.user, price=product_price, product=product, email=email, downloads=5, uuid=str(uuid.uuid4()))
-	# else:
-	# 	purchase = Purchase(product=product, price=product_price ,email=email, downloads=5, uuid=str(uuid.uuid4()))
-	# purchase.save()
-
-
-	# product.purchases+=1
-	# product.save()
-
-	# # send email
-	# plaintext = get_template('downloademail.txt')
-	# htmly = get_template('downloademail.html')
-	# d = Context({ 'purchase': purchase })
-	# subject, from_email, to = 'Download Link', 'from@example.com', 'thess624@gmail.com'
-	# text_content = plaintext.render(d)
-	# html_content = htmly.render(d)
-	# msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-	# msg.attach_alternative(html_content, "text/html")
-	# msg.send()
-
-
-	# context= {'purchase':purchase}
-	# return render(request, 'main/success.html', context)
-
-
-
-
-	# # Save the customer ID in your database so you can use it later
-	# save_stripe_customer_id(user, customer.id)
-
-	# # Later...
-	# customer_id = get_stripe_customer_id(user)
-
-	# stripe.Charge.create(
-	#     amount=1500, # $15.00 this time
-	#     currency="usd",
-	#     customer=customer_id
-	# )
-
-
-	# Create the charge on Stripe's servers - this will charge the user's card
-	# try:
-	# 	charge = stripe.Charge.create(
-	# 		amount=ticektscents, # amount in cents, again
-	# 		currency="usd",
-	# 		customer=customer_id,
-	# 		# card=token,
-	# 		description="payinguser@example.com"
-	# 	)
-	# except stripe.CardError, e:
-	# 	# The card has been declined
-	# 	raise Http404
 
 
 

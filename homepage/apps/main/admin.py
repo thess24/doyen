@@ -26,7 +26,6 @@ admin.site.register(UserCard)
 # 2. expert page html
 # 5. call window
 # 6. approve payments works
-# 7. stripe keys online in env vars
 # 8. make sure pins generated properly-- check times
 
 
@@ -40,7 +39,6 @@ admin.site.register(UserCard)
 # make disconnected button do something
 
 
-# put stripe keys in settings and reference in views -- make env variables
 # check image size on upload, resize for smaller pics
 
 
@@ -61,4 +59,4 @@ admin.site.register(UserCard)
 
 
 ########## known bugs
-
+# fix dollar sign in expert page - not showing up properly in production

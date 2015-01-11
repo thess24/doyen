@@ -70,9 +70,9 @@
 	          <td>{{t.call_length}} minutes</td>
 	          <td>{{t.time_started}}</td>
 	          <td>{{t.time_ended}}</td>
-	          <td class='right'>Cost</td>
+	          <td class='right'>${{t.cost}}</td>
 	          <td>
-	          	<form method='post'>
+	          	<form method='post'> {% csrf_token %}
 	          		<input type='hidden' value='{{t.id}}' name='talk_id'>
 	          		<button class='btn btn-sm' type='submit'>Collect Payment</button>
 				</form>

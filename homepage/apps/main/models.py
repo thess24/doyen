@@ -53,8 +53,8 @@ class ExpertProfile(models.Model):
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
 	category = models.CharField(max_length=100)
-	# stripe_key = models.CharField(max_length=200)
-	# paypal_key = models.CharField(max_length=200)
+	# stripe_key = models.CharField(max_length=400)
+	# paypal_key = models.CharField(max_length=400)
 	# payment_notes = models.TextField()
 
 	# add stripe connect info?
@@ -120,7 +120,7 @@ class Talk(models.Model):
 			return minutes
 
 	def cost(self):
-		return self.call_length * self.price
+		return self.call_length() * self.price
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)
@@ -217,23 +217,11 @@ class TalkForm(ModelForm):
 			'message': forms.Textarea(attrs={'rows':5, 'cols':15, 'class':'form-control'}),
 		}
 
-	# def __init__(self, *args, **kwargs):
-	# 	super(TalkForm, self).__init__(*args, **kwargs)
-	# 	self.helper= FormHelper()
-	# 	self.helper.form_class = 'form-horizontal'
-	# 	self.helper.form_id = 'upload-form'
-	# 	self.helper.label_class = 'col-lg-3'
-	# 	self.helper.field_class = 'col-lg-9'
-	# 	self.helper.layout = Layout(
-	# 			'message' ,
-	# 			StrictButton('Submit', name='requestform', type='submit',css_class='btn-primary btn-lg'),
-	# 	)
 
 class TalkTimeForm(forms.Form):
     time1 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
     time2 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
     time3 = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'class': 'datetimefield form-control'}))
-
 
 
 class TalkReplyForm(ModelForm):
@@ -262,21 +250,6 @@ class RatingForm(ModelForm):
 			'title': forms.TextInput(attrs={'class':'form-control'}),
 			'comment': forms.Textarea(attrs={'rows':5, 'cols':15, 'class':'form-control'}),
 		}
-
-	# def __init__(self, *args, **kwargs):
-	# 	super(RatingForm, self).__init__(*args, **kwargs)
-	# 	self.helper= FormHelper()
-	# 	self.helper.form_class = 'form-horizontal'
-	# 	self.helper.form_id = 'upload-form'
-	# 	self.helper.label_class = 'col-lg-3'
-	# 	self.helper.field_class = 'col-lg-9'
-	# 	self.helper.layout = Layout(
-	# 			'title' ,
-	# 			'rating' ,
-	# 			'comment' ,
-	# 			# StrictButton('Submit', name='ratingform', type='submit',css_class='btn-primary btn-lg'),
-	# 	)
-
 
 # extended form for allauth
 class SignupForm(forms.Form):

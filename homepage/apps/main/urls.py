@@ -25,7 +25,6 @@ urlpatterns = patterns('',
 	url(r'^favorites/$', views.favorites, name='favorites'),
 	url(r'^tagsearch/(?P<tags>.+)/$', views.tagsearch, name='tagsearch'),
 
-	url(r'^charge/$', views.charge, name='charge'),
 	url(r'^review/(?P<talkid>.+)/$', views.review, name='review'),
 	url(r'^invoice/$', views.invoice, name='invoice'),
 
