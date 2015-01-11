@@ -24,13 +24,10 @@ admin.site.register(UserCard)
 
 
 # 2. expert page html
-# 1. front page html
-# 3. talks page html
-# 4. requests page html
 # 5. call window
 # 6. approve payments works
 # 7. stripe keys online in env vars
-# 8. make sure pins generated properly
+# 8. make sure pins generated properly-- check times
 
 
  
@@ -41,15 +38,12 @@ admin.site.register(UserCard)
 	# make charges actually submit
 
 # make disconnected button do something
-# fix how pins are generated -- check times
-# call time window
 
 
 # put stripe keys in settings and reference in views -- make env variables
 # check image size on upload, resize for smaller pics
 
 
-# requests page html
 # front page
 
 # dont allow changing request (time) once submitted by accessing url
@@ -68,6 +62,3 @@ admin.site.register(UserCard)
 
 ########## known bugs
 
-# messages displays when user has logged in - dont want to do that
-# silent error if password length too short
-# 

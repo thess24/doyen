@@ -20,21 +20,6 @@
 
 	<div class='col-md-12'>
 		<div class="page-header">
-			{% if messages %}
-			    {% for message in messages %}
-				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  {{ message }}
-				</div>
-			    {% endfor %}
-			{% endif %}
-
-			{% if successalert %}
-			<div class="alert alert-success alert-dismissible" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  <strong>Congrats!</strong> Your profile has successfully been saved.  If this is your first time submitting your expert information, you will be reviewed by Jon before your profile goes online!
-			</div>
-			{% endif %}
 
 		  <div class='row'>
 		    <div class='col-md-12'>

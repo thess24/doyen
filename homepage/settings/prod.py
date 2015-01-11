@@ -164,3 +164,4 @@ MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
 ####### STRIPE
 
 STRIPE_API_KEY = environ.get('STRIPE_API_KEY', "")
+ STRIPE_PUBLISHABLE_KEY = 'pk_live_92BO4AmvfgWH16HVtLR5Z9hj'

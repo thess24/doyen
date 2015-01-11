@@ -19,7 +19,7 @@ from django.utils import timezone
 from django.forms.models import modelformset_factory
 from taggit.models import Tag
 from django.contrib import messages
-
+from django.conf import settings
 
 
 
@@ -591,7 +591,7 @@ def talkpayment(request, talkid):
 
 	talktimes = TalkTime.objects.filter(talk=talk)
 
-	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
+	stripe.api_key= settings.STRIPE_API_KEY 
 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
 
 	user_cards = UserCard.objects.filter(user=request.user) # get all cards on file
@@ -654,7 +654,7 @@ def talkpayment(request, talkid):
 
 
 
-	context = {'talk':talk, 'user_cards':user_cards, 'default_card':default_card, 'talktimes':talktimes}
+	context = {'talk':talk, 'user_cards':user_cards, 'default_card':default_card, 'talktimes':talktimes, 'stripekey':settings.STRIPE_PUBLISHABLE_KEY}
 	return render(request, 'main/talkpayment.html', context)
 
 

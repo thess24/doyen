@@ -39,7 +39,7 @@ body{
 		{{form.email.errors}}
 		<p><label for="id_email">E-mail:</label> <input id="id_email" name="email" placeholder="E-mail address" type="email" class='form-control' style='width:300px' data-parsley-trigger="change" required/></p>
 		{{form.password.errors}}
-		<p><label for="id_password1">Password:</label> <input id="id_password1" name="password1" placeholder="Password" type="password" class='form-control' style='width:300px' data-parsley-minlength="5" data-parsley-minlength-message = "Come on! You need to enter at least a 5 character password.. "/></p>
+		<p><label for="id_password1">Password:</label> <input id="id_password1" name="password1" placeholder="Password" type="password" class='form-control' style='width:300px' data-parsley-minlength="6" data-parsley-minlength-message = "Come on! You need to enter at least a 6 character password.. "/></p>
 		<p><label for="id_password2">Password (again):</label> <input id="id_password2" name="password2" placeholder="Password" type="password" class='form-control' style='width:300px' data-parsley-equalto="#id_password1" required/><input id="id_confirmation_key" name="confirmation_key" type="hidden" /></p>
 
 

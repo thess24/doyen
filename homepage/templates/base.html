@@ -69,6 +69,7 @@
 .dropdown-menu-large .dropdown-header {
   color: #428bca;
   font-size: 18px;
+  padding: 5px;
 }
 @media (max-width: 768px) {
   .dropdown-menu-large {
@@ -81,8 +82,8 @@
   .dropdown-menu-large > li:last-child {
     margin-bottom: 0;
   }
-  .dropdown-menu-large .dropdown-header {
-    padding: 3px 15px !important;
+  .dropdown-menu-large {
+    /*padding: 3px 15px !important;*/
   }
 }
 
@@ -115,7 +116,7 @@
               <img src="{{STATIC_URL}}img/logo_small.png" style='width:150px'>
           </a>
           {% endif %}
-        </div>
+        </div> 
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <!-- <li><a href="{% url 'expertfind' %}">Find an Investment Expert</a></li> -->
@@ -125,12 +126,11 @@
               <ul class="dropdown-menu dropdown-menu-large row">
                 <li class="col-sm-3">
                   <ul>
-                    <li class="dropdown-header">Asset Allocation</li>
-                    <li><a href="#">Available glyphs</a></li>
+                    <li class="dropdown-header"><a class='dropdown-header' href="{% url 'expertfindcategory' 'Asset Allocation' %}">Asset Allocation</a></li>
                     <li class="disabled"><a href="#">How to use</a></li>
                     <li><a href="#">Examples</a></li>
                     <li class="divider"></li>
-                    <li class="dropdown-header">Equities</li>
+                    <li><a class='dropdown-header' href="{% url 'expertfindcategory' 'Equities' %}">Equities</a></li>
                     <li><a href="#">Example</a></li>
                     <li><a href="#">Aligninment options</a></li>
                     <li><a href="#">Headers</a></li>
@@ -139,25 +139,25 @@
                 </li>
                 <li class="col-sm-3">
                   <ul>
-                    <li class="dropdown-header">Fixed Income</li>
+                    <li><a  class='dropdown-header'href="{% url 'expertfindcategory' 'Fixed Income' %}">Fixed Income</a></li>
                     <li><a href="#">Basic example</a></li>
                     <li><a href="#">Button toolbar</a></li>
                     <li><a href="#">Sizing</a></li>
                     <li><a href="#">Nesting</a></li>
                     <li><a href="#">Vertical variation</a></li>
                     <li class="divider"></li>
-                    <li class="dropdown-header">Sector Investing</li>
+                    <li><a  class='dropdown-header' href="{% url 'expertfindcategory' 'Sector Investing' %}">Sector Investing</a></li>
                     <li><a href="#">Single button dropdowns</a></li>
                   </ul>
                 </li>
                 <li class="col-sm-3">
                   <ul>
-                    <li class="dropdown-header">Alternative Investments</li>
+                    <li><a  class='dropdown-header' href="{% url 'expertfindcategory' 'Alternative Investments' %}">Alternative Investments</a></li>
                     <li><a href="#">Basic example</a></li>
                     <li><a href="#">Sizing</a></li>
                     <li><a href="#">Checkboxes and radio addons</a></li>
                     <li class="divider"></li>
-                    <li class="dropdown-header">Geopolitics</li>
+                    <li><a  class='dropdown-header' href="{% url 'expertfindcategory' 'Geopolitics' %}">Geopolitics</a></li>
                     <li><a href="#">Tabs</a></li>
                     <li><a href="#">Pills</a></li>
                     <li><a href="#">Justified</a></li>
@@ -165,7 +165,7 @@
                 </li>
                 <li class="col-sm-3">
                   <ul>
-                    <li class="dropdown-header">Financial Planning</li>
+                    <li><a  class='dropdown-header' href="{% url 'expertfindcategory' 'Financial Planning' %}">Financial Planning</a></li>
                     <li><a href="#">Default navbar</a></li>
                     <li><a href="#">Buttons</a></li>
                     <li><a href="#">Text</a></li>
@@ -173,8 +173,7 @@
                     <li><a href="#">Component alignment</a></li>
                     <li><a href="#">Fixed to top</a></li>
                     <li><a href="#">Fixed to bottom</a></li>
-                    <li><a href="#">Static top</a></li>
-                    <li><a href="#">Inverted navbar</a></li>
+                    <li><a  class='dropdown-header' href="{% url 'expertfind' %}">---All---</a></li>
                   </ul>
                 </li>
               </ul>
@@ -222,6 +221,15 @@
 
     <!-- Begin page content -->
     <div class="container">
+      {% if messages %}
+          {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert" style='margin:0px'>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ message }}
+        </div>
+          {% endfor %}
+      {% endif %}
+
     {% block content %}
       <div class="page-header">
         <h1>Sticky footer with fixed navbar</h1>

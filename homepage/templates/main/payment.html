@@ -96,7 +96,7 @@
 <!-- stripe reccomends this in head -->
   <script type="text/javascript">
     // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('pk_test_LuACnwzu1gOIBxwqsbndp2nY');
+    Stripe.setPublishableKey({{stripe_key}});
 
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
@@ -112,7 +112,7 @@
         $form.append($('<input type="hidden" name="stripeToken" />').val(token));
         // and re-submit
         $form.get(0).submit();
-      }
+      } 
     };
 
     jQuery(function($) {

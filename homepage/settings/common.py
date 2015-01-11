@@ -286,7 +286,7 @@ WSGI_APPLICATION = 'wsgi.application'
 
 ########## ALL AUTH
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/expertfind"
 ACCOUNT_EMAIL_REQUIRED = True
 # default settings are very good
 

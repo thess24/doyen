@@ -57,14 +57,20 @@
             <td>{{t.created}}</td>
             <td>{{t.call_length}} mins</td>
             <td>
-              <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}" >Respond</button>
+              <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#exampleModal" data-name="{{t.user.first_name}} {{t.user.last_name}}" data-time="{{t.time}}" data-reqid="{{t.id}}" >Respond</button>
 
               <button class='btn btn-xs' type='submit'>More</button>
             </td>
           </tr>
           <tr>
               <td colspan="6" class="hiddenRow">
-                <div id="row{{t.id}}" class="accordian-body collapse">{{t.message}}
+                <div id="row{{t.id}}" class="accordian-body collapse">Message: 
+                  {% if t.message %}
+                  {{t.message}}
+                  {% else %}
+                  None
+                  {% endif %}
+          
           {% for tt in talktimes %}
           {% ifequal tt.talk.id t.id%}
           <div class='timehigh hiddenRow' data-talktimeid="{{tt.id}}">{{ tt.time|date:"N d,  Y -  P T" }}</div>
@@ -90,7 +96,7 @@
 </div>
 <!-- end row -->
 
-{% for r in reqtalks%}
+<!-- {% for r in reqtalks%}
 
 
 
@@ -111,7 +117,7 @@
 
 	    <p>{{r.message}}</p>
 	    <div class='datesubmitted'>{{r.created}}</div>
-	    <button type="button" class="btn btn-primary modalbtn" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.time}}" data-reqid="{{r.id}}" style='margin: 10px 0px'>Respond</button>
+	    <button type="button" class="btn btn-primary modalbtn" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.created}}" data-reqid="{{r.id}}" style='margin: 10px 0px'>Respond</button>
 	  </div>
 	</div>
 {% empty %}
@@ -119,7 +125,7 @@
 <div class='row'>No requests at this time</div>
 
 {% endfor %}
-
+ -->
 
 
 
@@ -146,14 +152,10 @@
           
               {% csrf_token %}
 
-            <!-- <div><input type='radio' name='talktimeid' class='ttimeid'>1</div> -->
-
-
 
             <label for="id_message" class="control-label" id='message_label'>Message:</label>
             <textarea cols="40" id="id_reply_message" maxlength="500" name="reply_message" rows="7" class='form-control'></textarea>
             <input type='hidden' value='' id='requestid' name='requestid'>
-            <!-- {{talkreplyform}} -->
 
 
           </div>
@@ -185,7 +187,7 @@
 
 $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
-  var talkoptions = button.prevAll('.timehigh')
+  var talkoptions = button.closest('tr').next('tr').find('.timehigh')
   var responsetime = button.data('time') // Extract info from data-* attributes
   var responsename = button.data('name') // Extract info from data-* attributes
   var requestid = button.data('reqid') // Extract info from data-* attributes

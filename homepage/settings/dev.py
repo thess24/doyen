@@ -89,4 +89,5 @@ DEFAULT_FROM_EMAIL = 'testing@example.com'
 
 
 STRIPE_CLIENT_ID = "ca_3tfT9P19AQLjdkOmHXIjG3J4jWUknYKU"
-STRIPE_API_KEY = ""
+STRIPE_API_KEY = "sk_test_9ucD3dSakYLAivmgxMqOJd0r" 
+STRIPE_PUBLISHABLE_KEY = 'pk_test_LuACnwzu1gOIBxwqsbndp2nY'
