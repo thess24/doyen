@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Favorite, UserProfile, ConferenceLine, CallIn, UserCard
+from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Favorite, UserProfile, CallIn, UserCard
 from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -31,11 +31,14 @@ def generatepin(talktime, digits=5, expert=False):
 
 	start_range = talktime - timedelta(days=2)
 	end_range = talktime + timedelta(days=2)
-	used_pins = ConferenceLine.objects.filter(time__range=[start_range,end_range]).values_list('pin',flat=True)
 
 	pin = random.randrange(maxpin)
-	if expert: pin = "1"+str(pin)
-	else: pin = "0"+str(pin)
+	if expert: 
+		pin = "1"+str(pin)
+		used_pins = Talk.objects.filter(time__range=[start_range,end_range]).values_list('expert_pin',flat=True)
+	else: 
+		pin = "0"+str(pin)
+		used_pins = Talk.objects.filter(time__range=[start_range,end_range]).values_list('user_pin',flat=True)
 
 	if pin in used_pins:
 		generatepin(talktime,expert=expert)
@@ -622,7 +625,7 @@ def talkpayment(request, talkid):
 				# create customer if user submits card and doesnt have a stripeid on file
 				customer = stripe.Customer.create(
 					card=token,
-					description=request.user.email
+					email=request.user.email
 				)
 
 				newcustomer.stripe_id = customer.id
@@ -657,45 +660,6 @@ def talkpayment(request, talkid):
 	return render(request, 'main/talkpayment.html', context)
 
 
-
-# def payment(request):
-# 	''' if customer has submitted card before, displays card on file
-# 		if they havent, it gets info from them '''
-
-
-# 	# need to:
-# 	# add card model to store cards for user
-# 	# add card fk for talk to know what card to charge
-# 	# handle errors
-# 	# add button to move to review page, also add selected/inputted card to talk model instance
-# 	# BEFORE PROD - change api key to real one and make env variable
-
-
-# 	stripe.api_key= 'sk_test_9ucD3dSakYLAivmgxMqOJd0r'  #test keys -- change to env var in prod
-# 	newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
-
-# 	if newcustomer.stripe_id:
-# 		customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-# 		card = customer.cards.retrieve(customer.default_card)
-
-# 	if request.method == "POST":
-# 		token = request.POST.get('stripeToken')
-
-# 		customer = stripe.Customer.create(
-# 			card=token,
-# 			description=request.user.email
-# 		)
-
-# 		card = customer.cards.retrieve(customer.default_card)
-
-
-# 		newcustomer, created = UserProfile.objects.get_or_create(user=request.user)
-# 		newcustomer.stripe_id = customer.id
-# 		newcustomer.save()
-
-
-# 	context = {'card':card}
-# 	return render(request, 'main/payment.html', context)	
 
 
 def review(request, talkid):
@@ -756,9 +720,11 @@ def chargedashboard(request):
 		# # https://stripe.com/docs/api#create_charge
 		# # should pass customer and card
 
+		stripe.api_key= settings.STRIPE_API_KEY 
+
 		try:
 			charge = stripe.Charge.create(
-				amount= cost_in_cents, # amount in cents
+				amount=int(cost_in_cents), # amount in cents
 				currency="usd",
 				customer=customer_id,
 				card=card_id,

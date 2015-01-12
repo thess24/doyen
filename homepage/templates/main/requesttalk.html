@@ -47,6 +47,16 @@
 	        	{{requestform.message}}
 		    </div>
 		  </div>
+
+
+		  <div class="form-group">
+			<label for="{{ requestform.time_estimated.id_for_label }}"  class="col-sm-2 control-label">Estimated Length:</label>
+		    <div class="col-sm-3">
+	        	{{requestform.time_estimated.errors}}
+	        	{{requestform.time_estimated}}
+		    </div>
+		  </div>
+
 		  <div class="form-group">
 		    <label for="{{talktimeform.talk1.id_for_label}}" class="col-sm-2 control-label">Time 1</label>
 		    <div class="col-sm-3">
@@ -75,9 +85,6 @@
 		    </div>
 		  </div>
 
-<!-- <textarea class="form-control" rows="3" id="id_message" maxlength="500" name="message"></textarea> -->
-
-        {{talkformset.talk1}}
         
 		</div>
 		<br>

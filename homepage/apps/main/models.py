@@ -32,8 +32,8 @@ class UserCard(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	stripe_id = models.CharField(max_length=200)  
-	picture = models.ImageField(upload_to='profilepics')
+	stripe_id = models.CharField(max_length=200,blank=True,null=True)  
+	picture = models.ImageField(upload_to='profilepics',blank=True,null=True) # make optional
 	default_card = models.ForeignKey(UserCard, blank=True,null=True)
 
 	def __unicode__(self):
@@ -41,6 +41,17 @@ class UserProfile(models.Model):
 
 
 class ExpertProfile(models.Model):
+
+	CATEGORIES = (
+		('Asset Allocation', 'Asset Allocation'),
+		('Equities', 'Equities'),
+		('Fixed Income', 'Fixed Income'),
+		('Sector Investing', 'Sector Investing'),
+		('Alternative Investing', 'Alternative Investing'),
+		('Geopolitics', 'Geopolitics'),
+		('Financial Planning', 'Financial Planning'),
+	)
+
 	user = models.OneToOneField(User)
 	short_bio = models.TextField()  
 	resume = models.TextField()  
@@ -52,12 +63,10 @@ class ExpertProfile(models.Model):
 	location = models.CharField(max_length=100)
 	twitter = models.CharField(max_length=50, blank=True, null=True)
 	linkedin = models.CharField(max_length=50, blank=True, null=True)
-	category = models.CharField(max_length=100)
-	# stripe_key = models.CharField(max_length=400)
-	# paypal_key = models.CharField(max_length=400)
-	# payment_notes = models.TextField()
-
-	# add stripe connect info?
+	category = models.CharField(max_length=100, choices=CATEGORIES)
+	stripe_key = models.CharField(max_length=400, blank=True, null=True)
+	paypal_key = models.CharField(max_length=400, blank=True, null=True)
+	payment_notes = models.TextField(blank=True, null=True)
 
 	tags = TaggableManager()
 
@@ -72,7 +81,7 @@ class Talk(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
 	room = models.CharField(max_length=100,blank=True,null=True)  # uuid for call room / expert rating
-	message = models.TextField(max_length=500, blank=True, null=True)  # make mandatory
+	message = models.TextField(max_length=500)
 	reply_message = models.TextField(max_length=500, blank=True, null=True)
 	time_estimated = models.IntegerField(default=0)
 
@@ -108,6 +117,7 @@ class Talk(models.Model):
 		return True
 
 	def call_length(self):
+		''' in minutes'''
 		start = self.time_started
 		end = self.time_ended
 
@@ -120,7 +130,8 @@ class Talk(models.Model):
 			return minutes
 
 	def cost(self):
-		return self.call_length() * self.price
+		''' cost overall'''
+		return self.call_length() * self.price / 60
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)
@@ -145,17 +156,6 @@ class Rating(models.Model):
 
 	def __unicode__(self):
 		return self.expert.email
-
-
-class ConferenceLine(models.Model):
-	pin = models.CharField(max_length=10)
-	talk = models.ForeignKey(Talk, blank=True, null=True)
-	created_at = models.DateTimeField(auto_now_add=True)
-	expert = models.BooleanField(default=False)
-
-
-	def __unicode__(self):
-		return self.pin    
 
 
 class CallIn(models.Model):
@@ -212,9 +212,10 @@ class ExpertProfileForm(ModelForm):
 class TalkForm(ModelForm):
 	class Meta:
 		model = Talk
-		fields = ['message']
+		fields = ['message', 'time_estimated']
 		widgets = {
 			'message': forms.Textarea(attrs={'rows':5, 'cols':15, 'class':'form-control'}),
+			'time_estimated': forms.TextInput(attrs={'class': 'form-control'})
 		}
 
 

@@ -130,7 +130,6 @@ span.stars span {
 			        	{% for t in e.tags.all %}
 			        	<span class="label label-default experttag"><a href="{% url 'tagsearch' t.name %}">{{t.name}}</a></span>
 			        	{% endfor %}
-
 			        </p>
 			        <p>{{e.short_bio|truncatechars:250}}</p>
 
@@ -142,7 +141,11 @@ span.stars span {
 					
 			        	<a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;'>View Profile</a>
 			        	<div style='padding:0px 80px'>
+			        		{% if e.rating_score %}
 				        	<span class="stars">{{e.rating_score}}</span>
+			        		{% else%}
+				        	<span class="stars">0.01</span>
+			        		{% endif %}
 				        	<div>({{e.rating_count}} reviews)</div>
 			        	</div>
 			        </p>

@@ -53,11 +53,11 @@
 {% for t in reqtalks %}
 
           <tr data-toggle="collapse" data-target="#row{{t.id}}" class="accordion-toggle">
-            <td>{{t.expert.last_name}}, {{t.expert.first_name}}</td>
+            <td>{{t.user.last_name}}, {{t.user.first_name}}</td>
             <td>{{t.created}}</td>
-            <td>{{t.call_length}} mins</td>
+            <td>{{t.time_estimated}} mins</td>
             <td>
-              <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#exampleModal" data-name="{{t.user.first_name}} {{t.user.last_name}}" data-time="{{t.time}}" data-reqid="{{t.id}}" >Respond</button>
+              <button type="button" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#exampleModal" data-name="{{t.user.first_name}} {{t.user.last_name}}" data-time="{{t.created}}" data-reqid="{{t.id}}" >Respond</button>
 
               <button class='btn btn-xs' type='submit'>More</button>
             </td>

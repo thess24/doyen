@@ -160,8 +160,8 @@
       <div class="form-group">
         <label class="col-sm-2 control-label" for="card-holder-name">Name on Card</label>
         <div class="col-sm-5">
-          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
-        </div>
+          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name" data-stripe="name">
+        </div> 
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label" for="card-number">Card Number</label>
@@ -218,7 +218,7 @@
 <!-- stripe reccomends this in head -->
   <script type="text/javascript">
     // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('pk_test_LuACnwzu1gOIBxwqsbndp2nY');
+    Stripe.setPublishableKey("{{stripekey}}");
 
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
