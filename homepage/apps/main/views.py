@@ -336,15 +336,21 @@ def talkrequests(request):
 		times = TalkTime.objects.filter(talk=talk)
 
 		if 'acceptform' in request.POST:
+			talkreplyform = TalkReplyForm(request.POST,instance=reqinstance)
+
 			talktimeid = request.POST.get('talktimeid','')
-			print talktimeid
-			acceptedtime = times.get(id=talktimeid)
-			talktime = acceptedtime.time
+
+			if not talktimeid:
+				talkreplyform.add_error(None,'Please select a time')
+
+			if talkreplyform.is_valid():
+
+				try: acceptedtime = times.get(id=talktimeid)
+				except: raise Http404
+				talktime = acceptedtime.time
 
 
-			form = TalkReplyForm(request.POST,instance=reqinstance)
-			if form.is_valid():
-				instance = form.save(commit=False)
+				instance = talkreplyform.save(commit=False)
 				instance.cancelled_at = None
 				instance.accepted_at = timezone.now()
 				instance.requested = False

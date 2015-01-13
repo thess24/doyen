@@ -27,7 +27,19 @@
 
 {% block content %} 
 
+
+
 <div class="page-header">
+
+{% if talkreplyform.non_field_errors %}
+  <div class="non-field-errors">
+    {% for err in talkreplyform.non_field_errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert" style='margin:0px'>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{err}}
+        </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
   <div class='row'>
     <div class='col-md-12'>
@@ -38,6 +50,7 @@
 
 
 <div class='row'>
+
 <div class='col-md-9'>
   <table class="table table-condensed">
         <thead>
@@ -96,47 +109,13 @@
 </div>
 <!-- end row -->
 
-<!-- {% for r in reqtalks%}
-
-
-
-
-	<div class="media">
-	  <a class="media-left" href="#">
-		<i class="fa fa-phone fa-4x"></i>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading">{{r.user.first_name}} {{r.user.last_name}}</h4>
-
-	    <h5>Requests for </h5>
-      {% for tt in talktimes %}
-        {% ifequal tt.talk.id r.id%}
-        <div class='timehigh' data-talktimeid="{{tt.id}}">{{ tt.time|date:"N d,  Y -  P T" }}</div>
-        {% endifequal %}
-      {% endfor %}
-
-	    <p>{{r.message}}</p>
-	    <div class='datesubmitted'>{{r.created}}</div>
-	    <button type="button" class="btn btn-primary modalbtn" data-toggle="modal" data-target="#exampleModal" data-name="{{r.user.first_name}} {{r.user.last_name}}" data-time="{{r.created}}" data-reqid="{{r.id}}" style='margin: 10px 0px'>Respond</button>
-	  </div>
-	</div>
-{% empty %}
-
-<div class='row'>No requests at this time</div>
-
-{% endfor %}
- -->
-
-
-
-
 
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
 
-          <form method="POST" action="{% url 'talkrequests' %}">
+          <form method="POST" action="{% url 'talkrequests' %}" data-parsley-validate>
 
     <div class="modal-content">
       <div class="modal-header">
@@ -183,6 +162,10 @@
 
 
 {% block scripts %}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.6/parsley.min.js"></script>
+
+
 <script type="text/javascript">
 
 $('#exampleModal').on('show.bs.modal', function (event) {
@@ -206,13 +189,11 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   var message_label = modal.find('#formdataarea')
 
   $.each( talkoptions, function(index,value) {
-
     var timeid = value.dataset.talktimeid
     var timetext = value.innerText
-    message_label.prepend("<div class='ttimewrapper'><input type='radio' name='talktimeid' class='ttimeid' value='"+timeid+"'>"+timetext+"</div>")
-
+    message_label.prepend("<div class='ttimewrapper'><input type='radio' name='talktimeid' class='ttimeid' value='"+timeid+"' required>"+timetext+"</div>")
   });
-
+ 
 
 
 

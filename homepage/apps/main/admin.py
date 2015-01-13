@@ -23,8 +23,6 @@ admin.site.register(UserProfile)
 
 ### Necessary
 # 2. expert page html
-# faq page html
-# about us html
 # 5. call window
 # 8. make sure pins generated properly-- check times
 
@@ -47,6 +45,5 @@ admin.site.register(UserProfile)
 
 ########## known bugs
 # fix dollar sign in expert page - not showing up properly in production
-# dont allow accepting "accept time" without selecting a time
 # make sure user gets stripe id when submitting card for first time
 # error handling/alerts for payment not going through
