@@ -26,7 +26,7 @@ admin.site.register(UserProfile)
 # 5. call window
 # 8. make sure pins generated properly-- check times
 
-
+# basic profile update page
 # make sure conf call is working
 	# check to see if conference is allowed at time, and if one is scheduled w pin
 
