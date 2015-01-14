@@ -51,11 +51,20 @@
 
 		  <div class="form-group">
 			<label for="{{ requestform.time_estimated.id_for_label }}"  class="col-sm-2 control-label">Estimated Length:</label>
-		    <div class="col-sm-3">
+		    <div class="col-sm-3" data-container="body" >
 	        	{{requestform.time_estimated.errors}}
 	        	{{requestform.time_estimated}}
 		    </div>
 		  </div>
+
+		  <br>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      Please select three times that work for you to make an appointment -- the expert will pick one that works and get back to you.
+		    </div>
+		  </div>
+
 
 		  <div class="form-group">
 		    <label for="{{talktimeform.talk1.id_for_label}}" class="col-sm-2 control-label">Time 1</label>
@@ -120,7 +129,29 @@
 	    autoclose:true,
 		});
 
+
 	});
+
+
+$(function () {
+
+    $("#id_requestform-time_estimated")
+        .popover({ content: "This is the estimated time the talk will take --  so the expert can plan out his day!",container:'.form-horizontal' })
+        .blur(function () {
+            $(this).popover('hide');
+        });
+
+
+    $("#id_requestform-message")
+        .popover({ content: "If you want to include a message to the expert, do so here.",container:'.form-horizontal' })
+        .blur(function () {
+            $(this).popover('hide');
+        });
+
+
+});
+
+
 </script>
 {% endblock %}
 

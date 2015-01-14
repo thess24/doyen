@@ -133,6 +133,9 @@ class Talk(models.Model):
 		''' cost overall'''
 		return self.call_length() * self.price / 60
 
+	def price_per_minute(self):
+		return self.price / 60
+
 	def __unicode__(self):
 		return '{} - {}'.format(self.id,self.user.email)
 
