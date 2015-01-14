@@ -73,6 +73,9 @@
 
 
 
+	.verifed-social{
+		color: rgb(121, 121, 255);
+	}
 
 /* radio buttons in form */
 
@@ -138,8 +141,22 @@
 			  	<div>{{expert.rating_score}} {{expert.rating_count}}</div>
 			  	
 			  	<div>
-			  		<i class="fa fa-twitter sm-sociallogo" data-toggle="tooltip" data-placement="bottom" title="Verified"></i> 
-			  		<i class="fa fa-linkedin sm-sociallogo" data-toggle="tooltip" data-placement="bottom" title="Verified"></i>
+			  		{% if expert.twitter %}
+				  		<a href="https://twitter.com/{{expert.twitter}}">
+				  			<i class="fa fa-twitter sm-sociallogo verified-social" data-toggle="tooltip" data-placement="bottom" title="Verified"></i> 
+				  		</a>
+				  		{% else %}
+				  		<i class="fa fa-twitter sm-sociallogo"></i> 
+			  		{% endif %}
+
+			  		{% if expert.linkedin %}
+				  		<a href="www.linkedin.com/in/{{expert.linkedin}}/">
+				  			<i class="fa fa-linkedin sm-sociallogo verified-social" data-toggle="tooltip" data-placement="bottom" title="Verified"></i>
+				  		</a>
+				  		{% else %}
+				  		<i class="fa fa-linkedin sm-sociallogo"></i>
+			  		{% endif %}
+
 			  	</div>
 			  	<hr>
 			    <h4 class="media-heading">

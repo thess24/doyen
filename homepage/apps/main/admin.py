@@ -23,23 +23,18 @@ admin.site.register(UserProfile)
 
 ### Necessary
 # 2. expert page html
-# 5. call window
-# 8. make sure pins generated properly-- check times
-
-# basic profile update page
 # explaination text for forms
+	# applying for expert
 
-# make sure conf call is working
-	# check to see if conference is allowed at time, and if one is scheduled w pin
-
+# make so value isnt require for me to reject -- make 2 seperate forms?
 # check image size on upload, resize for smaller pics
+# make pics uniform size 
 # dont allow changing card info once submitted by accessing url
 
 
 
 ######### Nice to have
 # make disconnected button do something
-# add text email template fallbacks
 # social auth creds
 # alerts for form submits - bootstrap growl
 

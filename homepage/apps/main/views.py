@@ -83,7 +83,7 @@ def index(request):
 def emailtest(request):
 	# delete once tested
 	context= {}
-	return render(request, 'doyen_email/user_rate_expert.html', context)
+	return render(request, 'account/email_confirm.html', context)
 
 
 def rateexpert(request, id): #done
@@ -465,10 +465,9 @@ def process_pin(request):
 		talk = Talk.objects.get(expert_pin=digits_pressed) #filter by date
 		if not starttime < talk.time < endtime:
 			r = twiml.Response()
-			r.say('Call back at the right time')
+			r.say('Please call back within a reasonable window for you appointment')
 			return r
 
-		## if error go back to enter digit prompt
 		talk.expert_count = 1
 
 		call = CallIn(talk=talk,twilio_call_key=callkey,expert=True)
@@ -478,10 +477,9 @@ def process_pin(request):
 		talk = Talk.objects.get(user_pin=digits_pressed) #filter by date
 		if not starttime < talk.time < endtime:
 			r = twiml.Response()
-			r.say('Call back at the right time')
+			r.say('Please call back within a reasonable window for you appointment')
 			return r
 
-		## if error go back to enter digit prompt
 		talk.user_count+=1
 
 		call = CallIn(talk=talk,twilio_call_key=callkey)
@@ -489,7 +487,11 @@ def process_pin(request):
 
 
 	else:
-		gather_pin()
+		# should go to another view that says error, then directs to gather_pin()
+		r = twiml.Response()
+		r.say('Sorry, your pin code is invalid. Goodbye.')
+		return r
+		# gather_pin()
 
 
 
