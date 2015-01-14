@@ -83,7 +83,7 @@ def index(request):
 def emailtest(request):
 	# delete once tested
 	context= {}
-	return render(request, 'doyen_email/user_invoice.html', context)
+	return render(request, 'doyen_email/user_rate_expert.html', context)
 
 
 def rateexpert(request, id): #done
