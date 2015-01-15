@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from apps.main.models import ExpertProfile, Talk,TalkTime, Rating, Favorite, UserProfile, CallIn, UserCard
 from apps.main.models import TalkForm, TalkTimeForm, ExpertProfileForm, RatingForm, TalkReplyForm
 from django.contrib.auth.decorators import login_required
@@ -115,6 +115,7 @@ def rateexpert(request, id): #done
 	context= {'talk':talk,'form':form}
 	return render(request, 'main/rateexpert.html', context)
 
+
 def editsettings(request):
 	context= {}
 	return render(request, 'main/profileeditmain.html', context)
@@ -160,7 +161,16 @@ def requesttalk(request,expertid):
 def expert(request, expertid):
 	currenttime = timezone.now()
 
-	expert = get_object_or_404(ExpertProfile, id=expertid)
+	expert = ExpertProfile.objects.filter(online=True,id=expertid) \
+		.annotate(rating_score=Avg('user__rating_expert__rating')) \
+		.annotate(rating_count=Count('user__rating_expert__rating'))
+
+	if not expert:
+		errortext = 'This expert does not exist'
+		return render(request, 'main/error.html', {'errortext': errortext})
+
+
+	expert = expert[0]
 
 	reviews = Rating.objects.filter(expert_id=expertid)
 
@@ -491,7 +501,7 @@ def process_pin(request):
 		r = twiml.Response()
 		r.say('Sorry, your pin code is invalid. Goodbye.')
 		return r
-		# gather_pin()
+		# return HttpResponseRedirect(reverse('apps.main.views.gather_pin', args=()))
 
 
 
@@ -594,9 +604,8 @@ def talkpayment(request, talkid):
 	talk = Talk.objects.get(id=talkid)
 
 	if not talk.requested:
-		# need to change this to show what error is
-		# this currently stops showing only after expert accepts--should stop after submitted
-		raise Http404
+		errortext = 'You cannot change the payment option after the request has been approved'
+		return render(request, 'main/error.html', {'errortext': errortext})
 
 
 	talktimes = TalkTime.objects.filter(talk=talk)

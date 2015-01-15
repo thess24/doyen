@@ -30,9 +30,8 @@
 	}
 
 	.reviewsheader{
-		background-color: rgb(100, 100, 100);
 		padding: 10px;
-		color: white;
+		border-bottom: 1px black solid;
 	}
 	.commentarea{
 		font-size: .9em;
@@ -64,37 +63,53 @@
 	}
 
 	.taglink{
+		font-size: 1.4em;
+	}
 
+	.taglink:hover{
+		text-decoration: none;
+	}
+
+	.taglabel:hover{
+		background:#042E62
 	}
 
 	.sm-sociallogo{
 		margin: 4px;
 	}
 
-
-
 	.verifed-social{
 		color: rgb(121, 121, 255);
 	}
 
+	#mainheader{
+		margin-top: 0px;
+		font-weight: bold;
+		font-size: 30px;
+	}
+
+	#ratingbox{
+		padding: 20px 50px;
+	}
+
+
 /* radio buttons in form */
 
+	.radio-toolbar input[type="radio"] {
+	    display:none; 
+	}
 
-.radio-toolbar input[type="radio"] {
-    display:none; 
-}
+	.radio-toolbar label {
+	    display:inline-block;
+	    background-color:#ddd;
+	    padding:4px 11px;
+	    font-family:Arial;
+	    font-size:16px;
+	}
 
-.radio-toolbar label {
-    display:inline-block;
-    background-color:#ddd;
-    padding:4px 11px;
-    font-family:Arial;
-    font-size:16px;
-}
-
-.radio-toolbar input[type="radio"]:checked + label { 
-    background-color:#bbb;
-}
+	.radio-toolbar input[type="radio"]:checked + label { 
+	    background-color:#bbb;
+	}
 </style>
 
 <link href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -104,22 +119,13 @@
 
 
 
-
+ 
 
 {% block content %} 
 
-<div class="page-header">
 
 
-  <div class='row'>
-    <div class='col-md-12'>
-          <h1 id='mainheader'>{{expert.user.first_name}} {{expert.user.last_name}}</h1>
-    </div>
-  </div>
-</div>
-
-
-<div class='row'>
+<div class='row' style='padding-top:40px'>
 
 	<div class='col-md-9'>
 		<div class='row'>
@@ -127,19 +133,27 @@
 			  <div class="media-left" href="#">
 			    <img src="{{MEDIA_URL}}{{expert.picture}}" alt="..." class='propic'>
 
-			    <div class='labelarea'>
-				    {% for t in expert.tags.all%} 
-				    <a href="{% url 'tagsearch' t.name %}" class='taglink'><span class="label label-default">{{t.name}}</span></a>
-				    {% endfor %}
-			  	</div>
+			    <div id='ratingbox'>
+	    			{% if expert.rating_score %}
+		        	<span class="stars">{{expert.rating_score}}</span>
+	        		{% else%}
+		        	<span class="stars">0.01</span>
+	        		{% endif %}
+
+	    			{% if expert.rating_score %}
+					<div>({{expert.rating_count}} reviews)</div>
+	        		{% else %}
+					<div>(0 reviews)</div>
+	        		{% endif %}
+				</div>
 
 			  </div>
 			  <div class="media-body">
-			  	
+			  	<h1 id='mainheader'>{{expert.user.first_name}} {{expert.user.last_name}}</h1>
 			  	<h4>{{expert.title}}</h4>
 			  	<h5><i class="fa fa-map-marker"></i> {{expert.location}}</h5>
-			  	<div>{{expert.rating_score}} {{expert.rating_count}}</div>
 			  	
+
 			  	<div>
 			  		{% if expert.twitter %}
 				  		<a href="https://twitter.com/{{expert.twitter}}">
@@ -158,13 +172,17 @@
 			  		{% endif %}
 
 			  	</div>
-			  	<hr>
-			    <h4 class="media-heading">
+
+			  	<hr style='margin-bottom:4px'>
+
+			  	<div class='labelarea'>
+				    {% for t in expert.tags.all%} 
+				    <a href="{% url 'tagsearch' t.name %}" class='taglink'><span class="label label-default taglabel">{{t.name}}</span></a>
+				    {% endfor %}
+			  	</div>
+
+			    <h4>
 			    	<span>Professional Qualifications</span>
-			    	<span class='pull-right'>
-
-
-			    	</span>
 			    </h4>
 			    <p>{{expert.short_bio}}</p>
 			    <p>{{expert.resume}}</p>
@@ -218,7 +236,7 @@
 
 		{% if request.user.is_authenticated %}
 		<form method="post" >{% csrf_token %}
-			<button class='btn btn-lg' style='width:100%;margin-top:10px' type='submit' name='favorite'>
+			<button class='btn btn-lg btn-default' style='width:100%;margin-top:10px' type='submit' name='favorite'>
 				{% if expert.user.id in favorites %}
 			<i class="fa fa-heart"></i>
 				{% else %}

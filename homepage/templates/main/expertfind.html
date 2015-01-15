@@ -112,7 +112,7 @@ span.stars span {
 			{% endfor %}
 		</div>
 		<hr>
-{% endif %}
+{% endif %} 
 
 		<br>
 		{% for e in experts %}
@@ -139,14 +139,20 @@ span.stars span {
 			<div class='col-md-3'>
 			        <p style= 'padding-top:40px'>
 					
-			        	<a href="{% url 'expert' e.id%}" class="btn btn-primary" role="button" style='width:100%;'>View Profile</a>
+			        	<a href="{% url 'expert' e.id %}" class="btn btn-primary" role="button" style='width:100%;'>View Profile</a>
 			        	<div style='padding:0px 80px'>
 			        		{% if e.rating_score %}
 				        	<span class="stars">{{e.rating_score}}</span>
-			        		{% else%}
+			        		{% else %}
 				        	<span class="stars">0.01</span>
 			        		{% endif %}
+
+			        		
+			        		{% if e.rating_score %}
 				        	<div>({{e.rating_count}} reviews)</div>
+			        		{% else %}
+				        	<div>(0 reviews)</div>
+			        		{% endif %}
 			        	</div>
 			        </p>
 			</div>

@@ -142,7 +142,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-success" name='acceptform'>Accept</button>
-        <button type="submit" class="btn btn-danger" name='rejectform'>Reject</button>
+        <button type="submit" class="btn btn-danger" name='rejectform' id='rejectsubmit'>Reject</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -167,6 +167,14 @@
 
 
 <script type="text/javascript">
+
+
+
+$( "#rejectsubmit" ).click(function() {
+  $('form').parsley().destroy();
+});
+
+
 
 $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal

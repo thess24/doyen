@@ -26,10 +26,8 @@ admin.site.register(UserProfile)
 # explaination text for forms
 	# applying for expert
 
-# make so value isnt require for me to reject -- make 2 seperate forms?
 # check image size on upload, resize for smaller pics
 # make pics uniform size 
-# dont allow changing card info once submitted by accessing url
 
 
 
@@ -44,3 +42,15 @@ admin.site.register(UserProfile)
 # fix dollar sign in expert page - not showing up properly in production
 # make sure user gets stripe id when submitting card for first time
 # error handling/alerts for payment not going through
+
+
+
+
+# Stripe paid account
+# Github paid account
+# Heroku paid account
+# HTTPS purchase
+# HTTPS online
+# Twilio paid account
+
+
