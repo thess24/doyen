@@ -11,7 +11,8 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 import pytz # time zones
 from timezone_field import TimeZoneField
-
+from django.conf import settings
+from PIL import Image
  
 
 
@@ -188,6 +189,26 @@ class ExpertProfileForm(ModelForm):
 	class Meta:
 		model = ExpertProfile
 		exclude = ['user', 'online']
+
+	def clean(self):
+		cleaned_data = super(ExpertProfileForm, self).clean()
+		image = cleaned_data.get('picture',False)
+
+		if image: 
+			if image._size > settings.MAX_IMG_SIZE:
+				raise ValidationError("Image too large - must be less than 750kb")
+
+			pilimage = Image.open(image) 
+			#image.size is a 2-tuple (width, height)
+			if pilimage.size[0] < settings.MIN_IMG_WIDTH or pilimage.size[0] < settings.MIN_IMG_HEIGHT: 
+				raise ValidationError("Image size needs to be at least 200 x 200 pixels")
+
+			imgtype = image.name.split(".")[-1]
+			if imgtype not in settings.ALLOWED_IMG_TYPES:
+				raise ValidationError("Must by a jpg, jpeg, gif, or png")
+
+		return cleaned_data
+
 
 	def __init__(self, *args, **kwargs):
 		super(ExpertProfileForm, self).__init__(*args, **kwargs)

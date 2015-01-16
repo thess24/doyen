@@ -19,15 +19,21 @@ admin.site.register(UserProfile)
 
 
  
-########## TODO 
+################ TODO 
 
-### Necessary
-# 2. expert page html
+####### Necessary
 # explaination text for forms
 	# applying for expert
 
-# check image size on upload, resize for smaller pics
-# make pics uniform size 
+# make pics uniform size in frontend
+# default image if expert deletes the one they have
+
+
+########## known bugs
+# make sure user gets stripe id when submitting card for first time
+# error handling/alerts for payment not going through
+
+
 
 
 
@@ -35,13 +41,10 @@ admin.site.register(UserProfile)
 # make disconnected button do something
 # social auth creds
 # alerts for form submits - bootstrap growl
+# resize uploaded images
 
 
 
-########## known bugs
-# fix dollar sign in expert page - not showing up properly in production
-# make sure user gets stripe id when submitting card for first time
-# error handling/alerts for payment not going through
 
 
 

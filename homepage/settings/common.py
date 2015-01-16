@@ -304,7 +304,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ######### HEROKU SETTINGS
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 ######## TWILIO 
@@ -312,3 +312,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 TWILIO_ACCOUNT_SID = 'id'
 TWILIO_AUTH_TOKEN = 'token'
 
+
+############## FILE SIZES
+
+MIN_IMG_WIDTH = 200
+MIN_IMG_HEIGHT = 200
+MAX_IMG_SIZE = 0.75*1000*1000
+ALLOWED_IMG_TYPES = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'GIF', 'PNG']
