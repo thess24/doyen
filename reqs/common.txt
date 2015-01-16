@@ -9,3 +9,4 @@ Pillow==2.6.1
 django_twilio==0.8.0
 django-timezone-field==1.1
 djrill==1.2.0
+django-sslify>=0.2
