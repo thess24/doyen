@@ -141,8 +141,14 @@ ALLOWED_HOSTS = ['.herokuapp.com','.investordoyen.com']
 ############ ALL AUTH
 
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
-SECURE_SSL_REDIRECT=True
 
+
+
+############ SSL
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 

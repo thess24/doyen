@@ -13,7 +13,7 @@ import pytz # time zones
 from timezone_field import TimeZoneField
 from django.conf import settings
 from PIL import Image
- 
+from sorl.thumbnail import ImageField
 
 
 class UserCard(models.Model):
@@ -34,7 +34,7 @@ class UserCard(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	stripe_id = models.CharField(max_length=200,blank=True,null=True)  
-	picture = models.ImageField(upload_to='profilepics',blank=True,null=True) # make optional
+	picture = ImageField(upload_to='profilepics',blank=True,null=True) # make optional
 	default_card = models.ForeignKey(UserCard, blank=True,null=True)
 
 	def __unicode__(self):
@@ -57,7 +57,7 @@ class ExpertProfile(models.Model):
 	short_bio = models.TextField()  
 	resume = models.TextField()  
 	price = models.DecimalField(max_digits=6, decimal_places=2)
-	picture = models.ImageField(upload_to='profilepics')
+	picture = ImageField(upload_to='profilepics')
 	online = models.BooleanField(default=False)
 	title = models.CharField(max_length=100)
 	time_zone = TimeZoneField()

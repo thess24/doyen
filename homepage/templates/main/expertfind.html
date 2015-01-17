@@ -38,6 +38,11 @@
 	padding:10px;
 }
 
+.expertimg{
+	width: 200px;
+
+}
+
 span.stars, span.stars span {
 	display: block;
 	background: url({{STATIC_URL}}img/stars.png) 0 -16px repeat-x;
@@ -120,7 +125,13 @@ span.stars span {
 		  	<div class='col-md-9'>
 			  	<div class="media">
 				  <a class="media-left" href="{% url 'expert' e.id%}">
-				    <img src="{{MEDIA_URL}}{{e.picture}}" style='height:140px' alt="profile image">
+
+				{% load thumbnail %}
+				{% thumbnail e.picture "200x200" as im %}
+				    <img style="margin:{{ im|margin:'200x200' }}" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+				{% endthumbnail %}
+
+				    <!-- <img src="{{MEDIA_URL}}{{e.picture}}" alt="profile image" class='expertimg'> -->
 				  </a>
 				  <div class="media-body">
 				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}} </h3>

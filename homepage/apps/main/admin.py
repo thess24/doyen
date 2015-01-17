@@ -1,5 +1,6 @@
 from django.contrib import admin
 from apps.main.models import ExpertProfile, Talk, Rating, CallIn, Favorite, TalkTime, UserCard, UserProfile
+from sorl.thumbnail.admin import AdminImageMixin
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -8,7 +9,10 @@ class TalkAdmin(admin.ModelAdmin):
 class CallInAdmin(admin.ModelAdmin):
     list_display = ('talk','time_started', 'time_ended','expert')
 
-admin.site.register(ExpertProfile)
+class ExpertProfileAdmin(AdminImageMixin, admin.ModelAdmin):
+    pass
+
+admin.site.register(ExpertProfile, ExpertProfileAdmin)
 admin.site.register(Talk, TalkAdmin)
 admin.site.register(Rating)
 admin.site.register(TalkTime)
@@ -53,7 +57,6 @@ admin.site.register(UserProfile)
 # Github paid account
 # Heroku paid account
 # HTTPS purchase
-# HTTPS online
 # Twilio paid account
 
 

@@ -221,6 +221,7 @@ THIRD_PARTY_APPS = (
     # 'allauth.socialaccount.providers.twitter',
     'django_twilio',
     'timezone_field',
+    'sorl.thumbnail',
 
 
 )
