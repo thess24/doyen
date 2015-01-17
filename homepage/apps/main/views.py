@@ -626,9 +626,9 @@ def talkpayment(request, talkid):
 
 			selected_card = user_cards.get(id=card_id)
 
-				customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-				card = customer.cards.retrieve(selected_card.stripe_id)
-				card.name = selected_card.name
+			customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+			card = customer.cards.retrieve(selected_card.stripe_id)
+			card.name = selected_card.name
 			try:
 				card.save()
 			except stripe.CardError,e:
