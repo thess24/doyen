@@ -626,8 +626,8 @@ def talkpayment(request, talkid):
 
 			selected_card = user_cards.get(id=card_id)
 
-			recipient = stripe.Recipient.retrieve(newcustomer.stripe_id)
-			card = recipient.cards.retrieve(selected_card.stripe_id)
+			customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+			card = customer.cards.retrieve(selected_card.stripe_id)
 			card.name = "Jane Austen"
 			card.save()
 

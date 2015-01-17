@@ -42,7 +42,7 @@ admin.site.register(UserProfile)
 # make searching area distinct from dashboard areas
 # html for dropdown areas
 # html for tagging area/category
-# hsts 
+# hsts -- add with django secure
 
 
 ########## known bugs
