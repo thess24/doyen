@@ -10,7 +10,7 @@
     {% block title %}
     <title>Investor Doyen</title>
     {% endblock %}
-
+ 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
@@ -100,7 +100,7 @@
       </button>
       <!-- begin logo in navigation -->
       <a class="navbar-brand" href="/">
-        <img src="{{STATIC_URL}}img/logo_small.png" style='width:200px'>
+        <img src="{{STATIC_URL}}img/logo_small_notext.png" style='width:200px'>
       </a>
       <!-- end logo in navigation -->
     </div>  
@@ -109,9 +109,9 @@
       <ul class="nav navbar-nav pull-right">
         <!-- begin navigation items -->
         <li><a href="#howitworks">How it Works</a></li>
-        <li><a href="#about">About Investor Doyen</a></li>
         <li><a href="{% url 'faq' %}">FAQ</a></li>
-        <li><a href="{% url 'expertfind' %}" class='headerpill'>Browse Investment Experts</a></li>
+        <li><a href="{% url 'expertfind' %}" class='headerpill'>Browse Experts</a></li>
+        <li><a href="#about">About InvestorDoyen</a></li>
         {% if request.user.is_authenticated %}
         <li><a href="#">Hey {{request.user}}!</a></li>
         {% else %}
@@ -171,15 +171,14 @@
     <div class="row">
       <div class="col-md-12">
         <div class="section-head wow fadeIn animated" data-wow-offset="120" data-wow-duration="1.5s">
-          <h1>Talk with investment experts</h1>
-          <p>only when you need it</p>
+          <h1>Personalized, objective investment advice. Just a few clicks away.</h1>
           <span class="underline"></span>
 
-          <div>Financial advisors are expensive and probably aren't experts at what you are looking for</div>
-          <div>Online advice can be unreputable and you can't directly ask questions</div>
-          <br>
-          <h3>Doyen experts only make money by giving advice...not by selling you investments</h3>
-          <div>(something like that...also list areas experts help in)</div>
+
+          <div>
+          With InvestorDoyen, you can be on the phone with an investment specialist in a matter of minutes. Expert disciplines include individual stock selection, asset allocation, mutual funds, retirement planning, alternative investments and much, much more.Need 401k rebalancing advice? Need a second opinion on your advisor’s recommendation? Need to be educated instead of sold a product? You need InvestorDoyen.
+          </div>
+
         </div>
       </div>
     </div>
@@ -197,9 +196,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">Responsive layout</h4>
+              <h4 class="main-color">Vetted Investment Experts</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                Experts must pass a rigorous qualification, vetting and application process. We pride ourselves on the strength of our expert lineup.
               </p>
             </div>
           </div>
@@ -214,9 +213,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">Modern design</h4>
+              <h4 class="main-color">Zero Conflict Advice</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              Experts are not permitted to sell product. This mandate ensures the fostering of purely objective education and advice.
               </p>
             </div>
           </div>
@@ -231,9 +230,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">Clean Code</h4>
+              <h4 class="main-color">Channeling our Inner-Darwin</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              Only the strong survive on our expert investment platform. Our user feedback and expert rating system separates the good from the great.
               </p>
             </div>
           </div>
@@ -262,9 +261,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">Font Awesome</h4>
+              <h4 class="main-color">Reasonable & Transparent Cost</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              It takes a rocket scientist to understand all the fees charged by financial advisors. InvestorDoyen experts bill on an easy-to-understand dollar per minute fee structure.
               </p>
             </div>
           </div>
@@ -279,9 +278,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">Cross Browser</h4>
+              <h4 class="main-color">Upgrade from a Generalist to a Specialist</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+              Financial advisors typically know a little about a lot. Sometimes you need someone with a deep understanding of one particular topic. Source a true specialist on InvestorDoyen.
               </p>
             </div>
           </div>
@@ -296,9 +295,9 @@
             </div>
 
             <div class="fetaure-details">
-              <h4 class="main-color">24/7 Support</h4>
+              <h4 class="main-color">No Paperwork & No Asset Deposits</h4>
               <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt
+No need to sign your life away. Your assets can stay where they are. Get personalized investment advice within minutes using the InvestorDoyen’s á la carte advice model. 
               </p>
             </div>
           </div>

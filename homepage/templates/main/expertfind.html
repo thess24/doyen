@@ -127,8 +127,8 @@ span.stars span {
 				  <a class="media-left" href="{% url 'expert' e.id%}">
 
 				{% load thumbnail %}
-				{% thumbnail e.picture "200x200" as im %}
-				    <img style="margin:{{ im|margin:'200x200' }}" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+				{% thumbnail e.picture "150x150" crop='center' as im %}
+				    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
 				{% endthumbnail %}
 
 				    <!-- <img src="{{MEDIA_URL}}{{e.picture}}" alt="profile image" class='expertimg'> -->
