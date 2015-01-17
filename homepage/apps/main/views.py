@@ -659,7 +659,7 @@ def talkpayment(request, talkid):
 
 				try:
 					card = customer.cards.create(card=token)
-				except CardError, e:
+				except stripe.CardError, e:
 					messages.warning(request,'Your card is not valid')
 					return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
 
