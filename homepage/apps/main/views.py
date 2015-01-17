@@ -669,7 +669,7 @@ def talkpayment(request, talkid):
 							)
 			newcard.save()
 
-			newcustomer = UserProfile.objects.get(user=request.user)
+			# newcustomer = UserProfile.objects.get(user=request.user)
 			newcustomer.default_card = newcard
 			newcustomer.save()
 
