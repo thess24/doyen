@@ -745,9 +745,7 @@ def chargedashboard(request):
 		customer_id = talk.user.userprofile.stripe_id
 		card_id = talk.card.stripe_id
 
-		# # https://stripe.com/docs/api#create_charge
-		# # should pass customer and card
-
+		# https://stripe.com/docs/api#create_charge
 		stripe.api_key= settings.STRIPE_API_KEY 
 
 		try:
@@ -759,9 +757,8 @@ def chargedashboard(request):
 				description= talk.expert.get_full_name()
 			)
 		except stripe.CardError, e:
-			# The card has been declined
-			# send message to screen?
-			raise Http404
+			messages.warning(request,'The card is not valid')
+			return HttpResponseRedirect(reverse('apps.main.views.chargedashboard', args=()))
 
 		talk.paid_at = timezone.now()
 		talk.save()
