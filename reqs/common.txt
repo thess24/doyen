@@ -10,3 +10,4 @@ django_twilio==0.8.0
 django-timezone-field==1.1
 djrill==1.2.0
 django-sslify>=0.2
+sorl-thumbnail==12.2
