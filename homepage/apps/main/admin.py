@@ -32,6 +32,7 @@ admin.site.register(UserProfile)
 # verify card is valid
 
 
+
 # html in review page to include more info
 # frontend form validation/flow for talkpayment addcard
 # talkpayment html -- move addcard
