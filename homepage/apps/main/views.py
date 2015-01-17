@@ -626,13 +626,14 @@ def talkpayment(request, talkid):
 
 			selected_card = user_cards.get(id=card_id)
 
-			customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-			card = customer.cards.retrieve(selected_card.stripe_id)
-			card.name = "Jane Austen"
-			card.save()
-
-			''' validate card by updating in stripe and checking 
-			exp date or throw error that card doesnt work'''
+				customer = stripe.Customer.retrieve(newcustomer.stripe_id)
+				card = customer.cards.retrieve(selected_card.stripe_id)
+				card.name = selected_card.name
+			try:
+				card.save()
+			except stripe.CardError,e:
+				messages.warning(request,'Your card is not valid')
+				return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
 
 			talk.card = selected_card
 			talk.save()
@@ -655,7 +656,13 @@ def talkpayment(request, talkid):
 			else:  
 				# if they already have a stripe account
 				customer = stripe.Customer.retrieve(newcustomer.stripe_id)
-				card = customer.cards.create(card=token)
+
+				try:
+					card = customer.cards.create(card=token)
+				except CardError, e:
+					messages.warning(request,'Your card is not valid')
+					return HttpResponseRedirect(reverse('apps.main.views.talkpayment', args=(talkid,)))
+
 
 
 			newcard = UserCard(
