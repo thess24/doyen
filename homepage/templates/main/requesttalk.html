@@ -33,7 +33,7 @@
 		    </div>
 		  </div>
 		</div> 
-
+ 
 
 {% if user.is_authenticated %}
 
@@ -116,6 +116,8 @@
 
 
 {% block scripts %}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.6/parsley.min.js"></script>
 <script src="{{STATIC_URL}}js/bootstrap-datetimepicker.min.js"></script>
 
 
@@ -130,6 +132,14 @@
 		});
 
 
+	});
+
+
+	$(function() {
+			$('input').attr('data-parsley-required', 'true');
+			$('textarea').attr('data-parsley-required', 'true');
+			$('#id_requestform-time_estimated').attr('data-parsley-min', 5);
+			$('form').parsley();
 	});
 
 

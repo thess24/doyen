@@ -136,7 +136,7 @@ def requesttalk(request,expertid):
 			requestform = TalkForm(request.POST,prefix='requestform')
 			talktimeform = TalkTimeForm(request.POST, prefix='talktimeform')
 
-			if requestform.is_valid():
+			if requestform.is_valid() and talktimeform.is_valid():
 				instance = requestform.save(commit=False)
 				instance.expert = expert.user
 				instance.user = request.user
@@ -144,7 +144,6 @@ def requesttalk(request,expertid):
 				instance.save()
 				talkid = instance.id
 
-			if talktimeform.is_valid():
 				data = talktimeform.cleaned_data
 				for t in ['time1','time2','time3']:
 					obj = TalkTime(talk=instance, time= data[t])
