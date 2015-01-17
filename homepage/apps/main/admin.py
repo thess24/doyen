@@ -29,12 +29,19 @@ admin.site.register(UserProfile)
 # explaination text for forms
 	# applying for expert
 
-# make pics uniform size in frontend
-# default image if expert deletes the one they have
+# make sure user gets stripe id when submitting card for first time
+
+
+# limit talks to 1 month away max
+# add correct tags to expertprofile
+# make all in better spot
+# make searching area distinct from dashboard areas
+# html for dropdown areas
+# html for tagging area/category
+# hsts 
 
 
 ########## known bugs
-# make sure user gets stripe id when submitting card for first time
 # error handling/alerts for payment not going through
 
 
@@ -45,18 +52,15 @@ admin.site.register(UserProfile)
 # make disconnected button do something
 # social auth creds
 # alerts for form submits - bootstrap growl
-# resize uploaded images
 
 
 
 
-
-
-
+# transfer domain
 # Stripe paid account
 # Github paid account
 # Heroku paid account
-# HTTPS purchase
+# ssl cert purchase
 # Twilio paid account
 
 

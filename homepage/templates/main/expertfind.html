@@ -129,9 +129,10 @@ span.stars span {
 				{% load thumbnail %}
 				{% thumbnail e.picture "150x150" crop='center' as im %}
 				    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+				{% empty %}
+				    <img src="{{STATIC_URL}}img/avatar-placeholder.jpg" width="150" height="150">
 				{% endthumbnail %}
 
-				    <!-- <img src="{{MEDIA_URL}}{{e.picture}}" alt="profile image" class='expertimg'> -->
 				  </a>
 				  <div class="media-body">
 				    <h3 class="media-heading">{{e.user.first_name}} {{e.user.last_name}} </h3>

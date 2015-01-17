@@ -10,6 +10,7 @@ from S3 import CallingFormat
 from common import *
 
 DEBUG = False
+STRIPE_DEBUG = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
@@ -169,5 +170,6 @@ MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
 
 ####### STRIPE
 
-STRIPE_API_KEY = environ.get('STRIPE_API_KEY', "")
-STRIPE_PUBLISHABLE_KEY = 'pk_live_92BO4AmvfgWH16HVtLR5Z9hj'
+if STRIPE_DEBUG == False:
+	STRIPE_API_KEY = environ.get('STRIPE_API_KEY', "")
+	STRIPE_PUBLISHABLE_KEY = 'pk_live_92BO4AmvfgWH16HVtLR5Z9hj'

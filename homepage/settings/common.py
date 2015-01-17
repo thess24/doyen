@@ -320,3 +320,10 @@ MIN_IMG_WIDTH = 200
 MIN_IMG_HEIGHT = 200
 MAX_IMG_SIZE = 0.75*1000*1000
 ALLOWED_IMG_TYPES = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'GIF', 'PNG']
+
+
+######### STRIPE
+
+STRIPE_CLIENT_ID = "ca_3tfT9P19AQLjdkOmHXIjG3J4jWUknYKU"
+STRIPE_API_KEY = "sk_test_9ucD3dSakYLAivmgxMqOJd0r" 
+STRIPE_PUBLISHABLE_KEY = 'pk_test_LuACnwzu1gOIBxwqsbndp2nY'
