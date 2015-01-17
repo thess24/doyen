@@ -2,15 +2,15 @@
 
 
 from os import environ
-
 from memcacheify import memcacheify
 from postgresify import postgresify
 from S3 import CallingFormat
 
 from common import *
 
-DEBUG = False
-STRIPE_DEBUG = True
+
+DEBUG = True
+STRIPE_DEBUG = DEBUG
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
