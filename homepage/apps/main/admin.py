@@ -29,10 +29,13 @@ admin.site.register(UserProfile)
 # explaination text for forms
 	# applying for expert
 
-# make sure user gets stripe id when submitting card for first time
+# verify card is valid
 
 
-# limit talks to 1 month away max
+# html in review page to include more info
+# frontend form validation/flow for talkpayment addcard
+# talkpayment html -- move addcard
+# limit talks to 1 month away max, make sure request is for a time in future
 # add correct tags to expertprofile
 # make all in better spot
 # make searching area distinct from dashboard areas

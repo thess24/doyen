@@ -626,6 +626,11 @@ def talkpayment(request, talkid):
 
 			selected_card = user_cards.get(id=card_id)
 
+			recipient = stripe.Recipient.retrieve(newcustomer.stripe_id)
+			card = recipient.cards.retrieve(selected_card.stripe_id)
+			card.name = "Jane Austen"
+			card.save()
+
 			''' validate card by updating in stripe and checking 
 			exp date or throw error that card doesnt work'''
 

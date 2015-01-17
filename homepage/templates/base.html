@@ -25,6 +25,14 @@
 
 <style type="text/css">
 
+
+#allview{
+  padding:20px;
+  text-align: center;
+  background: rgb(250, 250, 250);
+  font-size: 1.5em;
+}
+
 .dropdown-large {
   position: static !important;
 }
@@ -128,6 +136,7 @@
               <ul class="dropdown-menu dropdown-menu-large row">
                 <li class="col-sm-3">
                   <ul>
+                    <li><a id='allview' class='dropdown-header' href="{% url 'expertfind' %}">View All Experts</a></li>
                     <li class="dropdown-header"><a class='dropdown-header' href="{% url 'expertfindcategory' 'Asset Allocation' %}">Asset Allocation</a></li>
                     <li class="disabled"><a href="#">How to use</a></li>
                     <li><a href="#">Examples</a></li>
@@ -175,7 +184,6 @@
                     <li><a href="#">Component alignment</a></li>
                     <li><a href="#">Fixed to top</a></li>
                     <li><a href="#">Fixed to bottom</a></li>
-                    <li><a  class='dropdown-header' href="{% url 'expertfind' %}">---All---</a></li>
                   </ul>
                 </li>
               </ul>
