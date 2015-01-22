@@ -29,16 +29,11 @@ admin.site.register(UserProfile)
 # explaination text for forms
 	# applying for expert
 
-# verify card is valid
-
-
-
 # html in review page to include more info
 # frontend form validation/flow for talkpayment addcard
 # talkpayment html -- move addcard
 # limit talks to 1 month away max, make sure request is for a time in future
 # add correct tags to expertprofile
-# make all in better spot
 # make searching area distinct from dashboard areas
 # html for dropdown areas
 # html for tagging area/category
@@ -46,7 +41,6 @@ admin.site.register(UserProfile)
 
 
 ########## known bugs
-# error handling/alerts for payment not going through
 
 
 
